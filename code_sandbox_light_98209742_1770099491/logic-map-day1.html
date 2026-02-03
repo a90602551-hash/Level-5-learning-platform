@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic Map - Day 1</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/content.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        /* Brand Color Override */
+        header {
+            background: linear-gradient(135deg, #F6E27F 0%, #F6E27F 100%) !important;
+            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.3) !important;
+        }
+        
+        header h1 {
+            color: #1F2A44 !important;
+        }
+        
+        .student-info, .student-info * {
+            color: #1F2A44 !important;
+        }
+        
+        .difficulty-badge {
+            background: rgba(31, 42, 68, 0.1) !important;
+            color: #1F2A44 !important;
+        }
+        
+        /* 버튼 강조 */
+        button[onclick*="submit"], button[id*="submitBtn"], .btn {
+            font-size: 16px !important;
+            padding: 15px 30px !important;
+            font-weight: 600 !important;
+            border-radius: 8px !important;
+        }
+        
+        button[onclick*="submit"], button[id*="submitBtn"] {
+            background: linear-gradient(135deg, #F6E27F 0%, #E5D06B 100%) !important;
+            color: #1F2A44 !important;
+            border: 3px solid #1F2A44 !important;
+            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.4) !important;
+        }
+        
+        button[onclick*="submit"]:hover, button[id*="submitBtn"]:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 24px rgba(246, 226, 127, 0.6) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-project-diagram"></i> 논리구조도 - Day 1</h1>
+            <div class="student-info">
+                <span id="student-name">홍길동</span>
+                <span class="difficulty-badge">Step 2 | Logic Map</span>
+            </div>
+        </header>
+
+        <main class="content-area">
+            <section class="logic-map-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-sitemap"></i> Reading vs Listening 대조 분석</h2>
+                    <div class="timer">
+                        <i class="fas fa-clock"></i>
+                        <span id="timer">15:00</span>
+                    </div>
+                </div>
+
+                <div class="instructions-box">
+                    <h3><i class="fas fa-info-circle"></i> 작성 방법</h3>
+                    <ol>
+                        <li>Reading과 Listening의 핵심 내용을 빈칸에 채우세요.</li>
+                        <li>각 섹션의 힌트를 참고하여 답안을 작성하세요.</li>
+                        <li>모두 작성한 후 "모범답안 확인" 버튼을 클릭하세요.</li>
+                        <li>자동 채점 결과를 확인하고 피드백을 받으세요.</li>
+                    </ol>
+                </div>
+
+                <!-- Word Bank -->
+                <div class="word-bank">
+                    <h3><i class="fas fa-book"></i> Word Bank (참고 단어)</h3>
+                    <div class="word-bank-items">
+                        <span class="word-item">standard</span>
+                        <span class="word-item">student</span>
+                        <span class="word-item">learn</span>
+                        <span class="word-item">skill</span>
+                        <span class="word-item">succeed</span>
+                        <span class="word-item">problem</span>
+                        <span class="word-item">stressed</span>
+                        <span class="word-item">confidence</span>
+                        <span class="word-item">support</span>
+                        <span class="word-item">progress</span>
+                    </div>
+                </div>
+
+                <!-- Logic Map Grid -->
+                <div class="logic-map-grid">
+                    <!-- Reading Side (찬성) -->
+                    <div class="logic-side reading-side">
+                        <h3><i class="fas fa-book-open"></i> Reading (찬성)</h3>
+                        <p class="topic-label">Topic: Why Schools Need High Standards</p>
+
+                        <div class="logic-section">
+                            <h4>1. Main Claim (주장)</h4>
+                            <div class="input-group">
+                                <label>Schools need high ____________.</label>
+                                <input type="text" id="reading-claim" class="logic-input" placeholder="빈칸에 답을 입력하세요">
+                                <button class="hint-btn" onclick="showHint('reading-claim-hint')">
+                                    <i class="fas fa-lightbulb"></i> 힌트
+                                </button>
+                                <p class="hint-text" id="reading-claim-hint" style="display: none;">
+                                    💡 힌트: 학교가 필요로 하는 것은 무엇인가요? (기준, 표준)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="logic-section">
+                            <h4>2. Supporting Point 1 (근거 1)</h4>
+                            <div class="input-group">
+                                <label>When schools have high standards, students ____________ more.</label>
+                                <input type="text" id="reading-support1" class="logic-input" placeholder="빈칸에 답을 입력하세요">
+                                <button class="hint-btn" onclick="showHint('reading-support1-hint')">
+                                    <i class="fas fa-lightbulb"></i> 힌트
+                                </button>
+                                <p class="hint-text" id="reading-support1-hint" style="display: none;">
+                                    💡 힌트: 학생들이 더 많이 무엇을 하나요? (배우다)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="logic-section">
+                            <h4>3. Supporting Point 2 (근거 2)</h4>
+                            <div class="input-group">
+                                <label>High standards help students develop important ____________.</label>
+                                <input type="text" id="reading-support2" class="logic-input" placeholder="빈칸에 답을 입력하세요">
+                                <button class="hint-btn" onclick="showHint('reading-support2-hint')">
+                                    <i class="fas fa-lightbulb"></i> 힌트
+                                </button>
+                                <p class="hint-text" id="reading-support2-hint" style="display: none;">
+                                    💡 힌트: 학생들이 개발하는 것은 무엇인가요? (기술, 능력)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="logic-section">
+                            <h4>4. Conclusion (결론)</h4>
+                            <div class="input-group">
+                                <label>Students who work hard ____________ in life.</label>
+                                <input type="text" id="reading-conclusion" class="logic-input" placeholder="빈칸에 답을 입력하세요">
+                                <button class="hint-btn" onclick="showHint('reading-conclusion-hint')">
+                                    <i class="fas fa-lightbulb"></i> 힌트
+                                </button>
+                                <p class="hint-text" id="reading-conclusion-hint" style="display: none;">
+                                    💡 힌트: 열심히 하는 학생들은 인생에서 무엇을 하나요? (성공하다)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Listening Side (반대) -->
+                    <div class="logic-side listening-side">
+                        <h3><i class="fas fa-headphones"></i> Listening (반대)</h3>
+                        <p class="topic-label">Topic: The Problem with High Standards</p>
+
+                        <div class="logic-section">
+                            <h4>1. Counter-claim (반론)</h4>
+                            <div class="input-group">
+                                <label>Very high standards can cause ____________.</label>
+                                <input type="text" id="listening-claim" class="logic-input" placeholder="빈칸에 답을 입력하세요">
+                                <button class="hint-btn" onclick="showHint('listening-claim-hint')">
+                                    <i class="fas fa-lightbulb"></i> 힌트
+                                </button>
+                                <p class="hint-text" id="listening-claim-hint" style="display: none;">
+                                    💡 힌트: 높은 기준이 무엇을 야기하나요? (문제)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="logic-section">
+                            <h4>2. Problem 1 (문제점 1)</h4>
+                            <div class="input-group">
+                                <label>High standards make students feel ____________ and worried.</label>
+                                <input type="text" id="listening-problem1" class="logic-input" placeholder="빈칸에 답을 입력하세요">
+                                <button class="hint-btn" onclick="showHint('listening-problem1-hint')">
+                                    <i class="fas fa-lightbulb"></i> 힌트
+                                </button>
+                                <p class="hint-text" id="listening-problem1-hint" style="display: none;">
+                                    💡 힌트: 학생들이 어떻게 느끼나요? (스트레스를 받는)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="logic-section">
+                            <h4>3. Problem 2 (문제점 2)</h4>
+                            <div class="input-group">
+                                <label>Students may lose ____________ and stop trying.</label>
+                                <input type="text" id="listening-problem2" class="logic-input" placeholder="빈칸에 답을 입력하세요">
+                                <button class="hint-btn" onclick="showHint('listening-problem2-hint')">
+                                    <i class="fas fa-lightbulb"></i> 힌트
+                                </button>
+                                <p class="hint-text" id="listening-problem2-hint" style="display: none;">
+                                    💡 힌트: 학생들이 무엇을 잃나요? (자신감)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="logic-section">
+                            <h4>4. Alternative Solution (대안)</h4>
+                            <div class="input-group">
+                                <label>Schools should ____________ each student at their own level.</label>
+                                <input type="text" id="listening-solution" class="logic-input" placeholder="빈칸에 답을 입력하세요">
+                                <button class="hint-btn" onclick="showHint('listening-solution-hint')">
+                                    <i class="fas fa-lightbulb"></i> 힌트
+                                </button>
+                                <p class="hint-text" id="listening-solution-hint" style="display: none;">
+                                    💡 힌트: 학교가 학생들에게 무엇을 해야 하나요? (지원하다)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Indicator -->
+                <div class="progress-indicator">
+                    <p><strong>작성 진행률:</strong> <span id="completion">0/8</span> (0%)</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="progressBarFill"></div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="clearAll()">
+                        <i class="fas fa-eraser"></i> 모두 지우기
+                    </button>
+                    <button class="btn btn-primary" onclick="checkAnswers()">
+                        <i class="fas fa-check-circle"></i> 모범답안 확인
+                    </button>
+                    <button class="btn btn-success" onclick="submitLogicMap()" id="submitBtn" disabled>
+                        <i class="fas fa-paper-plane"></i> 제출하기
+                    </button>
+                </div>
+
+                <!-- Results Box -->
+                <div class="results-box" id="resultsBox" style="display: none;">
+                    <h3><i class="fas fa-chart-bar"></i> 채점 결과</h3>
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <span id="scorePercent">0</span>%
+                        </div>
+                        <p><strong>정답 개수:</strong> <span id="correctCount">0</span> / 8</p>
+                    </div>
+                    <div class="feedback-section" id="feedbackSection"></div>
+                    <div class="model-answer-section" id="modelAnswerSection"></div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i> 리스닝으로 돌아가기
+                    </button>
+                    <button class="btn btn-primary" onclick="goToWriting()">
+                        Writing으로 이동 <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <style>
+        .difficulty-badge {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 15px;
+        }
+
+        .instructions-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .instructions-box h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .instructions-box ol {
+            margin: 0;
+            padding-left: 25px;
+        }
+
+        .instructions-box li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .word-bank {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .word-bank h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .word-bank-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .word-item {
+            background: white;
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            border: 2px solid #667eea;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .word-item:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .logic-map-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .logic-side {
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .reading-side {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .listening-side {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+
+        .logic-side h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .topic-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .logic-section {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .logic-section h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .logic-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            transition: all 0.3s;
+        }
+
+        .logic-input:focus {
+            outline: none;
+            border-color: white;
+            background: white;
+        }
+
+        .logic-input.correct {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+
+        .logic-input.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .hint-btn {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .hint-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .hint-text {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .progress-indicator {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .progress-bar-container {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .results-box {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .results-box h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .score-display {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .score-circle {
+            display: inline-block;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .feedback-section {
+            margin-top: 20px;
+        }
+
+        .feedback-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .model-answer-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 968px) {
+            .logic-map-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    
+    <script src="js/firebase-config.js"></script>
+    <script src="js/progress-manager.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/grammar-worksheet-day1.js"></script>
+    <script>
+        // 모범답안
+        const modelAnswers = {
+            'reading-claim': ['standards', 'standard'],
+            'reading-support1': ['learn'],
+            'reading-support2': ['skills', 'skill'],
+            'reading-conclusion': ['succeed', 'success'],
+            'listening-claim': ['problems', 'problem'],
+            'listening-problem1': ['stressed', 'stress'],
+            'listening-problem2': ['confidence'],
+            'listening-solution': ['support']
+        };
+
+        // 진행률 업데이트
+        function updateProgress() {
+            const inputs = document.querySelectorAll('.logic-input');
+            let filledCount = 0;
+            
+            inputs.forEach(input => {
+                if (input.value.trim() !== '') {
+                    filledCount++;
+                }
+            });
+            
+            const percent = Math.round((filledCount / 8) * 100);
+            document.getElementById('completion').textContent = `${filledCount}/8`;
+            document.getElementById('progressBarFill').style.width = percent + '%';
+            document.getElementById('progressBarFill').textContent = percent + '%';
+        }
+
+        // 입력 필드 이벤트 리스너
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = document.querySelectorAll('.logic-input');
+            inputs.forEach(input => {
+                input.addEventListener('input', updateProgress);
+            });
+
+            // 학생 이름 로드
+            const studentName = localStorage.getItem('studentName') || '학생';
+            document.getElementById('student-name').textContent = studentName;
+        });
+
+        // 힌트 보기
+        function showHint(hintId) {
+            const hint = document.getElementById(hintId);
+            hint.style.display = hint.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // 모두 지우기
+        function clearAll() {
+            if (confirm('정말 모든 내용을 지우시겠습니까?')) {
+                document.querySelectorAll('.logic-input').forEach(input => {
+                    input.value = '';
+                    input.classList.remove('correct', 'incorrect');
+                });
+                updateProgress();
+                document.getElementById('resultsBox').style.display = 'none';
+                document.getElementById('submitBtn').disabled = true;
+            }
+        }
+
+        // 답안 확인
+        function checkAnswers() {
+            let correctCount = 0;
+            const feedbackHTML = [];
+            
+            Object.keys(modelAnswers).forEach(inputId => {
+                const input = document.getElementById(inputId);
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswers = modelAnswers[inputId];
+                
+                const isCorrect = correctAnswers.some(answer => 
+                    userAnswer === answer.toLowerCase()
+                );
+                
+                if (isCorrect) {
+                    input.classList.remove('incorrect');
+                    input.classList.add('correct');
+                    correctCount++;
+                } else {
+                    input.classList.remove('correct');
+                    input.classList.add('incorrect');
+                    
+                    feedbackHTML.push(`
+                        <div class="feedback-item">
+                            <strong>${input.previousElementSibling.textContent}</strong><br>
+                            <span style="color: #dc3545;">❌ 오답:</span> ${userAnswer || '(미입력)'}<br>
+                            <span style="color: #28a745;">✅ 정답:</span> ${correctAnswers.join(' 또는 ')}
+                        </div>
+                    `);
+                }
+            });
+            
+            const percent = Math.round((correctCount / 8) * 100);
+            
+            document.getElementById('scorePercent').textContent = percent;
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('feedbackSection').innerHTML = 
+                feedbackHTML.length > 0 
+                    ? `<h4>오답 피드백</h4>${feedbackHTML.join('')}` 
+                    : '<p style="color: #28a745; font-weight: bold;">🎉 모든 답이 정확합니다!</p>';
+            
+            // 모범답안 표시
+            document.getElementById('modelAnswerSection').innerHTML = `
+                <h4><i class="fas fa-star"></i> 모범답안</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <h5>Reading (찬성)</h5>
+                        <ul>
+                            <li><strong>Main Claim:</strong> standards</li>
+                            <li><strong>Supporting Point 1:</strong> learn</li>
+                            <li><strong>Supporting Point 2:</strong> skills</li>
+                            <li><strong>Conclusion:</strong> succeed</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5>Listening (반대)</h5>
+                        <ul>
+                            <li><strong>Counter-claim:</strong> problems</li>
+                            <li><strong>Problem 1:</strong> stressed</li>
+                            <li><strong>Problem 2:</strong> confidence</li>
+                            <li><strong>Alternative:</strong> support</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('resultsBox').style.display = 'block';
+            document.getElementById('submitBtn').disabled = false;
+            
+            // 결과로 스크롤
+            document.getElementById('resultsBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 제출하기
+        async function submitLogicMap() {
+            const studentName = localStorage.getItem('studentName') || '학생';
+            const studentId = localStorage.getItem('studentId');
+            
+            if (!studentId) {
+                alert('로그인 정보가 없습니다. 다시 로그인해주세요.');
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            const correctCount = parseInt(document.getElementById('correctCount').textContent);
+            const percent = Math.round((correctCount / 8) * 100);
+            
+            // Firebase에 저장
+            try {
+                // Save progress using ProgressManager
+                if (typeof ProgressManager !== 'undefined') {
+                    await ProgressManager.updateActivity(studentId, 1, 'logicMap', true, percent);
+                } else {
+                    console.warn('ProgressManager not available');
+                }
+                
+                alert(`✅ 논리구조도 제출 완료!\n점수: ${percent}점 (${correctCount}/8)\n\n다음 단계인 Writing으로 이동합니다.`);
+                window.location.href = 'writing-day1.html';
+                
+            } catch (error) {
+                console.error('제출 오류:', error);
+                alert('완료 처리되었습니다.\n\nWriting으로 이동합니다.');
+                window.location.href = 'writing-day1.html';
+            }
+        }
+
+        // 타이머
+        let timeLeft = 900; // 15분
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            }
+        }
+        updateTimer();
+
+        // 네비게이션
+        function goBack() {
+            window.location.href = 'toefl-listening-day1.html';
+        }
+
+        function goToWriting() {
+            window.location.href = 'writing-day1.html';
+        }
+    </script>
+</body>
+</html>

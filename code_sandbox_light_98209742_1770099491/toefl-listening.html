@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOEFL 리스닝 - Level 5</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/content.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Level 5 Learning</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> 홈
+                </a>
+                <div class="student-info" id="studentInfo">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="studentName">학생</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <a href="toefl-reading.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> 리딩으로 돌아가기
+                </a>
+                <h1 class="page-title">
+                    <i class="fas fa-headphones"></i>
+                    TOEFL 통합형 리스닝
+                </h1>
+                <p class="page-subtitle">The Counter-Perspective on School Uniforms</p>
+            </div>
+
+            <!-- Audio Player Section -->
+            <div class="audio-player-section">
+                <h2 class="section-title">
+                    <i class="fas fa-volume-up"></i> 리스닝 강의 듣기
+                </h2>
+                <p class="section-description">
+                    교복에 반대하는 관점의 강의를 들어보세요. 재생 버튼을 눌러 음성을 들을 수 있습니다.
+                </p>
+
+                <div class="audio-player">
+                    <div class="audio-controls">
+                        <button class="play-btn" id="playBtn" onclick="toggleAudio()">
+                            <i class="fas fa-play" id="playIcon"></i>
+                        </button>
+                    </div>
+                    <div class="audio-progress">
+                        <div class="audio-progress-bar" id="progressBar"></div>
+                    </div>
+                    <div class="audio-time">
+                        <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+                    </div>
+                </div>
+
+                <div class="transcript-box">
+                    <h4><i class="fas fa-file-alt"></i> 리스닝 스크립트</h4>
+                    <p class="transcript-text">
+                        "While the reading focuses on the benefits of conformity, opponents argue that uniforms rob students of their fundamental right to self-expression. They indicate that adolescence is a crucial period for developing individuality, and punitive dress codes can stifle this growth. For many, the idea that uniforms save money is a financial illusion; instead, they often place a significant financial burden on poorer parents who must purchase these items exclusively from authorized vendors.
+                    </p>
+                    <p class="transcript-text">
+                        Moreover, critics argue that uniforms have no measurable effect on actual academic success. They believe the utility of such policies is overstated and serves as a way to conceal a lack of quality instruction. Instead of focusing on outward appearance, schools should be looking at ways to enhance the actual learning environment. Ultimately, the prospect of a uniform creating a better student is not backed by empirical evidence, and the outcome of such policies may simply be to teach students to follow authority without question, rather than thinking for themselves."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Content Analysis -->
+            <div class="content-card">
+                <div class="content-section">
+                    <h2 class="content-title">
+                        <i class="fas fa-balance-scale"></i> 리딩 vs 리스닝 대조 분석
+                    </h2>
+                    
+                    <div class="comparison-grid">
+                        <div class="comparison-item reading-side">
+                            <h4><i class="fas fa-book-open"></i> Reading (찬성)</h4>
+                            <ul class="argument-list">
+                                <li>교복은 사회경제적 격차를 줄인다</li>
+                                <li>외모에 대한 판단을 숨긴다</li>
+                                <li>학교 자부심을 강화한다</li>
+                                <li>방해 요소를 제거한다</li>
+                                <li>순응을 통해 훈육을 향상시킨다</li>
+                            </ul>
+                        </div>
+
+                        <div class="comparison-item listening-side">
+                            <h4><i class="fas fa-headphones"></i> Listening (반대)</h4>
+                            <ul class="argument-list">
+                                <li><strong>자기표현의 권리</strong>를 빼앗는다</li>
+                                <li><strong>개성 발달</strong>을 억압하는 응징적 규정</li>
+                                <li><strong>경제적 부담</strong>이 오히려 증가</li>
+                                <li><strong>측정 가능한 효과</strong>가 없음</li>
+                                <li>낮은 교육 질을 <strong>숨기는</strong> 수단</li>
+                                <li>비판 없이 권위를 따르도록 가르침</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-vocabulary">
+                    <h3><i class="fas fa-key"></i> 핵심 어휘 (Listening)</h3>
+                    <div class="vocab-grid">
+                        <div class="vocab-item">
+                            <strong>Opponent</strong>
+                            <span>반대론자</span>
+                        </div>
+                        <div class="vocab-item">
+                            <strong>Self-expression</strong>
+                            <span>자기표현</span>
+                        </div>
+                        <div class="vocab-item">
+                            <strong>Indicate</strong>
+                            <span>나타내다</span>
+                        </div>
+                        <div class="vocab-item">
+                            <strong>Individuality</strong>
+                            <span>개성</span>
+                        </div>
+                        <div class="vocab-item">
+                            <strong>Punitive</strong>
+                            <span>응징적인</span>
+                        </div>
+                        <div class="vocab-item">
+                            <strong>Financial burden</strong>
+                            <span>경제적 부담</span>
+                        </div>
+                        <div class="vocab-item">
+                            <strong>Exclusively</strong>
+                            <span>독점적으로</span>
+                        </div>
+                        <div class="vocab-item">
+                            <strong>Measurable effect</strong>
+                            <span>측정 가능한 효과</span>
+                        </div>
+                        <div class="vocab-item">
+                            <strong>Conceal</strong>
+                            <span>숨기다</span>
+                        </div>
+                        <div class="vocab-item">
+                            <strong>Enhance</strong>
+                            <span>향상시키다</span>
+                        </div>
+                        <div class="vocab-item">
+                            <strong>Prospect</strong>
+                            <span>전망</span>
+                        </div>
+                        <div class="vocab-item">
+                            <strong>Outcome</strong>
+                            <span>결과</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="location.href='logic-map.html'">
+                        다음: 논리구조도 작성 <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn-card" onclick="location.href='index.html'">
+                        <i class="fas fa-home"></i> 홈으로 이동
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Level 5 Learning Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/listening.js"></script>
+
+    <style>
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .comparison-item {
+            background: white;
+            border: 3px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .comparison-item.reading-side {
+            border-color: #4facfe;
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.05) 0%, rgba(0, 242, 254, 0.05) 100%);
+        }
+
+        .comparison-item.listening-side {
+            border-color: #f093fb;
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.05) 0%, rgba(245, 87, 108, 0.05) 100%);
+        }
+
+        .comparison-item h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .argument-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .argument-list li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .argument-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .argument-list li strong {
+            color: var(--primary-color);
+        }
+    </style>
+</body>
+</html>

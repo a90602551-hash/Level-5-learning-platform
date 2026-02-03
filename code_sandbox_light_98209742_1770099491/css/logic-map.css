@@ -1,0 +1,361 @@
+/* Logic Map Styles */
+
+.instructions-card {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 2px solid var(--primary-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.instructions-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.instructions-card p {
+    color: var(--text-dark);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 0.75rem;
+}
+
+.instructions-card p:last-child {
+    margin-bottom: 0;
+}
+
+/* Logic Map Container */
+.logic-map-container {
+    background: white;
+    border-radius: 1rem;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+}
+
+/* Logic Map Table */
+.logic-map-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.logic-map-table thead th {
+    padding: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+}
+
+.reading-header {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    width: 40%;
+}
+
+.category-header {
+    background: var(--gradient-hero);
+    width: 20%;
+}
+
+.listening-header {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    width: 40%;
+}
+
+.logic-map-table tbody td {
+    padding: 2rem;
+    border: 2px solid var(--border-color);
+    vertical-align: top;
+}
+
+.reading-cell {
+    background: rgba(79, 172, 254, 0.05);
+}
+
+.listening-cell {
+    background: rgba(240, 147, 251, 0.05);
+}
+
+.category-cell {
+    background: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.logic-map-table td strong {
+    display: block;
+    color: var(--primary-color);
+    font-size: 1.05rem;
+    margin-bottom: 0.75rem;
+}
+
+.logic-map-table td p {
+    color: var(--text-dark);
+    font-size: 1.05rem;
+    line-height: 2;
+    margin: 0;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 1rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.category-badge.socio {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.category-badge.individuality {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    color: var(--text-dark);
+}
+
+.category-badge.educational {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    color: var(--text-dark);
+}
+
+/* Logic Input */
+.logic-input {
+    min-width: 180px;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+    margin: 0 0.25rem;
+}
+
+.logic-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.logic-input.correct {
+    border-color: var(--success-color);
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.logic-input.wrong {
+    border-color: var(--danger-color);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Word Bank Section */
+.word-bank-section {
+    background: var(--bg-light);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.word-bank-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.word-bank-desc {
+    color: var(--text-light);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+}
+
+.word-bank-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.word-bank-grid .word-chip {
+    display: inline-block;
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 0.75rem 1.25rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.word-bank-grid .word-chip:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Answer Comparison */
+.answer-comparison {
+    background: white;
+    border-radius: 1rem;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.comparison-result {
+    margin-top: 2rem;
+}
+
+.result-summary {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: var(--bg-light);
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+
+.score-circle {
+    width: 120px;
+    height: 120px;
+    background: var(--gradient-hero);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: var(--shadow-lg);
+    flex-shrink: 0;
+}
+
+.score-number {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.score-label {
+    font-size: 1.25rem;
+    margin-top: 0.25rem;
+}
+
+.result-message h3 {
+    font-size: 1.75rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.result-message p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* Answer Table */
+.answer-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.answer-table thead th {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.answer-table tbody td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.answer-table tbody tr:hover {
+    background: var(--bg-light);
+}
+
+.answer-table tbody tr.correct-row {
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.answer-table tbody tr.wrong-row {
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.answer-correct {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+.answer-wrong {
+    color: var(--danger-color);
+    font-weight: 600;
+}
+
+.result-icon {
+    font-size: 1.25rem;
+}
+
+.result-icon.correct {
+    color: var(--success-color);
+}
+
+.result-icon.wrong {
+    color: var(--danger-color);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .logic-map-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .result-summary {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .logic-map-container {
+        padding: 1.5rem;
+    }
+
+    .logic-input {
+        min-width: 140px;
+        font-size: 0.9rem;
+    }
+
+    .word-bank-grid {
+        justify-content: center;
+    }
+
+    .answer-table {
+        font-size: 0.9rem;
+    }
+
+    .answer-table thead th,
+    .answer-table tbody td {
+        padding: 0.75rem;
+    }
+}

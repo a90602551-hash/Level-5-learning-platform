@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 상세 - Level 5 Learning</title>
+    <link rel="stylesheet" href="css/brand-colors.css">
+    <link rel="stylesheet" href="css/brand-fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: var(--color-bg-main);
+            font-family: var(--font-combined);
+        }
+
+        .detail-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* 학생 헤더 */
+        .student-detail-header {
+            background: var(--gradient-hero);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .student-detail-header h1 {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 0.5rem;
+        }
+
+        .student-detail-header .student-level {
+            font-size: var(--font-size-lg);
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .header-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 0.65rem 1.75rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-weight: var(--font-weight-medium);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* 진도 섹션 */
+        .progress-section {
+            background: var(--color-bg-card);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 2rem;
+        }
+
+        .progress-section h2 {
+            font-size: var(--font-size-2xl);
+            color: var(--color-text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 40px;
+            background: var(--color-border-light);
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: width 0.8s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-lg);
+            color: var(--color-text-primary);
+        }
+
+        .progress-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .progress-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--color-bg-light);
+            border-radius: 0.75rem;
+            border: 2px solid var(--color-border-light);
+        }
+
+        .stat-number {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-bold);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: var(--font-size-base);
+            color: var(--color-text-secondary);
+            margin-top: 0.5rem;
+            font-weight: var(--font-weight-medium);
+        }
+
+        /* Day 상세 섹션 */
+        .days-detail-section {
+            background: var(--color-bg-card);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 2rem;
+        }
+
+        .days-detail-section h2 {
+            font-size: var(--font-size-2xl);
+            color: var(--color-text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .day-detail-card {
+            background: var(--color-bg-light);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            border: 2px solid var(--color-border-light);
+            transition: all 0.3s ease;
+        }
+
+        .day-detail-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .day-detail-card.completed {
+            border-color: var(--color-success);
+            background: linear-gradient(135deg, white 0%, var(--color-success-light) 100%);
+        }
+
+        .day-detail-card.in-progress {
+            border-color: var(--color-warning);
+            background: linear-gradient(135deg, white 0%, var(--color-warning-light) 100%);
+        }
+
+        .day-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .day-number-large {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-primary);
+        }
+
+        .day-status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .badge-completed {
+            background: var(--color-success-light);
+            color: var(--color-success-dark);
+        }
+
+        .badge-in-progress {
+            background: var(--color-warning-light);
+            color: var(--color-warning-dark);
+        }
+
+        .badge-not-started {
+            background: var(--color-bg-light);
+            color: var(--color-text-tertiary);
+        }
+
+        .activity-checklist {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+        }
+
+        .activity-item i {
+            margin-right: 0.65rem;
+            width: 18px;
+            font-size: 1.1rem;
+        }
+
+        .activity-completed {
+            color: var(--color-success);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .activity-pending {
+            color: var(--color-text-tertiary);
+        }
+
+        .activity-score {
+            margin-left: auto;
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+        }
+
+        /* 로딩 상태 */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--color-text-secondary);
+        }
+
+        .loading i {
+            font-size: 3rem;
+            animation: spin 1s linear infinite;
+            color: var(--color-primary);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--color-text-tertiary);
+        }
+
+        .empty-state i {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.2;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .detail-container {
+                padding: 1rem;
+            }
+
+            .header-actions {
+                flex-direction: column;
+            }
+
+            .progress-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .activity-checklist {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="detail-container">
+        
+        <!-- 로딩 상태 -->
+        <div id="loadingState" class="loading">
+            <i class="fas fa-spinner"></i>
+            <p>학생 정보를 불러오는 중...</p>
+        </div>
+
+        <!-- 메인 내용 (초기 숨김) -->
+        <div id="mainContent" style="display: none;">
+            
+            <!-- 학생 헤더 -->
+            <div class="student-detail-header">
+                <h1><i class="fas fa-user-circle"></i> <span id="studentName">학생</span>님의 학습 현황</h1>
+                <div class="student-level">📚 Level 5 | Day <span id="currentDay">1</span> / 96</div>
+                <div class="header-actions">
+                    <a href="teacher-dashboard.html" class="header-btn">
+                        <i class="fas fa-arrow-left"></i> 학생 목록으로
+                    </a>
+                    <button class="header-btn" onclick="refreshData()">
+                        <i class="fas fa-sync-alt"></i> 새로고침
+                    </button>
+                </div>
+            </div>
+
+            <!-- 진도 현황 -->
+            <div class="progress-section">
+                <h2>📊 전체 진도 현황</h2>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="overallProgress" style="width: 0%;">
+                        0%
+                    </div>
+                </div>
+                <div class="progress-stats-grid">
+                    <div class="progress-stat">
+                        <div class="stat-number" id="completedDays">0</div>
+                        <div class="stat-label">완료한 Day</div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="stat-number" id="currentDayProgress">0%</div>
+                        <div class="stat-label">현재 Day 진도</div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="stat-number" id="averageScore">-</div>
+                        <div class="stat-label">평균 점수</div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="stat-number" id="totalTasks">0</div>
+                        <div class="stat-label">완료한 과제</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 상세 -->
+            <div class="days-detail-section">
+                <h2>📚 Day별 학습 상세</h2>
+                <div id="daysDetailContainer">
+                    <!-- Day 상세 카드들이 여기에 동적으로 생성됩니다 -->
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/progress-manager.js"></script>
+
+    <script>
+        let studentId = null;
+        let studentProgress = null;
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // URL에서 학생 ID 가져오기
+                const urlParams = new URLSearchParams(window.location.search);
+                studentId = urlParams.get('studentId');
+
+                if (!studentId) {
+                    alert('학생 ID가 없습니다.');
+                    window.location.href = 'teacher-dashboard.html';
+                    return;
+                }
+
+                // 학생 데이터 로드
+                await loadStudentData();
+
+                // UI 렌더링
+                renderStudentDetail();
+
+                // 로딩 숨기기, 메인 표시
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+
+            } catch (error) {
+                console.error('❌ Error loading student data:', error);
+                document.getElementById('loadingState').innerHTML = `
+                    <i class="fas fa-exclamation-triangle" style="color: var(--color-danger);"></i>
+                    <p>학생 정보를 불러오는 중 오류가 발생했습니다.</p>
+                    <button onclick="location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--color-primary); color: white; border: none; border-radius: 0.5rem; cursor: pointer;">
+                        다시 시도
+                    </button>
+                `;
+            }
+        });
+
+        // 학생 데이터 로드
+        async function loadStudentData() {
+            const db = firebase.firestore();
+            const doc = await db.collection('student_progress').doc(studentId).get();
+
+            if (!doc.exists) {
+                throw new Error('학생 데이터를 찾을 수 없습니다.');
+            }
+
+            studentProgress = {
+                id: doc.id,
+                ...doc.data()
+            };
+
+            console.log('✅ Student data loaded:', studentProgress);
+        }
+
+        // 학생 상세 렌더링
+        function renderStudentDetail() {
+            // 학생 정보 표시
+            document.getElementById('studentName').textContent = studentProgress.studentName;
+            document.getElementById('currentDay').textContent = studentProgress.currentDay;
+
+            // 진도 통계 업데이트
+            const completedCount = studentProgress.completedDays.length;
+            const progressPercent = Math.round((completedCount / 96) * 100);
+            
+            document.getElementById('overallProgress').style.width = progressPercent + '%';
+            document.getElementById('overallProgress').textContent = progressPercent + '%';
+            document.getElementById('completedDays').textContent = completedCount;
+
+            // 현재 Day 진도
+            const currentDayData = studentProgress.progress[`day${studentProgress.currentDay}`] || {};
+            const currentDayPercent = ProgressManager.calculateDayProgress(currentDayData);
+            document.getElementById('currentDayProgress').textContent = currentDayPercent + '%';
+
+            // 평균 점수
+            const stats = ProgressManager.calculateStudentStats(studentProgress);
+            document.getElementById('averageScore').textContent = stats.averageScore > 0 ? stats.averageScore + '점' : '-';
+
+            // 완료한 과제 수
+            const totalTasks = completedCount * 7 + Math.floor(currentDayPercent / 100 * 7);
+            document.getElementById('totalTasks').textContent = totalTasks;
+
+            // Day별 상세 렌더링 (최근 10개만)
+            renderDaysDetail();
+        }
+
+        // Day별 상세 렌더링
+        function renderDaysDetail() {
+            const container = document.getElementById('daysDetailContainer');
+            const maxDay = Math.max(studentProgress.currentDay, 1);
+            const startDay = Math.max(1, maxDay - 9); // 최근 10개
+
+            let html = '';
+
+            for (let day = maxDay; day >= startDay; day--) {
+                const dayData = studentProgress.progress[`day${day}`] || {};
+                const progressPercent = ProgressManager.calculateDayProgress(dayData);
+                const status = ProgressManager.getDayStatus(studentProgress, day);
+
+                let statusClass = 'badge-not-started';
+                let statusText = '시작 전';
+                let cardClass = '';
+
+                if (status === 'completed') {
+                    statusClass = 'badge-completed';
+                    statusText = '✅ 완료';
+                    cardClass = 'completed';
+                } else if (status === 'in_progress') {
+                    statusClass = 'badge-in-progress';
+                    statusText = '🔄 진행중';
+                    cardClass = 'in-progress';
+                }
+
+                html += `
+                    <div class="day-detail-card ${cardClass}">
+                        <div class="day-detail-header">
+                            <div class="day-number-large">Day ${day}</div>
+                            <span class="day-status-badge ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="activity-checklist">
+                            <div class="activity-item ${dayData.awl_study ? 'activity-completed' : 'activity-pending'}">
+                                <i class="fas ${dayData.awl_study ? 'fa-check-circle' : 'fa-circle'}"></i>
+                                AWL 학습
+                            </div>
+                            <div class="activity-item ${dayData.grammar_worksheet ? 'activity-completed' : 'activity-pending'}">
+                                <i class="fas ${dayData.grammar_worksheet ? 'fa-check-circle' : 'fa-circle'}"></i>
+                                문법 워크시트
+                            </div>
+                            <div class="activity-item ${dayData.awl_test ? 'activity-completed' : 'activity-pending'}">
+                                <i class="fas ${dayData.awl_test ? 'fa-check-circle' : 'fa-circle'}"></i>
+                                AWL 테스트
+                                ${dayData.awl_test_score ? `<span class="activity-score">${dayData.awl_test_score}점</span>` : ''}
+                            </div>
+                            <div class="activity-item ${dayData.reading ? 'activity-completed' : 'activity-pending'}">
+                                <i class="fas ${dayData.reading ? 'fa-check-circle' : 'fa-circle'}"></i>
+                                Reading
+                            </div>
+                            <div class="activity-item ${dayData.listening ? 'activity-completed' : 'activity-pending'}">
+                                <i class="fas ${dayData.listening ? 'fa-check-circle' : 'fa-circle'}"></i>
+                                Listening
+                            </div>
+                            <div class="activity-item ${dayData.logic_map ? 'activity-completed' : 'activity-pending'}">
+                                <i class="fas ${dayData.logic_map ? 'fa-check-circle' : 'fa-circle'}"></i>
+                                논리구조도
+                                ${dayData.logic_map_score ? `<span class="activity-score">${dayData.logic_map_score}점</span>` : ''}
+                            </div>
+                            <div class="activity-item ${dayData.writing ? 'activity-completed' : 'activity-pending'}">
+                                <i class="fas ${dayData.writing ? 'fa-check-circle' : 'fa-circle'}"></i>
+                                Writing
+                                ${dayData.writing_score ? `<span class="activity-score">${dayData.writing_score}점</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (html === '') {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>아직 시작한 Day가 없습니다</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = html;
+            }
+        }
+
+        // 데이터 새로고침
+        async function refreshData() {
+            try {
+                await loadStudentData();
+                renderStudentDetail();
+                alert('✅ 데이터가 새로고침되었습니다!');
+            } catch (error) {
+                console.error('❌ Refresh error:', error);
+                alert('새로고침 중 오류가 발생했습니다.');
+            }
+        }
+    </script>
+</body>
+</html>

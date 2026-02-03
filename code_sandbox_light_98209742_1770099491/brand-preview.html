@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 브랜드 컬러 미리보기 - Level 5 Learning</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <!-- Pretendard 폰트 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <!-- Inter 폰트 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    
+    <style>
+        /* ===== 브랜드 컬러 시스템 ===== */
+        :root {
+            /* 메인 컬러 */
+            --color-primary: #F6E27F;
+            --color-primary-light: #FFF4C4;
+            --color-primary-lighter: #FFFAEB;
+            --color-primary-dark: #E5D06B;
+            --color-primary-darker: #D4BF5A;
+
+            /* 서브 컬러 */
+            --color-secondary: #1F2A44;
+            --color-secondary-light: #2D3B5F;
+            --color-secondary-lighter: #3D4D7A;
+            --color-secondary-dark: #151F35;
+
+            /* 보조 컬러 */
+            --color-accent-coral: #FF9B85;
+            --color-accent-mint: #7FDBCA;
+            --color-accent-lavender: #B197FC;
+            --color-accent-peach: #FFB088;
+
+            /* 상태 컬러 */
+            --color-success: #4CAF93;
+            --color-success-light: #7DD4BA;
+            --color-success-dark: #3A9B7A;
+            --color-warning: #FFB74D;
+            --color-warning-light: #FFD699;
+            --color-warning-dark: #FF9800;
+            --color-danger: #EF7B7B;
+            --color-danger-light: #FFB3B3;
+            --color-danger-dark: #E74C3C;
+            --color-info: #64B5F6;
+            --color-info-light: #90CAF9;
+            --color-info-dark: #42A5F5;
+
+            /* 배경 컬러 */
+            --color-bg-main: #FAFBFC;
+            --color-bg-card: #FFFFFF;
+            --color-bg-light: #F5F7FA;
+            --color-bg-accent: #FFFAEB;
+
+            /* 텍스트 컬러 */
+            --color-text-primary: #1F2A44;
+            --color-text-secondary: #5A6B8C;
+            --color-text-tertiary: #8895B0;
+            --color-text-light: #B4BDD0;
+
+            /* 보더 */
+            --color-border-light: #E8EDF2;
+            --color-border-medium: #D1D9E6;
+            --color-border-dark: #B4BDD0;
+
+            /* 그라데이션 */
+            --gradient-hero: linear-gradient(135deg, #1F2A44 0%, #3D4D7A 50%, #F6E27F 100%);
+            --gradient-primary: linear-gradient(135deg, #F6E27F 0%, #FFD699 100%);
+            --gradient-warm: linear-gradient(135deg, #FF9B85 0%, #FFB088 100%);
+            --gradient-cool: linear-gradient(135deg, #7FDBCA 0%, #64B5F6 100%);
+            --gradient-soft: linear-gradient(135deg, #B197FC 0%, #90CAF9 100%);
+
+            /* 그림자 */
+            --shadow-card: 0 2px 12px rgba(31, 42, 68, 0.10);
+            --shadow-hover: 0 8px 24px rgba(246, 226, 127, 0.25);
+            --shadow-md: 0 4px 16px rgba(31, 42, 68, 0.12);
+            --shadow-lg: 0 8px 32px rgba(31, 42, 68, 0.16);
+
+            /* 폰트 */
+            --font-combined: 'Pretendard', 'Inter', -apple-system, sans-serif;
+            --font-weight-regular: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            --font-weight-extrabold: 800;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            --font-size-4xl: 2.25rem;
+            --line-height-normal: 1.5;
+            --line-height-relaxed: 1.75;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-combined);
+            background: var(--color-bg-main);
+            padding: 2rem;
+        }
+
+        .preview-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .preview-header {
+            background: var(--gradient-hero);
+            color: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .preview-header h1 {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-extrabold);
+            margin-bottom: 1rem;
+        }
+
+        .preview-header p {
+            font-size: var(--font-size-lg);
+            opacity: 0.95;
+        }
+
+        .section {
+            background: var(--color-bg-card);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-card);
+        }
+
+        .section-title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--color-primary);
+        }
+
+        /* 컬러 팔레트 */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .color-box {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+        }
+
+        .color-box:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .color-sample {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-lg);
+        }
+
+        .color-info {
+            padding: 1rem;
+            background: var(--color-bg-light);
+        }
+
+        .color-name {
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .color-code {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        /* 버튼 미리보기 */
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-base);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-text-primary);
+        }
+
+        .btn-secondary {
+            background: var(--color-secondary);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--color-success);
+            color: white;
+        }
+
+        .btn-warning {
+            background: var(--color-warning);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--color-danger);
+            color: white;
+        }
+
+        .btn-gradient {
+            background: var(--gradient-primary);
+            color: var(--color-text-primary);
+        }
+
+        /* 카드 미리보기 */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .preview-card {
+            background: var(--color-bg-card);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .preview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .preview-card.primary {
+            border-color: var(--color-primary);
+            background: var(--color-primary-lighter);
+        }
+
+        .preview-card.secondary {
+            border-color: var(--color-secondary);
+        }
+
+        .preview-card.success {
+            border-color: var(--color-success);
+            background: var(--color-success-light);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            font-size: var(--font-size-base);
+            color: var(--color-text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        /* 배지 */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-sm);
+        }
+
+        .badge-primary {
+            background: var(--color-primary-light);
+            color: var(--color-primary-darker);
+        }
+
+        .badge-secondary {
+            background: var(--color-secondary-light);
+            color: white;
+        }
+
+        .badge-success {
+            background: var(--color-success-light);
+            color: var(--color-success-dark);
+        }
+
+        .badge-warning {
+            background: var(--color-warning-light);
+            color: var(--color-warning-dark);
+        }
+
+        .badge-danger {
+            background: var(--color-danger-light);
+            color: var(--color-danger-dark);
+        }
+
+        .badge-info {
+            background: var(--color-info-light);
+            color: var(--color-info-dark);
+        }
+
+        /* 그라데이션 샘플 */
+        .gradient-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gradient-box {
+            height: 150px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gradient-hero { background: var(--gradient-hero); }
+        .gradient-primary { background: var(--gradient-primary); color: var(--color-text-primary); }
+        .gradient-warm { background: var(--gradient-warm); }
+        .gradient-cool { background: var(--gradient-cool); }
+        .gradient-soft { background: var(--gradient-soft); }
+
+        /* 실제 학습 카드 */
+        .day-card-demo {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.75rem;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .day-card-demo:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-primary);
+        }
+
+        .day-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .day-number {
+            font-size: 1.75rem;
+            font-weight: var(--font-weight-bold);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 10px;
+            background: var(--color-border-light);
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            border-radius: 1rem;
+        }
+
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .task-item i {
+            margin-right: 0.5rem;
+            color: var(--color-success);
+        }
+
+        /* 타이포그래피 */
+        .typography-sample {
+            margin-bottom: 1.5rem;
+        }
+
+        .typography-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-tertiary);
+            margin-bottom: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-container">
+        
+        <!-- 헤더 -->
+        <div class="preview-header">
+            <h1><i class="fas fa-palette"></i> Level 5 Learning</h1>
+            <p>브랜드 컬러 & 폰트 미리보기</p>
+            <p style="font-size: var(--font-size-base); margin-top: 0.5rem; opacity: 0.9;">
+                메인: #F6E27F (편안함) | 서브: #1F2A44 (신뢰)
+            </p>
+        </div>
+
+        <!-- 1. 메인 컬러 팔레트 -->
+        <div class="section">
+            <h2 class="section-title">🎨 메인 컬러 팔레트</h2>
+            <div class="color-grid">
+                <div class="color-box">
+                    <div class="color-sample" style="background: #F6E27F; color: #1F2A44;">
+                        메인
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Primary</div>
+                        <div class="color-code">#F6E27F</div>
+                    </div>
+                </div>
+
+                <div class="color-box">
+                    <div class="color-sample" style="background: #FFF4C4; color: #1F2A44;">
+                        연한 노랑
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Primary Light</div>
+                        <div class="color-code">#FFF4C4</div>
+                    </div>
+                </div>
+
+                <div class="color-box">
+                    <div class="color-sample" style="background: #E5D06B; color: #1F2A44;">
+                        진한 노랑
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Primary Dark</div>
+                        <div class="color-code">#E5D06B</div>
+                    </div>
+                </div>
+
+                <div class="color-box">
+                    <div class="color-sample" style="background: #1F2A44; color: white;">
+                        서브
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Secondary</div>
+                        <div class="color-code">#1F2A44</div>
+                    </div>
+                </div>
+
+                <div class="color-box">
+                    <div class="color-sample" style="background: #2D3B5F; color: white;">
+                        연한 네이비
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Secondary Light</div>
+                        <div class="color-code">#2D3B5F</div>
+                    </div>
+                </div>
+
+                <div class="color-box">
+                    <div class="color-sample" style="background: #FF9B85; color: white;">
+                        산호
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Accent Coral</div>
+                        <div class="color-code">#FF9B85</div>
+                    </div>
+                </div>
+
+                <div class="color-box">
+                    <div class="color-sample" style="background: #7FDBCA; color: white;">
+                        민트
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Accent Mint</div>
+                        <div class="color-code">#7FDBCA</div>
+                    </div>
+                </div>
+
+                <div class="color-box">
+                    <div class="color-sample" style="background: #B197FC; color: white;">
+                        라벤더
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Accent Lavender</div>
+                        <div class="color-code">#B197FC</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 상태 컬러 -->
+        <div class="section">
+            <h2 class="section-title">✅ 상태 컬러</h2>
+            <div class="color-grid">
+                <div class="color-box">
+                    <div class="color-sample" style="background: #4CAF93; color: white;">
+                        <i class="fas fa-check-circle"></i> 성공
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Success</div>
+                        <div class="color-code">#4CAF93</div>
+                    </div>
+                </div>
+
+                <div class="color-box">
+                    <div class="color-sample" style="background: #FFB74D; color: white;">
+                        <i class="fas fa-exclamation-circle"></i> 경고
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Warning</div>
+                        <div class="color-code">#FFB74D</div>
+                    </div>
+                </div>
+
+                <div class="color-box">
+                    <div class="color-sample" style="background: #EF7B7B; color: white;">
+                        <i class="fas fa-times-circle"></i> 위험
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Danger</div>
+                        <div class="color-code">#EF7B7B</div>
+                    </div>
+                </div>
+
+                <div class="color-box">
+                    <div class="color-sample" style="background: #64B5F6; color: white;">
+                        <i class="fas fa-info-circle"></i> 정보
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Info</div>
+                        <div class="color-code">#64B5F6</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 버튼 미리보기 -->
+        <div class="section">
+            <h2 class="section-title">🔘 버튼 스타일</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">
+                    <i class="fas fa-play"></i> 학습 시작
+                </button>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-book"></i> 콘텐츠 보기
+                </button>
+                <button class="btn btn-success">
+                    <i class="fas fa-check"></i> 제출하기
+                </button>
+                <button class="btn btn-warning">
+                    <i class="fas fa-clock"></i> 대기중
+                </button>
+                <button class="btn btn-danger">
+                    <i class="fas fa-times"></i> 취소하기
+                </button>
+                <button class="btn btn-gradient">
+                    <i class="fas fa-star"></i> 프리미엄
+                </button>
+            </div>
+        </div>
+
+        <!-- 4. 그라데이션 -->
+        <div class="section">
+            <h2 class="section-title">🌈 그라데이션</h2>
+            <div class="gradient-grid">
+                <div class="gradient-box gradient-hero">
+                    Hero Gradient
+                </div>
+                <div class="gradient-box gradient-primary">
+                    Primary Gradient
+                </div>
+                <div class="gradient-box gradient-warm">
+                    Warm Gradient
+                </div>
+                <div class="gradient-box gradient-cool">
+                    Cool Gradient
+                </div>
+                <div class="gradient-box gradient-soft">
+                    Soft Gradient
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. 배지 -->
+        <div class="section">
+            <h2 class="section-title">🏷️ 배지 & 라벨</h2>
+            <div class="badge-grid">
+                <span class="badge badge-primary">메인</span>
+                <span class="badge badge-secondary">서브</span>
+                <span class="badge badge-success">✅ 완료</span>
+                <span class="badge badge-warning">⏰ 진행중</span>
+                <span class="badge badge-danger">❌ 미완료</span>
+                <span class="badge badge-info">ℹ️ 정보</span>
+            </div>
+        </div>
+
+        <!-- 6. 카드 미리보기 -->
+        <div class="section">
+            <h2 class="section-title">📇 카드 스타일</h2>
+            <div class="cards-grid">
+                <div class="preview-card primary">
+                    <div class="card-icon" style="background: var(--color-primary); color: var(--color-text-primary);">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="card-title">AWL 학습</div>
+                    <div class="card-text">
+                        Academic Word List 30개 단어를 체계적으로 학습합니다.
+                    </div>
+                </div>
+
+                <div class="preview-card secondary">
+                    <div class="card-icon" style="background: var(--color-secondary); color: white;">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="card-title">문법 학습</div>
+                    <div class="card-text">
+                        핵심 문법 개념을 패턴 중심으로 이해합니다.
+                    </div>
+                </div>
+
+                <div class="preview-card success">
+                    <div class="card-icon" style="background: var(--color-success); color: white;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="card-title">완료된 과제</div>
+                    <div class="card-text">
+                        모든 학습 과제를 성공적으로 완료했습니다!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. 실제 학습 카드 시뮬레이션 -->
+        <div class="section">
+            <h2 class="section-title">📚 실제 학습 카드 예시</h2>
+            <div class="cards-grid">
+                
+                <!-- Day 1 완료 -->
+                <div class="day-card-demo" style="border-color: var(--color-success);">
+                    <div class="day-card-header">
+                        <div class="day-number">Day 1</div>
+                        <span class="badge badge-success">✅ 완료</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" style="width: 100%"></div>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-item">
+                            <i class="fas fa-check-circle"></i>
+                            AWL 학습
+                        </div>
+                        <div class="task-item">
+                            <i class="fas fa-check-circle"></i>
+                            문법 워크시트
+                        </div>
+                        <div class="task-item">
+                            <i class="fas fa-check-circle"></i>
+                            AWL 테스트 (95점)
+                        </div>
+                        <div class="task-item">
+                            <i class="fas fa-check-circle"></i>
+                            Writing (92점)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 2 진행중 -->
+                <div class="day-card-demo" style="border-color: var(--color-warning);">
+                    <div class="day-card-header">
+                        <div class="day-number">Day 2</div>
+                        <span class="badge badge-warning">🔄 진행중</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" style="width: 60%"></div>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-item">
+                            <i class="fas fa-check-circle"></i>
+                            AWL 학습
+                        </div>
+                        <div class="task-item">
+                            <i class="fas fa-check-circle"></i>
+                            문법 워크시트
+                        </div>
+                        <div class="task-item">
+                            <i class="fas fa-check-circle"></i>
+                            AWL 테스트
+                        </div>
+                        <div class="task-item" style="color: var(--color-text-tertiary);">
+                            <i class="fas fa-circle" style="color: var(--color-border-medium);"></i>
+                            Writing
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 3 시작 가능 -->
+                <div class="day-card-demo" style="border-color: var(--color-info);">
+                    <div class="day-card-header">
+                        <div class="day-number">Day 3</div>
+                        <span class="badge badge-info">🔓 시작 가능</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-item" style="color: var(--color-text-tertiary);">
+                            <i class="fas fa-circle" style="color: var(--color-border-medium);"></i>
+                            AWL 학습
+                        </div>
+                        <div class="task-item" style="color: var(--color-text-tertiary);">
+                            <i class="fas fa-circle" style="color: var(--color-border-medium);"></i>
+                            문법 워크시트
+                        </div>
+                        <div class="task-item" style="color: var(--color-text-tertiary);">
+                            <i class="fas fa-circle" style="color: var(--color-border-medium);"></i>
+                            AWL 테스트
+                        </div>
+                        <div class="task-item" style="color: var(--color-text-tertiary);">
+                            <i class="fas fa-circle" style="color: var(--color-border-medium);"></i>
+                            Writing
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 브랜드 철학 -->
+        <div class="section" style="background: var(--color-primary-lighter);">
+            <h2 class="section-title">💡 브랜드 철학</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: var(--color-primary-darker); margin-bottom: 0.5rem;">
+                        <i class="fas fa-sun"></i> 편안함 (Comfort)
+                    </h3>
+                    <p style="color: var(--color-text-secondary); line-height: var(--line-height-relaxed);">
+                        아이들이 긴장하지 않고 말문을 열 수 있는 공간. "틀려도 괜찮다"는 분위기를 시각적으로 전달합니다.
+                    </p>
+                </div>
+                <div>
+                    <h3 style="color: var(--color-secondary); margin-bottom: 0.5rem;">
+                        <i class="fas fa-shield-alt"></i> 신뢰 (Trust)
+                    </h3>
+                    <p style="color: var(--color-text-secondary); line-height: var(--line-height-relaxed);">
+                        학부모가 믿고 맡길 수 있는 전문성. "가볍지 않은 학원", "오래 맡길 수 있는 교육 공간"이라는 인상을 줍니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

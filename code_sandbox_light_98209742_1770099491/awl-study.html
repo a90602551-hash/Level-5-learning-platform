@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWL 단어 학습 - Level 5</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/awl.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        /* Brand Color Override */
+        .header {
+            background: linear-gradient(135deg, #F6E27F 0%, #F6E27F 100%) !important;
+            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.3) !important;
+        }
+        
+        .header .logo {
+            color: #1F2A44 !important;
+            font-weight: 700 !important;
+        }
+        
+        .header .nav-link {
+            color: #1F2A44 !important;
+        }
+        
+        .header .student-info {
+            color: #1F2A44 !important;
+            background: rgba(31, 42, 68, 0.1) !important;
+        }
+        
+        .page-title {
+            color: #1F2A44 !important;
+        }
+        
+        /* 버튼 강조 */
+        .btn-primary, .action-buttons button {
+            background: linear-gradient(135deg, #F6E27F 0%, #E5D06B 100%) !important;
+            color: #1F2A44 !important;
+            border: 3px solid #1F2A44 !important;
+            font-size: 18px !important;
+            padding: 15px 40px !important;
+            font-weight: 700 !important;
+            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.4) !important;
+        }
+        
+        .btn-primary:hover, .action-buttons button:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 24px rgba(246, 226, 127, 0.6) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Level 5 Learning</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> 홈
+                </a>
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-chart-line"></i> 대시보드
+                </a>
+                <div class="student-info" id="studentInfo">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="studentName">학생</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> 돌아가기
+                </a>
+                <h1 class="page-title">
+                    <i class="fas fa-book"></i>
+                    AWL 단어 학습 (Day 1)
+                </h1>
+                <p class="page-subtitle">Academic Word List 30개 단어를 학습하세요</p>
+            </div>
+
+            <!-- Study Progress -->
+            <div class="study-progress-card">
+                <div class="progress-info">
+                    <span class="progress-label">학습 진도</span>
+                    <span class="progress-number"><span id="studiedCount">0</span> / 30</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="tab-btn active" data-group="all">
+                    <i class="fas fa-th"></i> 전체 (30)
+                </button>
+                <button class="tab-btn" data-group="1">
+                    <i class="fas fa-star"></i> 그룹 1: 기초 (10)
+                </button>
+                <button class="tab-btn" data-group="2">
+                    <i class="fas fa-star-half-alt"></i> 그룹 2: 기초-중급 (5)
+                </button>
+                <button class="tab-btn" data-group="3">
+                    <i class="fas fa-stars"></i> 그룹 3: 중급 (15)
+                </button>
+            </div>
+
+            <!-- Word Cards Container -->
+            <div class="word-cards-container" id="wordCardsContainer">
+                <!-- Words will be dynamically generated here -->
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="location.href='awl-test.html'">
+                    <i class="fas fa-clipboard-check"></i> AWL 테스트 시작하기
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Level 5 Learning Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/progress-manager.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/tts-helper.js"></script>
+    <script src="js/awl-data-day1-elementary.js"></script>
+    <style>
+        .sound-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        .sound-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .sound-btn:active {
+            transform: scale(0.95);
+        }
+
+        .study-btn {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .study-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .word-card.studied .study-btn {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .word-actions {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+    </style>
+    <style>
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+    </style>
+    <script>
+        // Day 1 AWL 어휘 데이터 로드
+        const awlWords = day1Vocabulary || [];
+        
+        // 학습 진행 상태
+        let studiedWords = new Set();
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', () => {
+            // 학생 이름 로드
+            const studentName = localStorage.getItem('studentName') || '학생';
+            document.getElementById('studentName').textContent = studentName;
+
+            // 저장된 학습 진행 상태 로드
+            const savedProgress = localStorage.getItem('awlStudyProgress');
+            if (savedProgress) {
+                studiedWords = new Set(JSON.parse(savedProgress));
+            }
+
+            // 단어 카드 렌더링
+            renderWords('all');
+
+            // 탭 클릭 이벤트
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const group = btn.dataset.group;
+                    renderWords(group);
+                });
+            });
+
+            // 진행률 업데이트
+            updateProgress();
+        });
+
+        // 단어 카드 렌더링
+        function renderWords(group) {
+            const container = document.getElementById('wordCardsContainer');
+            const filteredWords = group === 'all' 
+                ? awlWords 
+                : awlWords.filter(word => word.group == group);
+
+            container.innerHTML = filteredWords.map(word => `
+                <div class="word-card ${studiedWords.has(word.id) ? 'studied' : ''}" data-word-id="${word.id}">
+                    <div class="word-header">
+                        <div class="word-main">
+                            <h3 class="word-text">${word.word}</h3>
+                            <span class="word-pronunciation">${word.pronunciation}</span>
+                        </div>
+                        <div class="word-actions">
+                            <button class="sound-btn" onclick="speakWord('${word.word}')" title="발음 듣기">
+                                <i class="fas fa-volume-up"></i>
+                            </button>
+                            <button class="study-btn" onclick="toggleStudied(${word.id})">
+                                <i class="fas ${studiedWords.has(word.id) ? 'fa-check-circle' : 'fa-circle'}"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="word-body">
+                        <div class="word-meaning">
+                            <span class="label">뜻:</span>
+                            <span class="text">${word.koreanMeaning}</span>
+                        </div>
+                        <div class="word-definition">
+                            <span class="label">정의:</span>
+                            <span class="text">${word.definition}</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="label">예문:</span>
+                            <p class="example-en">${word.example}</p>
+                            <p class="example-ko">${word.koreanExample}</p>
+                        </div>
+                        <div class="word-group-badge">
+                            Group ${word.group}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 단어 발음 듣기
+        function speakWord(word) {
+            // Web Speech API 사용
+            if ('speechSynthesis' in window) {
+                // 이전 음성 중지
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.8; // 조금 느리게
+                utterance.pitch = 1;
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('이 브라우저는 음성 기능을 지원하지 않습니다.');
+            }
+        }
+
+        // 학습 완료 토글
+        function toggleStudied(wordId) {
+            if (studiedWords.has(wordId)) {
+                studiedWords.delete(wordId);
+            } else {
+                studiedWords.add(wordId);
+            }
+
+            // 저장
+            localStorage.setItem('awlStudyProgress', JSON.stringify([...studiedWords]));
+
+            // 카드 업데이트
+            const card = document.querySelector(`[data-word-id="${wordId}"]`);
+            card.classList.toggle('studied');
+
+            const icon = card.querySelector('.study-btn i');
+            icon.className = studiedWords.has(wordId) ? 'fas fa-check-circle' : 'fas fa-circle';
+
+            // 진행률 업데이트
+            updateProgress();
+        }
+
+        // 진행률 업데이트
+        async function updateProgress() {
+            const count = studiedWords.size;
+            const percentage = Math.round((count / 30) * 100);
+
+            document.getElementById('studiedCount').textContent = count;
+            document.getElementById('progressFill').style.width = percentage + '%';
+
+            // 🔥 Firebase 진도 저장 (30개 모두 완료 시)
+            if (count === 30) {
+                const studentId = localStorage.getItem('studentId');
+                if (studentId) {
+                    try {
+                        await ProgressManager.updateActivityProgress(studentId, 1, 'awl_study', true);
+                        console.log('✅ AWL 학습 완료가 Firebase에 저장되었습니다!');
+                        
+                        // 완료 알림
+                        showCompletionNotification();
+                    } catch (error) {
+                        console.error('❌ Firebase 저장 오류:', error);
+                    }
+                }
+            }
+        }
+
+        // 완료 알림 표시
+        function showCompletionNotification() {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, var(--color-success) 0%, var(--color-success-dark) 100%);
+                color: white;
+                padding: 1.5rem 2rem;
+                border-radius: 1rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                font-weight: 600;
+                z-index: 10000;
+                animation: slideIn 0.5s ease;
+            `;
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i> 
+                AWL 학습 완료! 진도가 저장되었습니다 🎉
+            `;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.5s ease';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

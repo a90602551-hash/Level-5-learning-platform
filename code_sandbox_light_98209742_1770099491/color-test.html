@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 브랜드 컬러 테스트</title>
+    <style>
+        /* 브랜드 컬러 직접 정의 (캐시 문제 방지) */
+        :root {
+            --color-primary: #F6E27F;
+            --color-secondary: #1F2A44;
+            --color-success: #4CAF93;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            padding: 2rem;
+            background: #FAFBFC;
+        }
+
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .test-header {
+            background: linear-gradient(135deg, #1F2A44 0%, #3D4D7A 50%, #F6E27F 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(31, 42, 68, 0.2);
+        }
+
+        .test-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .color-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .color-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .color-sample {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .color-info {
+            padding: 1.5rem;
+            background: #f9fafb;
+        }
+
+        .color-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .color-code {
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            color: #6b7280;
+        }
+
+        .button-test {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .button-test h2 {
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: #1f2937;
+        }
+
+        .btn-secondary {
+            background: var(--color-secondary);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--color-success);
+            color: white;
+        }
+
+        .verification {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .verification h2 {
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .check-item {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+            background: #f9fafb;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .check-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .check-success {
+            background: #4CAF93;
+            color: white;
+        }
+
+        .check-fail {
+            background: #ef4444;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        
+        <div class="test-header">
+            <h1>🎨 브랜드 컬러 테스트</h1>
+            <p>CSS 변수가 제대로 작동하는지 확인합니다</p>
+        </div>
+
+        <div class="color-row">
+            <div class="color-card">
+                <div class="color-sample" style="background: #F6E27F; color: #1F2A44;">
+                    메인
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Primary Color</div>
+                    <div class="color-code">#F6E27F (노란색)</div>
+                    <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b7280;">
+                        편안함, 말문 열기
+                    </div>
+                </div>
+            </div>
+
+            <div class="color-card">
+                <div class="color-sample" style="background: #1F2A44;">
+                    서브
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Secondary Color</div>
+                    <div class="color-code">#1F2A44 (네이비)</div>
+                    <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b7280;">
+                        신뢰, 전문성
+                    </div>
+                </div>
+            </div>
+
+            <div class="color-card">
+                <div class="color-sample" style="background: #4CAF93;">
+                    성공
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Success Color</div>
+                    <div class="color-code">#4CAF93 (초록)</div>
+                    <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6b7280;">
+                        완료, 통과
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-test">
+            <h2>버튼 테스트</h2>
+            <div class="button-grid">
+                <button class="btn btn-primary">메인 버튼</button>
+                <button class="btn btn-secondary">서브 버튼</button>
+                <button class="btn btn-success">성공 버튼</button>
+            </div>
+        </div>
+
+        <div class="verification">
+            <h2>✅ 확인 사항</h2>
+            
+            <div class="check-item">
+                <div class="check-icon check-success">✓</div>
+                <div>
+                    <strong>메인 컬러가 노란색(#F6E27F)인가요?</strong>
+                    <div style="font-size: 0.9rem; color: #6b7280; margin-top: 0.25rem;">
+                        보라색이 아닌 노란색이어야 합니다
+                    </div>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <div class="check-icon check-success">✓</div>
+                <div>
+                    <strong>서브 컬러가 네이비(#1F2A44)인가요?</strong>
+                    <div style="font-size: 0.9rem; color: #6b7280; margin-top: 0.25rem;">
+                        진한 네이비 색상이어야 합니다
+                    </div>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <div class="check-icon check-success">✓</div>
+                <div>
+                    <strong>헤더 그라데이션이 네이비→노란색인가요?</strong>
+                    <div style="font-size: 0.9rem; color: #6b7280; margin-top: 0.25rem;">
+                        보라색 그라데이션이 아니어야 합니다
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; padding: 1.5rem; background: #FFF4C4; border-radius: 1rem; border-left: 4px solid #F6E27F;">
+            <h3 style="margin-bottom: 0.5rem; color: #1F2A44;">💡 만약 여전히 보라색이라면?</h3>
+            <p style="color: #1F2A44; line-height: 1.6;">
+                1. 브라우저 새로고침 (Ctrl + Shift + R 또는 Cmd + Shift + R)<br>
+                2. 브라우저 캐시 삭제<br>
+                3. Netlify 재배포 필요
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>

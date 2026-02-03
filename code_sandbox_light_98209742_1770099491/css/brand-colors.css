@@ -1,0 +1,123 @@
+/* =========================================
+   브랜드 컬러 시스템 - Level 5 Learning
+   ========================================= */
+
+/* 
+   브랜드 철학:
+   - 편안함 (Comfort): 아이들이 말문을 열 수 있는 공간
+   - 신뢰 (Trust): 학부모가 믿고 맡길 수 있는 전문성
+   - 즐거움 (Joy): 딱딱하지 않고 즐겁게 배우는 분위기
+   - 전문성 (Professionalism): 정확하고 체계적인 교육
+*/
+
+:root {
+    /* ===== 메인 컬러 (Primary) - 따뜻한 노란색 ===== */
+    --color-primary: #F6E27F;           /* 메인: 편안함, 말문 열기 */
+    --color-primary-light: #FFF4C4;     /* 연한 노랑: 배경, 하이라이트 */
+    --color-primary-lighter: #FFFAEB;   /* 아주 연한 노랑: 카드 배경 */
+    --color-primary-dark: #E5D06B;      /* 진한 노랑: 호버 효과 */
+    --color-primary-darker: #D4BF5A;    /* 더 진한 노랑: 액티브 상태 */
+
+    /* ===== 서브 컬러 (Secondary) - 깊은 네이비 ===== */
+    --color-secondary: #1F2A44;         /* 메인: 신뢰, 전문성 */
+    --color-secondary-light: #2D3B5F;   /* 연한 네이비: 텍스트 */
+    --color-secondary-lighter: #3D4D7A; /* 더 연한 네이비: 보조 텍스트 */
+    --color-secondary-dark: #151F35;    /* 진한 네이비: 헤더, 푸터 */
+    --color-secondary-darker: #0D1420;  /* 더 진한 네이비: 강조 */
+
+    /* ===== 보조 컬러 (Accent) - 밝고 즐거운 느낌 ===== */
+    --color-accent-coral: #FF9B85;      /* 산호색: 따뜻한 강조 (성취, 칭찬) */
+    --color-accent-mint: #7FDBCA;       /* 민트: 시원한 강조 (새로운 시작) */
+    --color-accent-lavender: #B197FC;   /* 라벤더: 부드러운 강조 (창의성) */
+    --color-accent-peach: #FFB088;      /* 피치: 따뜻한 보조 (격려) */
+
+    /* ===== 상태 컬러 (Status) ===== */
+    --color-success: #4CAF93;           /* 성공: 차분한 초록 (완료, 통과) */
+    --color-success-light: #7DD4BA;     /* 연한 초록: 성공 배경 */
+    --color-success-dark: #3A9B7A;      /* 진한 초록: 성공 강조 */
+
+    --color-warning: #FFB74D;           /* 경고: 부드러운 주황 (주의, 진행중) */
+    --color-warning-light: #FFD699;     /* 연한 주황: 경고 배경 */
+    --color-warning-dark: #FF9800;      /* 진한 주황: 경고 강조 */
+
+    --color-danger: #EF7B7B;            /* 위험: 부드러운 빨강 (오류, 미통과) */
+    --color-danger-light: #FFB3B3;      /* 연한 빨강: 위험 배경 */
+    --color-danger-dark: #E74C3C;       /* 진한 빨강: 위험 강조 */
+
+    --color-info: #64B5F6;              /* 정보: 밝은 파랑 (안내, 정보) */
+    --color-info-light: #90CAF9;        /* 연한 파랑: 정보 배경 */
+    --color-info-dark: #42A5F5;         /* 진한 파랑: 정보 강조 */
+
+    /* ===== 배경 컬러 (Background) ===== */
+    --color-bg-main: #FAFBFC;           /* 메인 배경: 아주 연한 회색 */
+    --color-bg-card: #FFFFFF;           /* 카드 배경: 순백색 */
+    --color-bg-light: #F5F7FA;          /* 연한 배경: 섹션 구분 */
+    --color-bg-accent: #FFFAEB;         /* 강조 배경: 메인 컬러 계열 */
+    --color-bg-dark: #F0F2F5;           /* 어두운 배경: 입력 필드 */
+
+    /* ===== 텍스트 컬러 (Text) ===== */
+    --color-text-primary: #1F2A44;      /* 메인 텍스트: 서브 컬러 활용 */
+    --color-text-secondary: #5A6B8C;    /* 서브 텍스트: 연한 네이비 */
+    --color-text-tertiary: #8895B0;     /* 보조 텍스트: 더 연한 네이비 */
+    --color-text-light: #B4BDD0;        /* 연한 텍스트: 플레이스홀더 */
+    --color-text-white: #FFFFFF;        /* 흰색 텍스트: 어두운 배경용 */
+    --color-text-accent: #D4BF5A;       /* 강조 텍스트: 메인 컬러 어두운 버전 */
+
+    /* ===== 보더/구분선 (Border) ===== */
+    --color-border-light: #E8EDF2;      /* 연한 구분선 */
+    --color-border-medium: #D1D9E6;     /* 중간 구분선 */
+    --color-border-dark: #B4BDD0;       /* 진한 구분선 */
+    --color-border-accent: #F6E27F;     /* 강조 구분선: 메인 컬러 */
+
+    /* ===== 그라데이션 (Gradient) ===== */
+    --gradient-primary: linear-gradient(135deg, #F6E27F 0%, #FFD699 100%);
+    --gradient-secondary: linear-gradient(135deg, #1F2A44 0%, #2D3B5F 100%);
+    --gradient-warm: linear-gradient(135deg, #FF9B85 0%, #FFB088 100%);
+    --gradient-cool: linear-gradient(135deg, #7FDBCA 0%, #64B5F6 100%);
+    --gradient-soft: linear-gradient(135deg, #B197FC 0%, #90CAF9 100%);
+    --gradient-hero: linear-gradient(135deg, #1F2A44 0%, #3D4D7A 50%, #F6E27F 100%);
+    
+    /* ===== 그림자 (Shadow) ===== */
+    --shadow-sm: 0 2px 8px rgba(31, 42, 68, 0.08);
+    --shadow-md: 0 4px 16px rgba(31, 42, 68, 0.12);
+    --shadow-lg: 0 8px 32px rgba(31, 42, 68, 0.16);
+    --shadow-xl: 0 16px 48px rgba(31, 42, 68, 0.20);
+    --shadow-card: 0 2px 12px rgba(31, 42, 68, 0.10);
+    --shadow-hover: 0 8px 24px rgba(246, 226, 127, 0.25);
+
+    /* ===== 투명도 (Opacity) ===== */
+    --overlay-light: rgba(31, 42, 68, 0.3);
+    --overlay-medium: rgba(31, 42, 68, 0.5);
+    --overlay-dark: rgba(31, 42, 68, 0.7);
+    --overlay-accent: rgba(246, 226, 127, 0.2);
+}
+
+/* ===== 다크 모드 대응 (선택사항) ===== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* 다크 모드에서도 브랜드 아이덴티티 유지 */
+        --color-bg-main: #151F35;
+        --color-bg-card: #1F2A44;
+        --color-text-primary: #FAFBFC;
+        /* 필요시 추가 */
+    }
+}
+
+/* ===== 사용 예시 (Usage Examples) ===== */
+/*
+  버튼:
+  .btn-primary { background: var(--color-primary); color: var(--color-text-primary); }
+  .btn-secondary { background: var(--color-secondary); color: var(--color-text-white); }
+
+  카드:
+  .card { background: var(--color-bg-card); box-shadow: var(--shadow-card); }
+  .card:hover { box-shadow: var(--shadow-hover); }
+
+  배지:
+  .badge-success { background: var(--color-success-light); color: var(--color-success-dark); }
+  .badge-warning { background: var(--color-warning-light); color: var(--color-warning-dark); }
+
+  그라데이션:
+  .hero { background: var(--gradient-hero); }
+  .card-special { background: var(--gradient-warm); }
+*/

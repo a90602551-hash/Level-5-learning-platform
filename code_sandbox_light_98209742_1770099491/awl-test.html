@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWL 테스트 - Level 5</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/test.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        /* Brand Color Override */
+        .header {
+            background: linear-gradient(135deg, #F6E27F 0%, #F6E27F 100%) !important;
+            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.3) !important;
+        }
+        
+        .header .logo {
+            color: #1F2A44 !important;
+            font-weight: 700 !important;
+        }
+        
+        .header .nav-link {
+            color: #1F2A44 !important;
+        }
+        
+        .header .student-info {
+            color: #1F2A44 !important;
+            background: rgba(31, 42, 68, 0.1) !important;
+        }
+        
+        .page-title {
+            color: #1F2A44 !important;
+        }
+        
+        /* 버튼 강조 */
+        .btn, button {
+            font-size: 16px !important;
+            padding: 15px 30px !important;
+            font-weight: 600 !important;
+            border-radius: 8px !important;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #F6E27F 0%, #E5D06B 100%) !important;
+            color: #1F2A44 !important;
+            border: 3px solid #1F2A44 !important;
+            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.4) !important;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 24px rgba(246, 226, 127, 0.6) !important;
+        }
+        
+        .btn-card {
+            background: #1F2A44 !important;
+            color: white !important;
+            border: 2px solid #1F2A44 !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Level 5 Learning</span>
+            </div>
+            <nav class="nav">
+                <div class="student-info" id="studentInfo">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="studentName">학생</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Test Start Screen -->
+            <div id="testStartScreen" class="test-screen">
+                <div class="test-intro-card">
+                    <div class="test-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h1 class="test-title">AWL 단어 테스트</h1>
+                    <p class="test-description">
+                        한글 뜻을 보고 알맞은 영어 단어를 선택하는 테스트입니다.<br>
+                        <strong>4지선다 30문제 + 스펠링 5문제 (총 35문제)</strong><br>
+                        95점 이상 획득 시 다음 단계로 진행할 수 있습니다.
+                    </p>
+                    
+                    <div class="test-info-box">
+                        <div class="info-item">
+                            <i class="fas fa-question-circle"></i>
+                            <div>
+                                <strong>문제 수</strong>
+                                <span>35문제 (선다형 30 + 스펠링 5)</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>제한 시간</strong>
+                                <span>제한 없음</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-trophy"></i>
+                            <div>
+                                <strong>합격 기준</strong>
+                                <span>95점 이상</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-large" onclick="startTest()">
+                        <i class="fas fa-play"></i> 테스트 시작하기
+                    </button>
+                    
+                    <a href="index.html" class="btn-text-link">
+                        <i class="fas fa-arrow-left"></i> 홈으로 돌아가기
+                    </a>
+                </div>
+            </div>
+
+            <!-- Test Questions Screen -->
+            <div id="testQuestionsScreen" class="test-screen" style="display: none;">
+                <!-- Progress Header -->
+                <div class="test-progress-header">
+                    <div class="progress-info">
+                        <span class="question-counter">
+                            문제 <span id="currentQuestion">1</span> / 35
+                        </span>
+                        <span class="score-display">
+                            정답: <span id="correctCount">0</span>
+                        </span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="testProgressFill"></div>
+                    </div>
+                </div>
+
+                <!-- Question Card -->
+                <div class="question-card" id="questionCard">
+                    <div class="question-number">Question <span id="qNum">1</span></div>
+                    <h2 class="question-text" id="questionText"></h2>
+                    <div class="question-korean" id="questionKorean"></div>
+                    
+                    <div class="answer-options" id="answerOptions">
+                        <!-- Options will be generated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Result Screen -->
+            <div id="testResultScreen" class="test-screen" style="display: none;">
+                <div class="result-card" id="resultCard">
+                    <div class="result-icon" id="resultIcon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h1 class="result-title" id="resultTitle">테스트 완료!</h1>
+                    <div class="result-score" id="resultScore">
+                        <span class="score-number">0</span>
+                        <span class="score-total">/ 100점</span>
+                    </div>
+                    <p class="result-message" id="resultMessage"></p>
+                    
+                    <div class="result-details">
+                        <div class="detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>정답</strong>
+                                <span id="correctAnswers">0</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-times-circle"></i>
+                            <div>
+                                <strong>오답</strong>
+                                <span id="wrongAnswers">0</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-percentage"></i>
+                            <div>
+                                <strong>정답률</strong>
+                                <span id="accuracyRate">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-actions">
+                        <button class="btn btn-primary" id="nextButton" onclick="location.href='grammar-worksheet-day1.html'" style="display: none;">
+                            <i class="fas fa-arrow-right"></i> 다음: 문법 워크시트
+                        </button>
+                        <button class="btn btn-card" onclick="location.href='student-dashboard.html'">
+                            <i class="fas fa-home"></i> 대시보드로
+                        </button>
+                        <button class="btn btn-card" onclick="retakeTest()">
+                            <i class="fas fa-redo"></i> 다시 시도
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Level 5 Learning Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/progress-manager.js"></script>
+    
+    <script src="js/main.js"></script>
+    <script src="js/tts-helper.js"></script>
+    <script src="js/awl-data-day1-elementary.js"></script>
+    <script src="js/awl-test.js"></script>
+</body>
+</html>

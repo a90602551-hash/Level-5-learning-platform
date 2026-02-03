@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar Worksheet - Day 1</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/content.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        .grammar-worksheet {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .grammar-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .grammar-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .pattern-sentence {
+            background: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .underline-area {
+            display: inline-block;
+            border-bottom: 2px dashed #667eea;
+            min-width: 200px;
+            padding: 2px 5px;
+            margin: 0 5px;
+        }
+        
+        .translation-area {
+            margin-top: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+        }
+        
+        .translation-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        .translation-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .error-sentence {
+            background: #fff5f5;
+            padding: 15px;
+            border-left: 4px solid #f56565;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .error-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .error-option {
+            padding: 8px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .error-option:hover {
+            background: #f0f0f0;
+        }
+        
+        .error-option.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .error-option.correct {
+            background: #48bb78;
+            color: white;
+            border-color: #48bb78;
+        }
+        
+        .error-option.wrong {
+            background: #f56565;
+            color: white;
+            border-color: #f56565;
+        }
+        
+        .explanation-area {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e6fffa;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .explanation-area.show {
+            display: block;
+        }
+        
+        .check-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: transform 0.2s;
+        }
+        
+        .check-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .check-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .feedback.show {
+            display: block;
+        }
+        
+        .feedback.correct {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        
+        .feedback.incorrect {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        
+        .submit-all {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .submit-all-button {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px 50px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .submit-all-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .score-display {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            margin: 30px 0;
+            display: none;
+        }
+        
+        .score-display.show {
+            display: block;
+        }
+        
+        .score-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Level 5 Learning</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> 홈
+                </a>
+                <div class="student-info" id="studentInfo">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="studentName">학생</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container grammar-worksheet">
+            <div class="page-header">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> 돌아가기
+                </a>
+                <h1 class="page-title">
+                    <i class="fas fa-book"></i>
+                    Day 1 Grammar Worksheet
+                </h1>
+                <p class="page-subtitle">관계사절 삽입구조 1 (Relative Clauses with Insertion Structure)</p>
+            </div>
+
+            <!-- Grammar Info -->
+            <div class="grammar-info">
+                <h3><i class="fas fa-lightbulb"></i> 문법 포인트</h3>
+                <p><strong>관계사절 삽입구조</strong>는 관계대명사절 안에 다른 절이 삽입되는 고급 문법 구조입니다.</p>
+                <p style="margin-top: 10px;">
+                    <strong>구조:</strong> 명사 + who/which + <u>삽입절 (I think/believe/say 등)</u> + 동사...
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>예시:</strong> The student <strong>who</strong> <u>I believe</u> <strong>is</strong> the smartest won the award.
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.9;">
+                    💡 팁: 삽입절을 제거해도 문장이 완전해야 합니다!
+                </p>
+            </div>
+
+            <!-- Section 1: Pattern Hunting -->
+            <div class="grammar-section">
+                <h2 class="section-title">
+                    <i class="fas fa-search"></i>
+                    Part 1: Pattern Hunting
+                </h2>
+                <p style="margin-bottom: 20px; color: #666;">
+                    각 문장에서 <strong>관계사절 삽입구조</strong>에 해당하는 부분을 찾아 아래 입력란에 적고, 문장 전체를 해석하세요.
+                </p>
+
+                <!-- Sentence 1 -->
+                <div class="pattern-sentence" id="pattern1">
+                    <strong>1.</strong> The suspect who the police thought was guilty has been released.
+                    <div class="translation-area">
+                        <label>밑줄 칠 부분:</label>
+                        <input type="text" class="translation-input" id="underline1" placeholder="예: who the police thought">
+                    </div>
+                    <div class="translation-area">
+                        <label>전체 해석:</label>
+                        <input type="text" class="translation-input" id="translation1" placeholder="문장을 해석해보세요">
+                    </div>
+                    <button class="check-button" onclick="checkPattern(1)">확인</button>
+                    <div class="feedback" id="feedback1"></div>
+                </div>
+
+                <!-- Sentence 2 -->
+                <div class="pattern-sentence" id="pattern2">
+                    <strong>2.</strong> We interviewed a candidate who we believed had the most potential for the role.
+                    <div class="translation-area">
+                        <label>밑줄 칠 부분:</label>
+                        <input type="text" class="translation-input" id="underline2" placeholder="예: who we believed">
+                    </div>
+                    <div class="translation-area">
+                        <label>전체 해석:</label>
+                        <input type="text" class="translation-input" id="translation2" placeholder="문장을 해석해보세요">
+                    </div>
+                    <button class="check-button" onclick="checkPattern(2)">확인</button>
+                    <div class="feedback" id="feedback2"></div>
+                </div>
+
+                <!-- Sentence 3 -->
+                <div class="pattern-sentence" id="pattern3">
+                    <strong>3.</strong> This is the masterpiece which the critics say changed the history of modern art.
+                    <div class="translation-area">
+                        <label>밑줄 칠 부분:</label>
+                        <input type="text" class="translation-input" id="underline3" placeholder="예: which the critics say">
+                    </div>
+                    <div class="translation-area">
+                        <label>전체 해석:</label>
+                        <input type="text" class="translation-input" id="translation3" placeholder="문장을 해석해보세요">
+                    </div>
+                    <button class="check-button" onclick="checkPattern(3)">확인</button>
+                    <div class="feedback" id="feedback3"></div>
+                </div>
+
+                <!-- Sentence 4 -->
+                <div class="pattern-sentence" id="pattern4">
+                    <strong>4.</strong> The theory which the professor argued explains the phenomenon is still debated.
+                    <div class="translation-area">
+                        <label>밑줄 칠 부분:</label>
+                        <input type="text" class="translation-input" id="underline4" placeholder="예: which the professor argued">
+                    </div>
+                    <div class="translation-area">
+                        <label>전체 해석:</label>
+                        <input type="text" class="translation-input" id="translation4" placeholder="문장을 해석해보세요">
+                    </div>
+                    <button class="check-button" onclick="checkPattern(4)">확인</button>
+                    <div class="feedback" id="feedback4"></div>
+                </div>
+
+                <!-- Sentence 5 -->
+                <div class="pattern-sentence" id="pattern5">
+                    <strong>5.</strong> They chose the location which the architect suggested would be best for the new building.
+                    <div class="translation-area">
+                        <label>밑줄 칠 부분:</label>
+                        <input type="text" class="translation-input" id="underline5" placeholder="예: which the architect suggested">
+                    </div>
+                    <div class="translation-area">
+                        <label>전체 해석:</label>
+                        <input type="text" class="translation-input" id="translation5" placeholder="문장을 해석해보세요">
+                    </div>
+                    <button class="check-button" onclick="checkPattern(5)">확인</button>
+                    <div class="feedback" id="feedback5"></div>
+                </div>
+            </div>
+
+            <!-- Section 2: Logical Error Detection -->
+            <div class="grammar-section">
+                <h2 class="section-title">
+                    <i class="fas fa-bug"></i>
+                    Part 2: Logical Error Detection
+                </h2>
+                <p style="margin-bottom: 20px; color: #666;">
+                    각 문장에서 <strong>문법적 오류</strong>가 있는 부분을 찾아 선택하고, 왜 틀렸는지 설명하세요.
+                </p>
+
+                <!-- Error 1 -->
+                <div class="error-sentence" id="error1">
+                    <strong>[Sentence A]</strong><br>
+                    "She is the teacher who I heard was won the national award."
+                    
+                    <div class="error-options">
+                        <div class="error-option" onclick="selectError(1, 1)" data-error="1" data-option="1">who</div>
+                        <div class="error-option" onclick="selectError(1, 2)" data-error="1" data-option="2">I heard</div>
+                        <div class="error-option" onclick="selectError(1, 3)" data-error="1" data-option="3">was won</div>
+                        <div class="error-option" onclick="selectError(1, 4)" data-error="1" data-option="4">오류 없음</div>
+                    </div>
+                    
+                    <button class="check-button" onclick="checkError(1)" id="checkError1">확인</button>
+                    
+                    <div class="explanation-area" id="explanation1">
+                        <strong>✅ 정답: was won</strong><br>
+                        <strong>이유:</strong> 'won'은 능동태 동사이므로 'was won'이 아니라 <strong>'won'</strong>만 사용해야 합니다.<br>
+                        <strong>올바른 문장:</strong> "She is the teacher who I heard won the national award."
+                    </div>
+                </div>
+
+                <!-- Error 2 -->
+                <div class="error-sentence" id="error2">
+                    <strong>[Sentence B]</strong><br>
+                    "The artifact which the researcher claimed it was authentic proved to be a fake."
+                    
+                    <div class="error-options">
+                        <div class="error-option" onclick="selectError(2, 1)" data-error="2" data-option="1">which</div>
+                        <div class="error-option" onclick="selectError(2, 2)" data-error="2" data-option="2">claimed it was</div>
+                        <div class="error-option" onclick="selectError(2, 3)" data-error="2" data-option="3">authentic</div>
+                        <div class="error-option" onclick="selectError(2, 4)" data-error="2" data-option="4">오류 없음</div>
+                    </div>
+                    
+                    <button class="check-button" onclick="checkError(2)" id="checkError2">확인</button>
+                    
+                    <div class="explanation-area" id="explanation2">
+                        <strong>✅ 정답: claimed it was</strong><br>
+                        <strong>이유:</strong> 관계대명사 'which'가 이미 주어 역할을 하므로 'it'는 중복입니다. <strong>'it'를 제거</strong>해야 합니다.<br>
+                        <strong>올바른 문장:</strong> "The artifact which the researcher claimed was authentic proved to be a fake."
+                    </div>
+                </div>
+
+                <!-- Error 3 -->
+                <div class="error-sentence" id="error3">
+                    <strong>[Sentence C]</strong><br>
+                    "This is the student who the principal believes are the most talented in our school."
+                    
+                    <div class="error-options">
+                        <div class="error-option" onclick="selectError(3, 1)" data-error="3" data-option="1">who</div>
+                        <div class="error-option" onclick="selectError(3, 2)" data-error="3" data-option="2">believes</div>
+                        <div class="error-option" onclick="selectError(3, 3)" data-error="3" data-option="3">are the most</div>
+                        <div class="error-option" onclick="selectError(3, 4)" data-error="3" data-option="4">오류 없음</div>
+                    </div>
+                    
+                    <button class="check-button" onclick="checkError(3)" id="checkError3">확인</button>
+                    
+                    <div class="explanation-area" id="explanation3">
+                        <strong>✅ 정답: are the most</strong><br>
+                        <strong>이유:</strong> 주어가 'the student'(단수)이므로 동사는 <strong>'is'</strong>를 사용해야 합니다.<br>
+                        <strong>올바른 문장:</strong> "This is the student who the principal believes is the most talented in our school."
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit All -->
+            <div class="submit-all">
+                <button class="submit-all-button" onclick="submitAll()">
+                    <i class="fas fa-check-circle"></i> 전체 제출하기
+                </button>
+            </div>
+
+            <!-- Score Display -->
+            <div class="score-display" id="scoreDisplay">
+                <h2>📊 최종 점수</h2>
+                <div class="score-number" id="finalScore">0/8</div>
+                <p id="scoreMessage">수고하셨습니다!</p>
+                <button class="check-button" onclick="location.reload()" style="margin-top: 20px;">
+                    <i class="fas fa-redo"></i> 다시 풀기
+                </button>
+                <a href="index.html" class="check-button" style="margin-top: 10px; display: inline-block; text-decoration: none;">
+                    <i class="fas fa-home"></i> 홈으로
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Level 5 Learning Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Pattern answers
+        const patternAnswers = {
+            1: {
+                underline: ["who the police thought", "who the police thought was guilty"],
+                translation: "경찰이 유죄라고 생각했던 용의자가 석방되었다"
+            },
+            2: {
+                underline: ["who we believed", "who we believed had"],
+                translation: "우리가 그 역할에 가장 큰 잠재력을 가졌다고 믿었던 후보자를 인터뷰했다"
+            },
+            3: {
+                underline: ["which the critics say", "which the critics say changed"],
+                translation: "이것은 비평가들이 현대 미술의 역사를 바꿨다고 말하는 걸작이다"
+            },
+            4: {
+                underline: ["which the professor argued", "which the professor argued explains"],
+                translation: "교수가 그 현상을 설명한다고 주장한 이론은 여전히 논쟁 중이다"
+            },
+            5: {
+                underline: ["which the architect suggested", "which the architect suggested would"],
+                translation: "그들은 건축가가 새 건물에 가장 좋을 것이라고 제안한 장소를 선택했다"
+            }
+        };
+
+        // Error answers
+        const errorAnswers = {
+            1: 3, // was won
+            2: 2, // claimed it was
+            3: 3  // are the most
+        };
+
+        let userAnswers = {
+            patterns: {},
+            errors: {}
+        };
+
+        function checkPattern(num) {
+            const underlineInput = document.getElementById(`underline${num}`).value.trim().toLowerCase();
+            const translationInput = document.getElementById(`translation${num}`).value.trim();
+            const feedback = document.getElementById(`feedback${num}`);
+            
+            const correctUnderline = patternAnswers[num].underline.some(ans => 
+                underlineInput.includes(ans.toLowerCase())
+            );
+            
+            const hasTranslation = translationInput.length > 10;
+            
+            if (correctUnderline && hasTranslation) {
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = `
+                    <strong>✅ 잘하셨습니다!</strong><br>
+                    정답: ${patternAnswers[num].underline[0]}<br>
+                    참고 해석: ${patternAnswers[num].translation}
+                `;
+                userAnswers.patterns[num] = true;
+            } else {
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = `
+                    <strong>❌ 다시 확인해보세요</strong><br>
+                    ${!correctUnderline ? '밑줄 친 부분을 다시 찾아보세요.' : ''}
+                    ${!hasTranslation ? '해석을 좀 더 자세히 작성해보세요.' : ''}
+                `;
+                userAnswers.patterns[num] = false;
+            }
+        }
+
+        let selectedErrors = {};
+
+        function selectError(errorNum, optionNum) {
+            // Clear previous selections
+            const options = document.querySelectorAll(`[data-error="${errorNum}"]`);
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Select current
+            event.target.classList.add('selected');
+            selectedErrors[errorNum] = optionNum;
+        }
+
+        function checkError(num) {
+            if (!selectedErrors[num]) {
+                alert('답을 선택해주세요!');
+                return;
+            }
+            
+            const correct = selectedErrors[num] === errorAnswers[num];
+            const explanation = document.getElementById(`explanation${num}`);
+            const options = document.querySelectorAll(`[data-error="${num}"]`);
+            
+            options.forEach(opt => {
+                const optNum = parseInt(opt.dataset.option);
+                if (optNum === errorAnswers[num]) {
+                    opt.classList.add('correct');
+                } else if (optNum === selectedErrors[num]) {
+                    opt.classList.add('wrong');
+                }
+            });
+            
+            explanation.classList.add('show');
+            document.getElementById(`checkError${num}`).disabled = true;
+            
+            userAnswers.errors[num] = correct;
+        }
+
+        function submitAll() {
+            const patternScore = Object.values(userAnswers.patterns).filter(v => v).length;
+            const errorScore = Object.values(userAnswers.errors).filter(v => v).length;
+            const totalScore = patternScore + errorScore;
+            const maxScore = 8;
+            
+            document.getElementById('finalScore').textContent = `${totalScore}/${maxScore}`;
+            
+            let message = '';
+            const percentage = (totalScore / maxScore) * 100;
+            
+            if (percentage >= 90) {
+                message = '🎉 완벽합니다! 관계사절 삽입구조를 잘 이해하셨습니다!';
+            } else if (percentage >= 70) {
+                message = '👍 잘하셨습니다! 조금만 더 연습하면 완벽해질 거예요!';
+            } else if (percentage >= 50) {
+                message = '💪 좋은 시도입니다! 복습 후 다시 도전해보세요!';
+            } else {
+                message = '📚 더 연습이 필요합니다. 문법 설명을 다시 읽어보세요!';
+            }
+            
+            document.getElementById('scoreMessage').textContent = message;
+            document.getElementById('scoreDisplay').classList.add('show');
+            
+            // Save to database
+            saveGrammarResult(totalScore, maxScore);
+            
+            // Scroll to score
+            document.getElementById('scoreDisplay').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function saveGrammarResult(score, maxScore) {
+            const currentStudent = JSON.parse(localStorage.getItem('currentStudent'));
+            if (!currentStudent) return;
+            
+            const result = {
+                studentId: currentStudent.id,
+                studentName: currentStudent.name,
+                day: 1,
+                grammarTopic: '관계사절 삽입구조 1',
+                score: score,
+                maxScore: maxScore,
+                percentage: Math.round((score / maxScore) * 100),
+                timestamp: Date.now(),
+                answers: userAnswers
+            };
+            
+            // Save to localStorage
+            const grammarResults = JSON.parse(localStorage.getItem('grammarResults') || '[]');
+            grammarResults.push(result);
+            localStorage.setItem('grammarResults', JSON.stringify(grammarResults));
+            
+            console.log('Grammar result saved:', result);
+        }
+
+        // Check student login
+        const currentStudent = JSON.parse(localStorage.getItem('currentStudent'));
+        if (currentStudent) {
+            document.getElementById('studentName').textContent = currentStudent.name;
+        }
+    </script>
+</body>
+</html>

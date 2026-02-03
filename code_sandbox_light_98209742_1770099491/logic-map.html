@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>논리구조도 작성 - Level 5</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logic-map.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Level 5 Learning</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> 홈
+                </a>
+                <div class="student-info" id="studentInfo">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="studentName">학생</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> 돌아가기
+                </a>
+                <h1 class="page-title">
+                    <i class="fas fa-project-diagram"></i>
+                    논리구조도 작성 (Integrated Logic-Map)
+                </h1>
+                <p class="page-subtitle">Day 1 Mission: 리딩과 리스닝의 대조적 논증을 정리하세요</p>
+            </div>
+
+            <!-- Instructions -->
+            <div class="instructions-card">
+                <h3><i class="fas fa-info-circle"></i> 작성 안내</h3>
+                <p>아래 표에서 리딩(찬성)과 리스닝(반대)의 대조적 논증을 Word Bank를 참고하여 완성하세요.</p>
+                <p>모든 빈칸을 채운 후 "제출하고 모범답안 확인하기" 버튼을 눌러 정답과 비교할 수 있습니다.</p>
+            </div>
+
+            <!-- Logic Map Form -->
+            <div class="logic-map-container">
+                <h2 class="section-title">
+                    <i class="fas fa-table"></i> Step 1: Integrated Logic Chart
+                </h2>
+
+                <form id="logicMapForm">
+                    <table class="logic-map-table">
+                        <thead>
+                            <tr>
+                                <th class="reading-header">Reading (Proponents)</th>
+                                <th class="category-header">Core Category</th>
+                                <th class="listening-header">Listening (Opponents)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Row 1: Socioeconomic -->
+                            <tr>
+                                <td class="reading-cell">
+                                    <strong>Point A:</strong>
+                                    <p>Uniforms reduce 
+                                        <input type="text" name="q1" class="logic-input" data-answer="socioeconomic barriers">
+                                        and help 
+                                        <input type="text" name="q2" class="logic-input" data-answer="level the playing field">
+                                        between students of different backgrounds.
+                                    </p>
+                                </td>
+                                <td class="category-cell">
+                                    <div class="category-badge socio">Socioeconomic</div>
+                                </td>
+                                <td class="listening-cell">
+                                    <strong>Point B:</strong>
+                                    <p>Uniforms impose a heavy 
+                                        <input type="text" name="q3" class="logic-input" data-answer="financial burden">
+                                        and do not truly hide the wealth gap.
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <!-- Row 2: Individuality -->
+                            <tr>
+                                <td class="reading-cell">
+                                    <strong>Point C:</strong>
+                                    <p>They foster 
+                                        <input type="text" name="q4" class="logic-input" data-answer="school pride">
+                                        and prepare students to respect 
+                                        <input type="text" name="q5" class="logic-input" data-answer="authority">
+                                        in the future.
+                                    </p>
+                                </td>
+                                <td class="category-cell">
+                                    <div class="category-badge individuality">Individuality</div>
+                                </td>
+                                <td class="listening-cell">
+                                    <strong>Point D:</strong>
+                                    <p>Uniforms rob students of their 
+                                        <input type="text" name="q6" class="logic-input" data-answer="individuality">
+                                        and stifle creative 
+                                        <input type="text" name="q7" class="logic-input" data-answer="self-expression">
+                                        .
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <!-- Row 3: Educational -->
+                            <tr>
+                                <td class="reading-cell">
+                                    <strong>Point E:</strong>
+                                    <p>They eliminate a major 
+                                        <input type="text" name="q8" class="logic-input" data-answer="distraction">
+                                        , leading to better educational 
+                                        <input type="text" name="q9" class="logic-input" data-answer="academic outcomes">
+                                        .
+                                    </p>
+                                </td>
+                                <td class="category-cell">
+                                    <div class="category-badge educational">Educational</div>
+                                </td>
+                                <td class="listening-cell">
+                                    <strong>Point F:</strong>
+                                    <p>There is no 
+                                        <input type="text" name="q10" class="logic-input" data-answer="measurable effect">
+                                        on grades, and they don't improve the quality of education.
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Word Bank -->
+                    <div class="word-bank-section">
+                        <h3><i class="fas fa-book"></i> Step 2: Logic Word Bank</h3>
+                        <p class="word-bank-desc">아래 용어 중에서 선택하여 빈칸을 채우세요:</p>
+                        <div class="word-bank-grid">
+                            <span class="word-chip">Socioeconomic barriers</span>
+                            <span class="word-chip">Level the playing field</span>
+                            <span class="word-chip">Financial burden</span>
+                            <span class="word-chip">School pride</span>
+                            <span class="word-chip">Authority</span>
+                            <span class="word-chip">Individuality</span>
+                            <span class="word-chip">Self-expression</span>
+                            <span class="word-chip">Distraction</span>
+                            <span class="word-chip">Academic outcomes</span>
+                            <span class="word-chip">Measurable effect</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="submit-section">
+                        <button type="button" class="btn btn-primary btn-large" onclick="submitLogicMap()">
+                            <i class="fas fa-check-circle"></i> 제출하고 모범답안 확인하기
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Answer Comparison -->
+            <div id="answerComparison" class="answer-comparison" style="display: none;">
+                <h2 class="section-title">
+                    <i class="fas fa-clipboard-check"></i> 모범답안 비교
+                </h2>
+
+                <div class="comparison-result">
+                    <div class="result-summary">
+                        <div class="score-circle">
+                            <span class="score-number" id="scoreNumber">0</span>
+                            <span class="score-label">/ 10</span>
+                        </div>
+                        <div class="result-message">
+                            <h3 id="resultMessage">잘했어요!</h3>
+                            <p id="resultDescription">모범답안과 비교한 결과입니다.</p>
+                        </div>
+                    </div>
+
+                    <table class="answer-table">
+                        <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>내 답안</th>
+                                <th>모범답안</th>
+                                <th>결과</th>
+                            </tr>
+                        </thead>
+                        <tbody id="answerTableBody">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="location.href='index.html'">
+                            <i class="fas fa-home"></i> 홈으로 이동
+                        </button>
+                        <button class="btn btn-card" onclick="resetLogicMap()">
+                            <i class="fas fa-redo"></i> 다시 작성하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Level 5 Learning Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/logic-map.js"></script>
+</body>
+</html>

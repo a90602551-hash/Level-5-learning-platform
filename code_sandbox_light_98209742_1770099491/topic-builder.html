@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>토픽빌더 - Level 5</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/topic-builder.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Level 5 Learning</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> 홈
+                </a>
+                <div class="student-info" id="studentInfo">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="studentName">학생</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> 돌아가기
+                </a>
+                <h1 class="page-title">
+                    <i class="fas fa-video"></i>
+                    토픽빌더 (Topic Builder) - Day 1
+                </h1>
+                <p class="page-subtitle">School Uniforms 영상 시청 + 딕테이션 + 한국어 해설</p>
+            </div>
+
+            <!-- Video Section -->
+            <div class="video-section">
+                <h2 class="section-title">
+                    <i class="fas fa-play-circle"></i> 학술 영상 시청
+                </h2>
+                <div class="video-container">
+                    <iframe 
+                        id="youtubeVideo"
+                        src="https://www.youtube.com/embed/QIusUjP6uqA" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-controls">
+                    <button class="btn btn-card" onclick="location.href='topic-builder-korean.html'">
+                        <i class="fas fa-language"></i> 한국어 해설본 보기
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dictation Section -->
+            <div class="dictation-section">
+                <h2 class="section-title">
+                    <i class="fas fa-keyboard"></i> 딕테이션 (Dictation)
+                </h2>
+                <p class="section-description">
+                    영상을 들으며 빈칸에 알맞은 단어를 입력하세요. Word Bank를 참고할 수 있습니다.
+                </p>
+
+                <form id="dictationForm">
+                    <!-- Intro & Overview -->
+                    <div class="dictation-group">
+                        <h3 class="group-title">Intro & Overview</h3>
+                        <div class="dictation-question">
+                            <label>1. School Uniforms are a highly <input type="text" name="q1" data-answer="controversial" class="dictation-input"> topic of discussion.</label>
+                        </div>
+                        <div class="dictation-question">
+                            <label>2. Some think that they help reduce <input type="text" name="q2" data-answer="socioeconomic" class="dictation-input"> barriers between students.</label>
+                        </div>
+                        <div class="dictation-question">
+                            <label>3. Others think they rob students of their <input type="text" name="q3" data-answer="individuality" class="dictation-input">.</label>
+                        </div>
+                    </div>
+
+                    <!-- Socioeconomic Pros & Cons -->
+                    <div class="dictation-group">
+                        <h3 class="group-title">Socioeconomic Pros & Cons</h3>
+                        <div class="dictation-question">
+                            <label>4. The greatest advantage of school uniforms is their ability to reduce socioeconomic <input type="text" name="q4" data-answer="divides" class="dictation-input">.</label>
+                        </div>
+                        <div class="dictation-question">
+                            <label>5. People in favor of uniforms argue that because everybody wears the same thing, they reduce these <input type="text" name="q5" data-answer="differences" class="dictation-input">.</label>
+                        </div>
+                        <div class="dictation-question">
+                            <label>6. Opponents argue that uniforms put a significant <input type="text" name="q6" data-answer="financial burden" class="dictation-input"> on poorer parents.</label>
+                        </div>
+                        <div class="dictation-question">
+                            <label>7. Moreover, opponents argue that uniforms are about schools <input type="text" name="q7" data-answer="making money" class="dictation-input"> off parents.</label>
+                        </div>
+                    </div>
+
+                    <!-- Individuality & Self-expression -->
+                    <div class="dictation-group">
+                        <h3 class="group-title">Individuality & Self-expression</h3>
+                        <div class="dictation-question">
+                            <label>8. This lack of self-expression can be harder under <input type="text" name="q8" data-answer="punitive" class="dictation-input"> dress codes.</label>
+                        </div>
+                        <div class="dictation-question">
+                            <label>9. Uniforms can help to enhance <input type="text" name="q9" data-answer="school pride" class="dictation-input"> and a sense of community.</label>
+                        </div>
+                        <div class="dictation-question">
+                            <label>10-11. I think that this represents the essential debate: <input type="text" name="q10" data-answer="conformity" class="dictation-input"> vs <input type="text" name="q11" data-answer="self-expression" class="dictation-input">.</label>
+                        </div>
+                        <div class="dictation-question">
+                            <label>11. Should students be taught to respect and do exactly as <input type="text" name="q12" data-answer="authority" class="dictation-input"> tells them?</label>
+                        </div>
+                    </div>
+
+                    <!-- Educational Outcomes -->
+                    <div class="dictation-group">
+                        <h3 class="group-title">Educational Outcomes</h3>
+                        <div class="dictation-question">
+                            <label>12. Proponents argue that school uniforms get rid of a major <input type="text" name="q13" data-answer="distraction" class="dictation-input">.</label>
+                        </div>
+                        <div class="dictation-question">
+                            <label>13. Students are focused less on their <input type="text" name="q14" data-answer="appearance" class="dictation-input"> and instead on their education.</label>
+                        </div>
+                        <div class="dictation-question">
+                            <label>14. Opponents argue that they have no <input type="text" name="q15" data-answer="measurable effect" class="dictation-input"> on improving grades.</label>
+                        </div>
+                        <div class="dictation-question">
+                            <label>15. The debate comes down to what <input type="text" name="q16" data-answer="value" class="dictation-input"> you think is most important.</label>
+                        </div>
+                    </div>
+
+                    <!-- Word Bank -->
+                    <div class="word-bank">
+                        <h4><i class="fas fa-book"></i> Word Bank</h4>
+                        <div class="word-bank-items">
+                            <span class="word-chip">Appearance</span>
+                            <span class="word-chip">Authority</span>
+                            <span class="word-chip">Conformity</span>
+                            <span class="word-chip">Controversial</span>
+                            <span class="word-chip">Differences</span>
+                            <span class="word-chip">Distraction</span>
+                            <span class="word-chip">Divides</span>
+                            <span class="word-chip">Financial burden</span>
+                            <span class="word-chip">Individuality</span>
+                            <span class="word-chip">Making money</span>
+                            <span class="word-chip">Measurable effect</span>
+                            <span class="word-chip">Punitive</span>
+                            <span class="word-chip">School pride</span>
+                            <span class="word-chip">Self-expression</span>
+                            <span class="word-chip">Socioeconomic</span>
+                            <span class="word-chip">Value</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="submit-section">
+                        <button type="button" class="btn btn-primary" onclick="checkDictation()">
+                            <i class="fas fa-check"></i> 제출하고 채점하기
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="dictationResults" class="dictation-results" style="display: none;">
+                    <h3>채점 결과</h3>
+                    <div class="result-summary">
+                        <div class="result-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>정답</strong>
+                                <span id="correctCount">0</span>
+                            </div>
+                        </div>
+                        <div class="result-item">
+                            <i class="fas fa-times-circle"></i>
+                            <div>
+                                <strong>오답</strong>
+                                <span id="wrongCount">0</span>
+                            </div>
+                        </div>
+                        <div class="result-item">
+                            <i class="fas fa-percentage"></i>
+                            <div>
+                                <strong>정답률</strong>
+                                <span id="accuracy">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-card" onclick="resetDictation()">
+                        <i class="fas fa-redo"></i> 다시 시도하기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Level 5 Learning Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/topic-builder.js"></script>
+</body>
+</html>

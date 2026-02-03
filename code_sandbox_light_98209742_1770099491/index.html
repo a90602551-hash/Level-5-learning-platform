@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 5 - English Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Level 5 Learning</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">
+                    <i class="fas fa-home"></i> 홈
+                </a>
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-chart-line"></i> 대시보드
+                </a>
+                <div class="student-info" id="studentInfo">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="studentName">학생</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <h1 class="welcome-title">
+                    <i class="fas fa-book-reader"></i>
+                    Welcome to Level 5
+                </h1>
+                <p class="welcome-subtitle">체계적인 학습 시스템으로 영어 실력을 향상시키세요</p>
+                
+                <!-- Student Login -->
+                <div class="student-login" id="studentLogin">
+                    <div class="login-card">
+                        <h3>학습을 시작하려면 이름을 입력하세요</h3>
+                        <input type="text" id="studentNameInput" placeholder="이름을 입력하세요" class="input-field">
+                        <button onclick="loginStudent()" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i> 시작하기
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learning Steps -->
+            <section class="learning-steps" id="learningSteps" style="display: none;">
+                <!-- Step 1: Home Task -->
+                <div class="step-section">
+                    <div class="step-header">
+                        <div class="step-number">Step 1</div>
+                        <div class="step-title">
+                            <h2>Home Task: 지식의 입력 (Input)</h2>
+                            <p class="step-subtitle">등원 전 완료 필수 - 가정학습</p>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-cards">
+                        <!-- AWL 단어 학습 -->
+                        <div class="learning-card">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>AWL 단어 학습</h3>
+                                <p>Academic Word List 30개 단어 학습</p>
+                                <div class="card-progress">
+                                    <span class="status-badge status-ready">학습 가능</span>
+                                </div>
+                            </div>
+                            <a href="awl-study.html" class="btn btn-card">
+                                학습하기 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <!-- 토픽빌더 -->
+                        <div class="learning-card">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>토픽빌더 (Topic Builder)</h3>
+                                <p>학술 영상 시청 + 딕테이션 + 한국어 해설</p>
+                                <div class="card-progress">
+                                    <span class="status-badge status-ready">학습 가능</span>
+                                </div>
+                            </div>
+                            <a href="topic-builder.html" class="btn btn-card">
+                                학습하기 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <!-- 명시적 문법 인강 (준비중) -->
+                        <div class="learning-card disabled">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>명시적 문법 인강</h3>
+                                <p>주차별 핵심 문법 개념 사전 학습</p>
+                                <div class="card-progress">
+                                    <span class="status-badge status-coming">추후 탑재 예정</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-card" disabled>
+                                준비중 <i class="fas fa-lock"></i>
+                            </button>
+                        </div>
+
+                        <!-- 문법 워크시트 (Day 1) -->
+                        <div class="learning-card">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                                <i class="fas fa-pen-alt"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>문법 워크시트</h3>
+                                <p>관계사절 삽입구조 - Pattern Hunting & Error Detection</p>
+                                <div class="card-progress">
+                                    <span class="status-badge status-ready">학습 가능</span>
+                                </div>
+                            </div>
+                            <a href="grammar-worksheet-day1.html" class="btn btn-card">
+                                학습하기 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Booth -->
+                <div class="step-section">
+                    <div class="step-header">
+                        <div class="step-number">Step 2</div>
+                        <div class="step-title">
+                            <h2>Booth: 지식의 점검 및 구조화</h2>
+                            <p class="step-subtitle">원내 온라인 부스 학습 (45분) - 개별 독립 학습</p>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-cards">
+                        <!-- AWL 테스트 -->
+                        <div class="learning-card" id="awlTestCard">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                <i class="fas fa-spell-check"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>AWL 테스트</h3>
+                                <p>95점 이상 패스제 (미통과 시 다음 단계 진입 불가)</p>
+                                <div class="card-progress">
+                                    <span class="status-badge status-ready">테스트 시작</span>
+                                </div>
+                            </div>
+                            <a href="awl-test.html" class="btn btn-card">
+                                테스트 시작 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <!-- 토플 통합형 지문 분석 -->
+                        <div class="learning-card" id="readingCard">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>토플 리딩 지문 분석</h3>
+                                <p>Why Schools Need High Standards - 98 words</p>
+                                <div class="card-progress">
+                                    <span class="status-badge status-locked" id="readingStatus">
+                                        <i class="fas fa-lock"></i> AWL 테스트 통과 필요
+                                    </span>
+                                </div>
+                            </div>
+                            <a href="reading-day1-final.html" class="btn btn-card" id="readingBtn">
+                                학습하기 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <!-- 리스닝 강의 -->
+                        <div class="learning-card" id="listeningCard">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                                <i class="fas fa-headphones"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>토플 리스닝 강의</h3>
+                                <p>The Problem with High Standards - 103 words</p>
+                                <div class="card-progress">
+                                    <span class="status-badge status-locked" id="listeningStatus">
+                                        <i class="fas fa-lock"></i> AWL 테스트 통과 필요
+                                    </span>
+                                </div>
+                            </div>
+                            <a href="toefl-listening-day1.html" class="btn btn-card" id="listeningBtn">
+                                학습하기 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <!-- 논리구조도 작성 -->
+                        <div class="learning-card" id="logicMapCard">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>논리구조도 작성</h3>
+                                <p>Reading vs Listening 대조 분석 (8 빈칸)</p>
+                                <div class="card-progress">
+                                    <span class="status-badge status-locked" id="logicMapStatus">
+                                        <i class="fas fa-lock"></i> AWL 테스트 통과 필요
+                                    </span>
+                                </div>
+                            </div>
+                            <a href="logic-map-day1.html" class="btn btn-card" id="logicMapBtn">
+                                학습하기 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <!-- Writing 과제 -->
+                        <div class="learning-card" id="writingCard">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);">
+                                <i class="fas fa-pen-fancy"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Writing 과제</h3>
+                                <p>5문장 에세이 작성 + 자동 첨삭 (100점 만점)</p>
+                                <div class="card-progress">
+                                    <span class="status-badge status-locked" id="writingStatus">
+                                        <i class="fas fa-lock"></i> AWL 테스트 통과 필요
+                                    </span>
+                                </div>
+                            </div>
+                            <a href="writing-day1.html" class="btn btn-card" id="writingBtn">
+                                학습하기 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <!-- 핵심논리 강의 (준비중) -->
+                        <div class="learning-card disabled">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%);">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>오늘의 핵심논리 강의</h3>
+                                <p>핵심 논리 이해 및 적용</p>
+                                <div class="card-progress">
+                                    <span class="status-badge status-coming">추후 탑재 예정</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-card" disabled>
+                                준비중 <i class="fas fa-lock"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Level 5 Learning Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK (optional - for data persistence) -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

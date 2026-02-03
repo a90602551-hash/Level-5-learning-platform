@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교사 LMS - UI 미리보기</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #f3f4f6;
+        }
+
+        .dashboard-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* 교사 헤더 */
+        .teacher-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .teacher-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .teacher-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* 통계 카드 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .stat-content h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-content p {
+            font-size: 0.95rem;
+            color: #6b7280;
+        }
+
+        /* 필터 섹션 */
+        .filter-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-section input,
+        .filter-section select {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        .filter-section input:focus,
+        .filter-section select:focus {
+            border-color: #667eea;
+        }
+
+        .filter-section input[type="text"] {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* 학생 테이블 */
+        .students-table {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+
+        .students-table h2 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        tr:hover {
+            background: #f9fafb;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 0.85rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge-info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .progress-bar-mini {
+            width: 100px;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-bar-mini-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 1rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .action-btn-assign {
+            background: #10b981;
+        }
+
+        .action-btn-assign:hover {
+            background: #059669;
+        }
+
+        /* 모달 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: #1f2937;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #1f2937;
+        }
+
+        .detail-section {
+            margin-bottom: 2rem;
+        }
+
+        .detail-section h3 {
+            font-size: 1.2rem;
+            color: #374151;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .detail-item {
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .score-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+        }
+
+        .score-item-title {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .score-item-value {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .score-high {
+            color: #10b981;
+        }
+
+        .score-medium {
+            color: #f59e0b;
+        }
+
+        .score-low {
+            color: #ef4444;
+        }
+
+        /* 과제 배정 폼 */
+        .assign-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                max-width: calc(100% - 2rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- 교사 헤더 -->
+        <div class="teacher-header">
+            <h1><i class="fas fa-chalkboard-teacher"></i> Level 5 Learning - 교사 LMS</h1>
+            <p>학생들의 학습 현황을 관리하고 개별 과제를 배정하세요</p>
+        </div>
+
+        <!-- 전체 통계 -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>24명</h3>
+                    <p>전체 학생 수</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Day 12.3</h3>
+                    <p>평균 진도</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>89.5점</h3>
+                    <p>평균 점수</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>37개</h3>
+                    <p>개별 과제</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 필터 섹션 -->
+        <div class="filter-section">
+            <input type="text" placeholder="🔍 학생 이름 검색..." />
+            <select>
+                <option>전체 진도</option>
+                <option>Day 1-10</option>
+                <option>Day 11-20</option>
+                <option>Day 21+</option>
+            </select>
+            <select>
+                <option>전체 상태</option>
+                <option>정상 진행</option>
+                <option>주의 필요</option>
+                <option>우수</option>
+            </select>
+            <button class="filter-btn">
+                <i class="fas fa-filter"></i> 필터 적용
+            </button>
+        </div>
+
+        <!-- 학생 목록 테이블 -->
+        <div class="students-table">
+            <h2>📋 학생 목록</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>현재 진도</th>
+                        <th>완료율</th>
+                        <th>평균 점수</th>
+                        <th>AWL 테스트</th>
+                        <th>Writing</th>
+                        <th>개별과제</th>
+                        <th>마지막 활동</th>
+                        <th>관리</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 학생 1 -->
+                    <tr>
+                        <td><strong>김영희</strong></td>
+                        <td>
+                            <span class="badge badge-info">Day 15</span>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <div class="progress-bar-mini">
+                                    <div class="progress-bar-mini-fill" style="width: 85%"></div>
+                                </div>
+                                <span style="font-size: 0.85rem; color: #6b7280;">85%</span>
+                            </div>
+                        </td>
+                        <td><strong style="color: #10b981;">92점</strong></td>
+                        <td><span class="badge badge-success">95점 이상</span></td>
+                        <td><span class="badge badge-success">90점 이상</span></td>
+                        <td>3개 (2개 완료)</td>
+                        <td>2시간 전</td>
+                        <td>
+                            <button class="action-btn" onclick="viewStudent('김영희')">
+                                <i class="fas fa-eye"></i> 상세보기
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- 학생 2 -->
+                    <tr>
+                        <td><strong>박철수</strong></td>
+                        <td>
+                            <span class="badge badge-info">Day 12</span>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <div class="progress-bar-mini">
+                                    <div class="progress-bar-mini-fill" style="width: 60%"></div>
+                                </div>
+                                <span style="font-size: 0.85rem; color: #6b7280;">60%</span>
+                            </div>
+                        </td>
+                        <td><strong style="color: #f59e0b;">78점</strong></td>
+                        <td><span class="badge badge-warning">70-94점</span></td>
+                        <td><span class="badge badge-danger">70점 미만</span></td>
+                        <td>1개 (0개 완료)</td>
+                        <td>1일 전</td>
+                        <td>
+                            <button class="action-btn" onclick="viewStudent('박철수')">
+                                <i class="fas fa-eye"></i> 상세보기
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- 학생 3 -->
+                    <tr>
+                        <td><strong>이민지</strong></td>
+                        <td>
+                            <span class="badge badge-info">Day 18</span>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <div class="progress-bar-mini">
+                                    <div class="progress-bar-mini-fill" style="width: 95%"></div>
+                                </div>
+                                <span style="font-size: 0.85rem; color: #6b7280;">95%</span>
+                            </div>
+                        </td>
+                        <td><strong style="color: #10b981;">96점</strong></td>
+                        <td><span class="badge badge-success">95점 이상</span></td>
+                        <td><span class="badge badge-success">90점 이상</span></td>
+                        <td>2개 (2개 완료)</td>
+                        <td>30분 전</td>
+                        <td>
+                            <button class="action-btn" onclick="viewStudent('이민지')">
+                                <i class="fas fa-eye"></i> 상세보기
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- 학생 4 -->
+                    <tr>
+                        <td><strong>최동욱</strong></td>
+                        <td>
+                            <span class="badge badge-info">Day 8</span>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <div class="progress-bar-mini">
+                                    <div class="progress-bar-mini-fill" style="width: 40%"></div>
+                                </div>
+                                <span style="font-size: 0.85rem; color: #6b7280;">40%</span>
+                            </div>
+                        </td>
+                        <td><strong style="color: #ef4444;">65점</strong></td>
+                        <td><span class="badge badge-danger">70점 미만</span></td>
+                        <td><span class="badge badge-danger">70점 미만</span></td>
+                        <td>4개 (1개 완료)</td>
+                        <td>3일 전</td>
+                        <td>
+                            <button class="action-btn" onclick="viewStudent('최동욱')">
+                                <i class="fas fa-eye"></i> 상세보기
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- 학생 5 -->
+                    <tr>
+                        <td><strong>정수현</strong></td>
+                        <td>
+                            <span class="badge badge-info">Day 10</span>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <div class="progress-bar-mini">
+                                    <div class="progress-bar-mini-fill" style="width: 70%"></div>
+                                </div>
+                                <span style="font-size: 0.85rem; color: #6b7280;">70%</span>
+                            </div>
+                        </td>
+                        <td><strong style="color: #f59e0b;">85점</strong></td>
+                        <td><span class="badge badge-success">95점 이상</span></td>
+                        <td><span class="badge badge-warning">70-89점</span></td>
+                        <td>2개 (1개 완료)</td>
+                        <td>5시간 전</td>
+                        <td>
+                            <button class="action-btn" onclick="viewStudent('정수현')">
+                                <i class="fas fa-eye"></i> 상세보기
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 학생 상세보기 모달 -->
+    <div class="modal" id="studentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-circle"></i> <span id="modalStudentName">김영희</span> 학생 상세 정보</h2>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- 기본 정보 -->
+            <div class="detail-section">
+                <h3>📊 기본 정보</h3>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">현재 진도</div>
+                        <div class="detail-value">Day 15 / 96</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">완료율</div>
+                        <div class="detail-value">85%</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">평균 점수</div>
+                        <div class="detail-value" style="color: #10b981;">92점</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">마지막 활동</div>
+                        <div class="detail-value">2시간 전</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 공통학습 점수 -->
+            <div class="detail-section">
+                <h3>📚 공통학습 최근 점수</h3>
+                <div class="score-list">
+                    <div class="score-item">
+                        <span class="score-item-title">Day 15 - AWL 테스트</span>
+                        <span class="score-item-value score-high">97점</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-item-title">Day 15 - Writing</span>
+                        <span class="score-item-value score-high">92점</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-item-title">Day 15 - 논리구조도</span>
+                        <span class="score-item-value score-medium">88점</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-item-title">Day 14 - AWL 테스트</span>
+                        <span class="score-item-value score-high">95점</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-item-title">Day 14 - Writing</span>
+                        <span class="score-item-value score-high">90점</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 개별과제 현황 -->
+            <div class="detail-section">
+                <h3>📝 개별과제 현황</h3>
+                <div class="score-list">
+                    <div class="score-item">
+                        <span class="score-item-title">관계대명사 심화 문제</span>
+                        <span class="badge badge-success">✅ 완료 (90점)</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-item-title">Charlotte's Web - Chapter 1</span>
+                        <span class="badge badge-warning">🔄 진행중</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-item-title">Day 1-3 어휘 복습 테스트</span>
+                        <span class="badge badge-info">⏰ 예정</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 과제 배정 버튼 -->
+            <button class="submit-btn" onclick="openAssignModal()">
+                <i class="fas fa-plus-circle"></i> 새 개별과제 배정하기
+            </button>
+        </div>
+    </div>
+
+    <!-- 과제 배정 모달 -->
+    <div class="modal" id="assignModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-clipboard-list"></i> 개별과제 배정</h2>
+                <button class="modal-close" onclick="closeAssignModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <form class="assign-form">
+                <div class="form-group">
+                    <label>학생 선택</label>
+                    <select>
+                        <option>김영희</option>
+                        <option>박철수</option>
+                        <option>이민지</option>
+                        <option>최동욱</option>
+                        <option>정수현</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>과제 유형</label>
+                    <select>
+                        <option>문법 워크시트</option>
+                        <option>원서 읽기</option>
+                        <option>어휘 복습</option>
+                        <option>독해 연습</option>
+                        <option>작문 연습</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>과제 제목</label>
+                    <input type="text" placeholder="예: 관계대명사 심화 문제" />
+                </div>
+
+                <div class="form-group">
+                    <label>과제 설명</label>
+                    <textarea placeholder="과제에 대한 상세 설명을 입력하세요"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>마감일</label>
+                    <input type="date" />
+                </div>
+
+                <button type="button" class="submit-btn" onclick="submitAssignment()">
+                    <i class="fas fa-paper-plane"></i> 과제 배정하기
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function viewStudent(name) {
+            document.getElementById('modalStudentName').textContent = name;
+            document.getElementById('studentModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('studentModal').classList.remove('active');
+        }
+
+        function openAssignModal() {
+            document.getElementById('studentModal').classList.remove('active');
+            document.getElementById('assignModal').classList.add('active');
+        }
+
+        function closeAssignModal() {
+            document.getElementById('assignModal').classList.remove('active');
+        }
+
+        function submitAssignment() {
+            alert('과제가 배정되었습니다!');
+            closeAssignModal();
+        }
+
+        // 모달 외부 클릭 시 닫기
+        window.onclick = function(event) {
+            const studentModal = document.getElementById('studentModal');
+            const assignModal = document.getElementById('assignModal');
+            if (event.target == studentModal) {
+                closeModal();
+            }
+            if (event.target == assignModal) {
+                closeAssignModal();
+            }
+        }
+    </script>
+</body>
+</html>

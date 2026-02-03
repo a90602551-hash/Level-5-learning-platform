@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교사 LMS 대시보드 - Level 5 Learning</title>
+    <link rel="stylesheet" href="css/brand-colors.css">
+    <link rel="stylesheet" href="css/brand-fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: var(--color-bg-main);
+            font-family: var(--font-combined);
+        }
+
+        .dashboard-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* 헤더 */
+        .teacher-header {
+            background: var(--gradient-hero);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .teacher-header h1 {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 0.5rem;
+        }
+
+        .teacher-header p {
+            font-size: var(--font-size-lg);
+            opacity: 0.95;
+        }
+
+        .back-to-home {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 0.65rem 1.75rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-weight: var(--font-weight-medium);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-to-home:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* 통계 카드 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--color-bg-card);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-primary);
+        }
+
+        .stat-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .stat-value {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .stat-label {
+            font-size: var(--font-size-base);
+            color: var(--color-text-secondary);
+            font-weight: var(--font-weight-medium);
+        }
+
+        /* 필터 섹션 */
+        .filter-section {
+            background: var(--color-bg-card);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--color-border);
+            border-radius: 0.5rem;
+            font-family: var(--font-combined);
+            font-size: var(--font-size-base);
+            transition: all 0.3s ease;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .filter-select {
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--color-border);
+            border-radius: 0.5rem;
+            font-family: var(--font-combined);
+            font-size: var(--font-size-base);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        /* 학생 테이블 */
+        .students-table-section {
+            background: var(--color-bg-card);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-card);
+        }
+
+        .students-table-section h2 {
+            font-size: var(--font-size-2xl);
+            color: var(--color-text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .students-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .students-table thead {
+            background: var(--color-bg-light);
+        }
+
+        .students-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-primary);
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .students-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-border-light);
+            color: var(--color-text-secondary);
+        }
+
+        .students-table tbody tr {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .students-table tbody tr:hover {
+            background: var(--color-bg-light);
+        }
+
+        .progress-badge {
+            display: inline-block;
+            padding: 0.35rem 0.85rem;
+            border-radius: 1rem;
+            font-size: 0.85rem;
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .badge-green {
+            background: var(--color-success-light);
+            color: var(--color-success-dark);
+        }
+
+        .badge-yellow {
+            background: var(--color-warning-light);
+            color: var(--color-warning-dark);
+        }
+
+        .badge-red {
+            background: var(--color-danger-light);
+            color: var(--color-danger-dark);
+        }
+
+        .badge-gray {
+            background: var(--color-bg-light);
+            color: var(--color-text-tertiary);
+        }
+
+        .view-detail-btn {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: var(--font-weight-medium);
+            transition: all 0.2s ease;
+        }
+
+        .view-detail-btn:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* 로딩 상태 */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--color-text-secondary);
+        }
+
+        .loading i {
+            font-size: 3rem;
+            animation: spin 1s linear infinite;
+            color: var(--color-primary);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--color-text-tertiary);
+        }
+
+        .empty-state i {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.2;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 1rem;
+            }
+
+            .teacher-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .students-table {
+                font-size: 0.9rem;
+            }
+
+            .students-table th,
+            .students-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        
+        <!-- 로딩 상태 -->
+        <div id="loadingState" class="loading">
+            <i class="fas fa-spinner"></i>
+            <p>학생 데이터를 불러오는 중...</p>
+        </div>
+
+        <!-- 메인 대시보드 (초기 숨김) -->
+        <div id="mainDashboard" style="display: none;">
+            
+            <!-- 교사 헤더 -->
+            <div class="teacher-header">
+                <div>
+                    <h1><i class="fas fa-chalkboard-teacher"></i> 교사 LMS 대시보드</h1>
+                    <p>Level 5 학생 관리 및 진도 현황</p>
+                </div>
+                <div>
+                    <a href="index.html" class="back-to-home">
+                        <i class="fas fa-home"></i> 홈으로
+                    </a>
+                </div>
+            </div>
+
+            <!-- 통계 카드 -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-value" id="totalStudents">0</div>
+                    <div class="stat-label">전체 학생 수</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="stat-value" id="averageProgress">Day 0</div>
+                    <div class="stat-label">평균 진도</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-star"></i>
+                    <div class="stat-value" id="averageScore">0점</div>
+                    <div class="stat-label">평균 점수</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tasks"></i>
+                    <div class="stat-value" id="totalTasks">0</div>
+                    <div class="stat-label">배정된 과제</div>
+                </div>
+            </div>
+
+            <!-- 필터 섹션 -->
+            <div class="filter-section">
+                <input 
+                    type="text" 
+                    class="filter-input" 
+                    id="searchInput" 
+                    placeholder="🔍 학생 이름 검색..."
+                    onkeyup="filterStudents()"
+                >
+                <select class="filter-select" id="progressFilter" onchange="filterStudents()">
+                    <option value="all">전체 진도</option>
+                    <option value="ahead">앞서가는 학생 (Day 10+)</option>
+                    <option value="ontrack">정상 진행 (Day 1-9)</option>
+                    <option value="behind">부진 학생 (Day 0)</option>
+                </select>
+                <select class="filter-select" id="statusFilter" onchange="filterStudents()">
+                    <option value="all">전체 상태</option>
+                    <option value="active">활동 중</option>
+                    <option value="inactive">미활동</option>
+                </select>
+            </div>
+
+            <!-- 학생 목록 테이블 -->
+            <div class="students-table-section">
+                <h2>📋 학생 목록</h2>
+                <div id="studentsTableContainer">
+                    <!-- 테이블이 여기에 동적으로 생성됩니다 -->
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/progress-manager.js"></script>
+
+    <script>
+        let allStudents = [];
+        let filteredStudents = [];
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // 모든 학생 데이터 로드
+                await loadAllStudents();
+                
+                // 통계 업데이트
+                updateStatistics();
+                
+                // 학생 테이블 렌더링
+                renderStudentsTable();
+
+                // 로딩 숨기기, 메인 표시
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('mainDashboard').style.display = 'block';
+
+            } catch (error) {
+                console.error('❌ Dashboard initialization error:', error);
+                document.getElementById('loadingState').innerHTML = `
+                    <i class="fas fa-exclamation-triangle" style="color: var(--color-danger);"></i>
+                    <p>데이터를 불러오는 중 오류가 발생했습니다.</p>
+                    <button onclick="location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--color-primary); color: white; border: none; border-radius: 0.5rem; cursor: pointer;">
+                        다시 시도
+                    </button>
+                `;
+            }
+        });
+
+        // 모든 학생 데이터 로드
+        async function loadAllStudents() {
+            const db = firebase.firestore();
+            const snapshot = await db.collection('student_progress').get();
+            
+            allStudents = [];
+            snapshot.forEach(doc => {
+                allStudents.push({
+                    id: doc.id,
+                    ...doc.data()
+                });
+            });
+
+            filteredStudents = [...allStudents];
+            console.log('✅ Loaded students:', allStudents.length);
+        }
+
+        // 통계 업데이트
+        function updateStatistics() {
+            const totalStudents = allStudents.length;
+            document.getElementById('totalStudents').textContent = totalStudents;
+
+            if (totalStudents === 0) {
+                document.getElementById('averageProgress').textContent = 'Day 0';
+                document.getElementById('averageScore').textContent = '0점';
+                document.getElementById('totalTasks').textContent = '0';
+                return;
+            }
+
+            // 평균 진도 계산
+            const avgDay = Math.round(
+                allStudents.reduce((sum, student) => sum + student.currentDay, 0) / totalStudents
+            );
+            document.getElementById('averageProgress').textContent = `Day ${avgDay}`;
+
+            // 평균 점수 계산
+            const studentsWithScores = allStudents.filter(s => {
+                const stats = ProgressManager.calculateStudentStats(s);
+                return stats.averageScore > 0;
+            });
+
+            if (studentsWithScores.length > 0) {
+                const avgScore = Math.round(
+                    studentsWithScores.reduce((sum, student) => {
+                        const stats = ProgressManager.calculateStudentStats(student);
+                        return sum + stats.averageScore;
+                    }, 0) / studentsWithScores.length
+                );
+                document.getElementById('averageScore').textContent = `${avgScore}점`;
+            } else {
+                document.getElementById('averageScore').textContent = '-';
+            }
+
+            // 개별과제 수 (아직 구현 안 됨)
+            document.getElementById('totalTasks').textContent = '0';
+        }
+
+        // 학생 테이블 렌더링
+        function renderStudentsTable() {
+            const container = document.getElementById('studentsTableContainer');
+
+            if (filteredStudents.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-user-slash"></i>
+                        <p>표시할 학생이 없습니다</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <table class="students-table">
+                    <thead>
+                        <tr>
+                            <th>이름</th>
+                            <th>현재 진도</th>
+                            <th>완료한 Day</th>
+                            <th>평균 점수</th>
+                            <th>상태</th>
+                            <th>상세보기</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            filteredStudents.forEach(student => {
+                const completedDays = student.completedDays.length;
+                const stats = ProgressManager.calculateStudentStats(student);
+                const avgScore = stats.averageScore > 0 ? `${stats.averageScore}점` : '-';
+                
+                let progressBadge = 'badge-green';
+                let progressText = '정상';
+                if (student.currentDay === 1 && completedDays === 0) {
+                    progressBadge = 'badge-yellow';
+                    progressText = '시작';
+                } else if (student.currentDay >= 10) {
+                    progressBadge = 'badge-green';
+                    progressText = '우수';
+                }
+
+                html += `
+                    <tr onclick="viewStudentDetail('${student.id}')">
+                        <td><strong>${student.studentName}</strong></td>
+                        <td>Day ${student.currentDay} / 96</td>
+                        <td>${completedDays}개 완료</td>
+                        <td>${avgScore}</td>
+                        <td><span class="progress-badge ${progressBadge}">${progressText}</span></td>
+                        <td>
+                            <button class="view-detail-btn" onclick="event.stopPropagation(); viewStudentDetail('${student.id}')">
+                                <i class="fas fa-eye"></i> 보기
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // 학생 필터링
+        function filterStudents() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const progressFilter = document.getElementById('progressFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+
+            filteredStudents = allStudents.filter(student => {
+                // 이름 검색
+                if (searchTerm && !student.studentName.toLowerCase().includes(searchTerm)) {
+                    return false;
+                }
+
+                // 진도 필터
+                if (progressFilter !== 'all') {
+                    if (progressFilter === 'ahead' && student.currentDay < 10) return false;
+                    if (progressFilter === 'ontrack' && (student.currentDay < 1 || student.currentDay >= 10)) return false;
+                    if (progressFilter === 'behind' && student.currentDay > 0) return false;
+                }
+
+                // 상태 필터 (활동/미활동)
+                if (statusFilter !== 'all') {
+                    const lastActive = student.updated_at || student.created_at;
+                    const threeDaysAgo = Date.now() - (3 * 24 * 60 * 60 * 1000);
+                    const isActive = lastActive > threeDaysAgo;
+
+                    if (statusFilter === 'active' && !isActive) return false;
+                    if (statusFilter === 'inactive' && isActive) return false;
+                }
+
+                return true;
+            });
+
+            renderStudentsTable();
+        }
+
+        // 학생 상세보기
+        function viewStudentDetail(studentId) {
+            window.location.href = `student-detail.html?studentId=${studentId}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOEFL Reading - Day 1</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        /* Brand Color Override */
+        .header {
+            background: linear-gradient(135deg, #F6E27F 0%, #F6E27F 100%) !important;
+            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.3) !important;
+            color: #1F2A44 !important;
+        }
+        
+        /* 버튼 강조 */
+        .nav-btn.primary {
+            background: linear-gradient(135deg, #F6E27F 0%, #E5D06B 100%) !important;
+            color: #1F2A44 !important;
+            border: 3px solid #1F2A44 !important;
+            font-size: 18px !important;
+            padding: 18px 40px !important;
+            font-weight: 700 !important;
+            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.4) !important;
+        }
+        
+        .nav-btn.primary:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 24px rgba(246, 226, 127, 0.6) !important;
+        }
+        
+        .nav-btn.secondary {
+            background: #1F2A44 !important;
+            color: white !important;
+            border: 2px solid #1F2A44 !important;
+            font-size: 16px !important;
+            padding: 15px 30px !important;
+        }
+        
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+        }
+
+        .header .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .timer {
+            font-size: 24px;
+            font-weight: 600;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 8px;
+        }
+
+        /* Tab System */
+        .tab-navigation {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            background: #f1f3f5;
+            color: #495057;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            min-height: 400px;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Reading Passage */
+        .passage-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 30px;
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .passage-content {
+            line-height: 2.2;
+            color: #1e293b;
+        }
+
+        .passage-content p {
+            font-size: 22px;
+            margin-bottom: 30px;
+            text-align: justify;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        /* Grammar Focus */
+        .grammar-section h3 {
+            font-size: 24px;
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grammar-examples {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .example-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .example-item p {
+            font-size: 18px;
+            margin: 0;
+            color: #495057;
+        }
+
+        .highlight-grammar {
+            background: #fef3c7;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        .grammar-note {
+            background: #e0e7ff;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 16px;
+            color: #3730a3;
+            margin-top: 20px;
+        }
+
+        /* Analysis */
+        .analysis-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .analysis-item {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+        }
+
+        .analysis-item strong {
+            display: block;
+            color: #10b981;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .analysis-item p {
+            font-size: 16px;
+            color: #495057;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Vocabulary */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .vocab-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .vocab-item strong {
+            display: block;
+            color: #1e293b;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .vocab-item .pronunciation {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .vocab-item p {
+            font-size: 15px;
+            color: #495057;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Navigation Buttons */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .nav-btn.secondary {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .nav-btn.secondary:hover {
+            background: #dee2e6;
+        }
+
+        .nav-btn.primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .nav-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-book-reader"></i> TOEFL Reading - Day 1</h1>
+            <div class="meta">
+                <div>
+                    <span id="studentName" style="font-size: 18px;">학생</span>
+                    <span style="opacity: 0.8; margin-left: 15px;">난이도 3/10 ★★★☆☆</span>
+                </div>
+                <div class="timer">
+                    <i class="fas fa-clock"></i> <span id="timer">8:00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="switchTab('reading')">
+                <i class="fas fa-book-open"></i> 본문 읽기
+            </button>
+            <button class="tab-btn" onclick="switchTab('grammar')">
+                <i class="fas fa-highlighter"></i> 문법 분석
+            </button>
+            <button class="tab-btn" onclick="switchTab('vocabulary')">
+                <i class="fas fa-book"></i> 핵심 어휘
+            </button>
+        </div>
+
+        <!-- Tab 1: Reading Passage -->
+        <div id="tab-reading" class="tab-content active">
+            <h2 class="passage-title">Why Schools Need High Standards</h2>
+            <div class="passage-content">
+                <p>
+                    Many teachers who experts believe are good say that schools need high standards. Standards are goals that students must achieve. When schools have high standards, students learn more and prepare better for the future.
+                </p>
+                <p>
+                    High standards help students develop important skills. Students who teachers think work hard become better learners. They learn to solve problems and think carefully. Schools which people say are excellent produce students who succeed in life.
+                </p>
+            </div>
+        </div>
+
+        <!-- Tab 2: Grammar Focus -->
+        <div id="tab-grammar" class="tab-content">
+            <div class="grammar-section">
+                <h3><i class="fas fa-highlighter"></i> Grammar Focus: 관계사절 삽입구조</h3>
+                <div class="grammar-examples">
+                    <div class="example-item">
+                        <p>teachers <span class="highlight-grammar">who experts believe</span> are good</p>
+                    </div>
+                    <div class="example-item">
+                        <p>students <span class="highlight-grammar">who teachers think</span> work hard</p>
+                    </div>
+                    <div class="example-item">
+                        <p>schools <span class="highlight-grammar">which people say</span> are excellent</p>
+                    </div>
+                    <div class="example-item">
+                        <p>students <span class="highlight-grammar">who</span> succeed in life</p>
+                    </div>
+                </div>
+                <div class="grammar-note">
+                    <strong><i class="fas fa-lightbulb"></i> 패턴:</strong> 관계사 + (주어 + 생각/전달 동사) + 진짜 동사<br><br>
+                    문법 워크시트에서 배운 패턴이 실제 지문에서 어떻게 사용되는지 확인하세요!
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Vocabulary -->
+        <div id="tab-vocabulary" class="tab-content">
+            <h3 style="font-size: 24px; margin-bottom: 20px;"><i class="fas fa-book"></i> Key Vocabulary (Day 1 AWL)</h3>
+            <div class="vocab-grid">
+                <div class="vocab-item">
+                    <strong>standard</strong>
+                    <span class="pronunciation">[ˈstændərd]</span>
+                    <p>기준, 표준 - a level of quality or achievement</p>
+                </div>
+                <div class="vocab-item">
+                    <strong>achieve</strong>
+                    <span class="pronunciation">[əˈtʃiːv]</span>
+                    <p>달성하다 - to succeed in doing something</p>
+                </div>
+                <div class="vocab-item">
+                    <strong>develop</strong>
+                    <span class="pronunciation">[dɪˈveləp]</span>
+                    <p>개발하다, 발전시키다 - to grow or improve</p>
+                </div>
+                <div class="vocab-item">
+                    <strong>skill</strong>
+                    <span class="pronunciation">[skɪl]</span>
+                    <p>기술, 능력 - an ability to do something well</p>
+                </div>
+                <div class="vocab-item">
+                    <strong>prepare</strong>
+                    <span class="pronunciation">[prɪˈper]</span>
+                    <p>준비하다 - to make ready for something</p>
+                </div>
+                <div class="vocab-item">
+                    <strong>succeed</strong>
+                    <span class="pronunciation">[səkˈsiːd]</span>
+                    <p>성공하다 - to achieve something you want</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <button class="nav-btn secondary" onclick="location.href='student-dashboard.html'">
+                <i class="fas fa-home"></i> 대시보드로
+            </button>
+            <button class="nav-btn primary" onclick="completeReading()">
+                다음: Listening <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/progress-manager.js"></script>
+    
+    <script>
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+            
+            // Highlight selected button
+            event.target.closest('.tab-btn').classList.add('active');
+        }
+
+        // Timer
+        let timeLeft = 480; // 8 minutes
+        
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                alert('시간이 종료되었습니다!');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const student = getCurrentStudent();
+            if (student) {
+                document.getElementById('studentName').textContent = student.name;
+            }
+            
+            updateTimer();
+        });
+
+        // ========================================
+        // Firebase Progress Save
+        // ========================================
+        
+        async function completeReading() {
+            try {
+                // Get student info from localStorage
+                const studentId = localStorage.getItem('studentId');
+                const studentName = localStorage.getItem('studentName');
+                
+                if (!studentId) {
+                    alert('로그인 정보가 없습니다. 다시 로그인해주세요.');
+                    window.location.href = 'index.html';
+                    return;
+                }
+                
+                // Check if ProgressManager is available
+                if (typeof ProgressManager === 'undefined') {
+                    console.warn('ProgressManager not available, completing without saving');
+                    window.location.href = 'toefl-listening-day1.html';
+                    return;
+                }
+                
+                // Save to Firebase
+                await ProgressManager.updateActivity(studentId, 1, 'reading', true);
+                
+                alert('✅ Reading 완료!\n\n다음 단계인 Listening으로 이동합니다.');
+                window.location.href = 'toefl-listening-day1.html';
+                
+            } catch (error) {
+                console.error('완료 저장 중 오류:', error);
+                // Even if save fails, allow navigation
+                alert('완료 처리되었습니다.\n\nListening으로 이동합니다.');
+                window.location.href = 'toefl-listening-day1.html';
+            }
+        }
+    </script>
+</body>
+</html>

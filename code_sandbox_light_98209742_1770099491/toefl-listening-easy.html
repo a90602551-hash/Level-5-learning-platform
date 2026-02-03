@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOEFL 리스닝 - Day 1 Easy</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/content.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Level 5 Learning</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> 홈
+                </a>
+                <div class="student-info" id="studentInfo">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="studentName">학생</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <a href="toefl-reading-easy.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> 리딩으로 돌아가기
+                </a>
+                <h1 class="page-title">
+                    <i class="fas fa-headphones"></i>
+                    리스닝 (Easy Level)
+                </h1>
+                <p class="page-subtitle">Why Uniforms Are Not Always Good</p>
+            </div>
+
+            <!-- Audio Player Section -->
+            <div class="audio-player-section">
+                <h2 class="section-title">
+                    <i class="fas fa-volume-up"></i> 리스닝 듣기
+                </h2>
+                <p class="section-description">
+                    교복에 반대하는 의견을 들어보세요. 재생 버튼을 눌러 음성을 들을 수 있습니다.
+                </p>
+
+                <div class="audio-player">
+                    <div class="audio-controls">
+                        <button class="play-btn" id="playBtn" onclick="toggleAudio()">
+                            <i class="fas fa-play" id="playIcon"></i>
+                        </button>
+                    </div>
+                    <div class="audio-progress">
+                        <div class="audio-progress-bar" id="progressBar"></div>
+                    </div>
+                    <div class="audio-time">
+                        <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+                    </div>
+                </div>
+
+                <div class="transcript-box">
+                    <h4><i class="fas fa-file-alt"></i> 리스닝 스크립트</h4>
+                    
+                    <p class="transcript-text">
+                        <strong>Paragraph 1:</strong><br>
+                        However, many students disagree with the reading. They think uniforms are not always good. First, uniforms stop students from showing who they are. Young people need to learn about themselves. They want to choose their own clothes. This is part of growing up. When schools force students to wear uniforms, students cannot express themselves. This is a problem.
+                    </p>
+                    
+                    <p class="transcript-text">
+                        <strong>Paragraph 2:</strong><br>
+                        Second, uniforms don't really save money. The reading says uniforms are cheaper than regular clothes. But this is not true. Parents must buy uniforms from special stores. These stores are very expensive. Also, students need many uniforms because they wear them every day. So uniforms actually cost more money, not less.
+                    </p>
+
+                    <p class="transcript-text">
+                        <strong>Paragraph 3:</strong><br>
+                        Finally, uniforms don't help students get better grades. Some people think uniforms help students focus on studying. But there is no proof of this. Students can study well with or without uniforms. What really helps students is good teaching and interesting lessons. Schools should focus on teaching, not on what students wear.
+                    </p>
+
+                    <p class="transcript-text">
+                        <strong>Conclusion:</strong><br>
+                        In conclusion, uniforms have disadvantages. They stop self-expression, they cost too much money, and they don't improve learning. Schools should think carefully before making students wear uniforms.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Content Analysis -->
+            <div class="content-card">
+                <div class="content-section">
+                    <h2 class="content-title">
+                        <i class="fas fa-balance-scale"></i> 리딩 vs 리스닝 대조 분석
+                    </h2>
+                    
+                    <div class="contrast-table">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                    <th style="padding: 15px; text-align: left; border: 1px solid #ddd;">포인트</th>
+                                    <th style="padding: 15px; text-align: left; border: 1px solid #ddd;">리딩 (찬성)</th>
+                                    <th style="padding: 15px; text-align: left; border: 1px solid #ddd;">리스닝 (반대)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid #ddd; background: #f8f9fa;"><strong>평등성</strong></td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">✅ 모든 학생이 같아 보여서 평등하다</td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">❌ 학생들이 자신을 표현할 수 없다</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid #ddd; background: #f8f9fa;"><strong>비용</strong></td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">✅ (암시적) 돈을 절약할 수 있다</td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">❌ 특별한 가게에서 사야 해서 더 비싸다</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid #ddd; background: #f8f9fa;"><strong>학업</strong></td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">✅ 공부에 집중할 수 있다</td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">❌ 성적 향상과 관계없다, 좋은 수업이 중요하다</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="key-vocabulary">
+                    <h3><i class="fas fa-key"></i> 핵심 어휘 (리스닝)</h3>
+                    <div class="vocab-grid">
+                        <div class="vocab-item">
+                            <strong>disagree</strong> - 반대하다
+                        </div>
+                        <div class="vocab-item">
+                            <strong>express</strong> - 표현하다
+                        </div>
+                        <div class="vocab-item">
+                            <strong>force</strong> - 강요하다
+                        </div>
+                        <div class="vocab-item">
+                            <strong>save money</strong> - 돈을 절약하다
+                        </div>
+                        <div class="vocab-item">
+                            <strong>proof</strong> - 증거
+                        </div>
+                        <div class="vocab-item">
+                            <strong>improve</strong> - 향상시키다
+                        </div>
+                        <div class="vocab-item">
+                            <strong>disadvantage</strong> - 단점
+                        </div>
+                        <div class="vocab-item">
+                            <strong>carefully</strong> - 신중하게
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <a href="toefl-reading-easy.html" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> 리딩으로
+                    </a>
+                    <a href="logic-map-easy.html" class="btn btn-primary">
+                        다음: 논리구조도 <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Level 5 Learning Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Text-to-Speech for Listening
+        let currentUtterance = null;
+        let isPaused = false;
+
+        function toggleAudio() {
+            const playBtn = document.getElementById('playBtn');
+            const playIcon = document.getElementById('playIcon');
+
+            if (!currentUtterance || speechSynthesis.paused) {
+                playAudio();
+                playIcon.className = 'fas fa-pause';
+            } else {
+                pauseAudio();
+                playIcon.className = 'fas fa-play';
+            }
+        }
+
+        function playAudio() {
+            const text = `
+                However, many students disagree with the reading. They think uniforms are not always good. 
+                
+                First, uniforms stop students from showing who they are. Young people need to learn about themselves. They want to choose their own clothes. This is part of growing up. When schools force students to wear uniforms, students cannot express themselves. This is a problem.
+                
+                Second, uniforms don't really save money. The reading says uniforms are cheaper than regular clothes. But this is not true. Parents must buy uniforms from special stores. These stores are very expensive. Also, students need many uniforms because they wear them every day. So uniforms actually cost more money, not less.
+                
+                Finally, uniforms don't help students get better grades. Some people think uniforms help students focus on studying. But there is no proof of this. Students can study well with or without uniforms. What really helps students is good teaching and interesting lessons. Schools should focus on teaching, not on what students wear.
+                
+                In conclusion, uniforms have disadvantages. They stop self-expression, they cost too much money, and they don't improve learning. Schools should think carefully before making students wear uniforms.
+            `;
+
+            if (speechSynthesis.paused && currentUtterance) {
+                speechSynthesis.resume();
+            } else {
+                currentUtterance = new SpeechSynthesisUtterance(text);
+                currentUtterance.lang = 'en-US';
+                currentUtterance.rate = 0.8; // 천천히 읽기
+                currentUtterance.pitch = 1;
+
+                currentUtterance.onend = function() {
+                    document.getElementById('playIcon').className = 'fas fa-play';
+                };
+
+                speechSynthesis.speak(currentUtterance);
+            }
+        }
+
+        function pauseAudio() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.pause();
+            }
+        }
+
+        // Check student login
+        const currentStudent = JSON.parse(localStorage.getItem('currentStudent'));
+        if (currentStudent) {
+            document.getElementById('studentName').textContent = currentStudent.name;
+        }
+    </script>
+</body>
+</html>

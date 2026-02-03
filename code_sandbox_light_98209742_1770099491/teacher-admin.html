@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교사 관리 페이지 - Level 5</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        .teacher-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-box h3 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .stat-box p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        .students-table {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+        }
+        tr:hover {
+            background: #f9fafb;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .export-btn {
+            background: #10b981;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .export-btn:hover {
+            background: #059669;
+        }
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+        .detail-btn {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+        .detail-btn:hover {
+            background: #5568d3;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Level 5 Learning - 교사 관리</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> 학생 페이지
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="teacher-header">
+                <h1><i class="fas fa-chalkboard-teacher"></i> 교사 관리 대시보드</h1>
+                <p>학생들의 학습 현황과 성과를 확인하세요</p>
+            </div>
+
+            <!-- Overall Statistics -->
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-box">
+                    <h3 id="totalStudents">-</h3>
+                    <p>전체 학생</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="passedStudents">-</h3>
+                    <p>AWL 통과</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="totalWritings">-</h3>
+                    <p>Writing 제출</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="totalGrammars">-</h3>
+                    <p>문법 워크시트</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="totalLogicMaps">-</h3>
+                    <p>논리구조도</p>
+                </div>
+            </div>
+                <div class="stat-box">
+                    <h3 id="avgScore">-</h3>
+                    <p>평균 점수</p>
+                </div>
+            </div>
+
+            <!-- Export Button -->
+            <button class="export-btn" onclick="exportToExcel()">
+                <i class="fas fa-file-excel"></i> 엑셀로 내보내기
+            </button>
+
+            <!-- Students Table -->
+            <div class="students-table">
+                <h2 style="margin-bottom: 1.5rem;">
+                    <i class="fas fa-users"></i> 학생 목록
+                </h2>
+                <div id="loadingMessage" class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> 데이터를 불러오는 중...
+                </div>
+                <table id="studentsTable" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>이름</th>
+                            <th>AWL 점수</th>
+                            <th>상태</th>
+                            <th>Writing</th>
+                            <th>문법</th>
+                            <th>논리구조도</th>
+                            <th>마지막 활동</th>
+                            <th>상세보기</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsTableBody">
+                    </tbody>
+                </table>
+                <div id="noDataMessage" style="display: none; text-align: center; padding: 2rem; color: #6b7280;">
+                    <i class="fas fa-inbox"></i>
+                    <p>아직 학생 데이터가 없습니다.</p>
+                    <p style="font-size: 0.875rem;">학생들이 학습을 시작하면 여기에 표시됩니다.</p>
+                </div>
+            </div>
+
+            <!-- Firebase Status -->
+            <div style="text-align: center; margin-top: 2rem; padding: 1rem; background: #f9fafb; border-radius: 0.5rem;">
+                <p id="firebaseStatus" style="color: #6b7280; font-size: 0.875rem;">
+                    <i class="fas fa-database"></i> 데이터베이스 연결 확인 중...
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Level 5 Learning Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    
+    <script src="js/firebase-config.js"></script>
+    <script>
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            checkFirebaseStatus();
+            await loadAllData();
+        });
+
+        function checkFirebaseStatus() {
+            const statusEl = document.getElementById('firebaseStatus');
+            if (isFirebaseEnabled) {
+                statusEl.innerHTML = '<i class="fas fa-check-circle" style="color: #10b981;"></i> Firebase 연결됨 - 실시간 데이터 동기화';
+            } else {
+                statusEl.innerHTML = '<i class="fas fa-exclamation-triangle" style="color: #f59e0b;"></i> Firebase 미연결 - localStorage 사용 중 (데이터가 제한적일 수 있습니다)';
+            }
+        }
+
+        async function loadAllData() {
+            try {
+                // Get overall statistics
+                const stats = await getOverallStatistics();
+                if (stats) {
+                    document.getElementById('totalStudents').textContent = stats.totalStudents;
+                    document.getElementById('passedStudents').textContent = stats.passedStudents;
+                    document.getElementById('totalWritings').textContent = stats.totalWritings || 0;
+                    document.getElementById('totalGrammars').textContent = stats.totalGrammars || 0;
+                    document.getElementById('totalLogicMaps').textContent = stats.totalLogicMaps || 0;
+                }
+
+                // Get all students
+                const students = await getAllStudents();
+                
+                document.getElementById('loadingMessage').style.display = 'none';
+                
+                if (students.length === 0) {
+                    document.getElementById('noDataMessage').style.display = 'block';
+                } else {
+                    document.getElementById('studentsTable').style.display = 'table';
+                    displayStudents(students);
+                }
+
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('loadingMessage').innerHTML = 
+                    '<i class="fas fa-exclamation-circle"></i> 데이터를 불러오는 데 실패했습니다.';
+            }
+        }
+
+        async function displayStudents(students) {
+            const tbody = document.getElementById('studentsTableBody');
+            tbody.innerHTML = '';
+
+            for (const student of students) {
+                const row = document.createElement('tr');
+                
+                // AWL Status badge
+                let statusBadge = '';
+                if (student.awl_test_passed) {
+                    statusBadge = `<span class="badge badge-success">✓ 합격 (${student.awl_test_score}점)</span>`;
+                } else if (student.awl_test_score > 0) {
+                    statusBadge = `<span class="badge badge-warning">재시도 (${student.awl_test_score}점)</span>`;
+                } else {
+                    statusBadge = `<span class="badge badge-danger">미응시</span>`;
+                }
+
+                // Get student test counts
+                const writings = await getStudentWritings(student.id);
+                const grammars = await getStudentGrammarWorksheets(student.id);
+                const logicMaps = await getStudentLogicMaps(student.id);
+
+                // Writing score display
+                let writingDisplay = '-';
+                if (writings.length > 0) {
+                    const latestWriting = writings[0];
+                    const score = latestWriting.score || 0;
+                    const color = score >= 90 ? '#10b981' : score >= 80 ? '#f59e0b' : '#ef4444';
+                    writingDisplay = `<span style="color: ${color}; font-weight: 600;">${score}점</span>`;
+                }
+
+                // Grammar score display
+                let grammarDisplay = '-';
+                if (grammars.length > 0) {
+                    const latestGrammar = grammars[0];
+                    const score = latestGrammar.score || 0;
+                    grammarDisplay = `${score}점`;
+                }
+
+                row.innerHTML = `
+                    <td><strong>${student.name}</strong></td>
+                    <td>${student.awl_test_score || 0}점</td>
+                    <td>${statusBadge}</td>
+                    <td>${writingDisplay}</td>
+                    <td>${grammarDisplay}</td>
+                    <td>${logicMaps.length > 0 ? logicMaps[0].score + '/8' : '-'}</td>
+                    <td>${student.updated_at ? new Date(student.updated_at).toLocaleDateString() : '-'}</td>
+                    <td>
+                        <button class="detail-btn" onclick="viewStudentDetail('${student.id}', '${student.name}')">
+                            <i class="fas fa-eye"></i> 상세보기
+                        </button>
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            }
+        }
+
+        async function viewStudentDetail(studentId, studentName) {
+            const awlTests = await getStudentAWLTests(studentId);
+            const writings = await getStudentWritings(studentId);
+            const grammars = await getStudentGrammarWorksheets(studentId);
+            const dictations = await getStudentListeningDictations(studentId);
+            const logicMaps = await getStudentLogicMaps(studentId);
+
+            let message = `📊 ${studentName} 학생 상세 기록\n\n`;
+            
+            message += `📝 AWL 테스트 (${awlTests.length}회):\n`;
+            awlTests.forEach((test, index) => {
+                message += `  ${index + 1}. ${test.score}점 (${test.passed ? '합격' : '불합격'}) - ${new Date(test.date).toLocaleString()}\n`;
+            });
+            
+            message += `\n✍️ Writing (${writings.length}회):\n`;
+            writings.forEach((writing, index) => {
+                const scoreStr = writing.score ? `${writing.score}점` : '점수 없음';
+                message += `  ${index + 1}. ${scoreStr} - ${new Date(writing.date).toLocaleString()}\n`;
+                if (writing.detailedScores) {
+                    message += `     상세: 기본${writing.detailedScores.basic} 시제${writing.detailedScores.tense} 수일치${writing.detailedScores.agreement} 연결사${writing.detailedScores.connectors}\n`;
+                }
+            });
+            
+            message += `\n📚 문법 워크시트 (${grammars.length}회):\n`;
+            grammars.forEach((grammar, index) => {
+                message += `  ${index + 1}. ${grammar.score || 0}점 - ${new Date(grammar.date).toLocaleString()}\n`;
+            });
+            
+            message += `\n🎧 리스닝 딕테이션 (${dictations.length}회):\n`;
+            dictations.forEach((dict, index) => {
+                message += `  ${index + 1}. ${dict.score}/${dict.total} - ${new Date(dict.date).toLocaleString()}\n`;
+            });
+            
+            message += `\n🗺️ 논리구조도 (${logicMaps.length}회):\n`;
+            logicMaps.forEach((map, index) => {
+                message += `  ${index + 1}. ${map.score}/8 - ${new Date(map.date).toLocaleString()}\n`;
+            });
+
+            alert(message);
+        }
+
+        function exportToExcel() {
+            alert('엑셀 내보내기 기능은 Firebase 연동 후 구현됩니다.\n\n현재는 Firebase Console에서 직접 데이터를 내보낼 수 있습니다:\n1. Firebase Console 접속\n2. Firestore Database 선택\n3. 데이터 내보내기');
+        }
+    </script>
+</body>
+</html>

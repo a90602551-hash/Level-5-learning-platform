@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOEFL Listening - Day 1</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        /* Brand Color Override */
+        .header {
+            background: linear-gradient(135deg, #F6E27F 0%, #F6E27F 100%) !important;
+            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.3) !important;
+            color: #1F2A44 !important;
+        }
+        
+        /* 버튼 강조 */
+        .check-btn, .reset-btn, button[class*="btn"] {
+            font-size: 16px !important;
+            padding: 12px 30px !important;
+            font-weight: 600 !important;
+            border-radius: 8px !important;
+        }
+        
+        .check-btn {
+            background: linear-gradient(135deg, #F6E27F 0%, #E5D06B 100%) !important;
+            color: #1F2A44 !important;
+            border: 3px solid #1F2A44 !important;
+            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.4) !important;
+        }
+        
+        .check-btn:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 24px rgba(246, 226, 127, 0.6) !important;
+        }
+        
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+        }
+
+        .header .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .timer {
+            font-size: 24px;
+            font-weight: 600;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 8px;
+        }
+
+        /* Audio Player */
+        .audio-player {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-audio {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 20px;
+            border: none;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-audio:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .time-display {
+            text-align: center;
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        /* Tab System */
+        .tab-navigation {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            background: #f1f3f5;
+            color: #495057;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            min-height: 400px;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dictation */
+        .dictation-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dictation-instruction {
+            background: #fef3c7;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            color: #92400e;
+            font-weight: 500;
+        }
+
+        .dictation-paragraph {
+            font-size: 18px;
+            line-height: 2;
+            color: #1e293b;
+            margin-bottom: 30px;
+        }
+
+        .blank-input {
+            display: inline-block;
+            min-width: 120px;
+            padding: 4px 12px;
+            border: none;
+            border-bottom: 2px solid #f59e0b;
+            background: #fef3c7;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .blank-input:focus {
+            outline: none;
+            background: #fde68a;
+            border-bottom-color: #d97706;
+        }
+
+        .blank-input.correct {
+            background: #d1fae5;
+            border-bottom-color: #10b981;
+            color: #065f46;
+        }
+
+        .blank-input.incorrect {
+            background: #fee2e2;
+            border-bottom-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .check-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s;
+        }
+
+        .check-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .reset-btn {
+            width: 100%;
+            padding: 12px;
+            background: #6b7280;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .reset-btn:hover {
+            background: #4b5563;
+        }
+
+        .feedback-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #10b981;
+        }
+
+        .feedback-box.partial {
+            background: #fef3c7;
+            color: #92400e;
+            border: 2px solid #f59e0b;
+        }
+
+        /* Grammar Focus */
+        .grammar-section h3 {
+            font-size: 24px;
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grammar-examples {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .example-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .example-item p {
+            font-size: 18px;
+            margin: 0;
+            color: #495057;
+        }
+
+        .highlight-grammar {
+            background: #fef3c7;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        .grammar-note {
+            background: #e0e7ff;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 16px;
+            color: #3730a3;
+            margin-top: 20px;
+        }
+
+        /* Navigation Buttons */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .nav-btn.secondary {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .nav-btn.secondary:hover {
+            background: #dee2e6;
+        }
+
+        .nav-btn.primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .nav-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-headphones"></i> TOEFL Listening - Day 1</h1>
+            <div class="meta">
+                <div>
+                    <span id="studentName">학생</span>
+                    <span style="opacity: 0.8; margin-left: 15px;">난이도 3/10 ★★★☆☆</span>
+                </div>
+                <div class="timer">
+                    <i class="fas fa-clock"></i> <span id="timer">8:00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audio Player -->
+        <div class="audio-player">
+            <h3 style="margin: 0 0 20px 0; font-size: 20px; color: #1e293b;">
+                <i class="fas fa-volume-up"></i> The Problem with High Standards
+            </h3>
+            <div class="audio-controls">
+                <button class="btn-audio" id="playBtn" onclick="togglePlay()">
+                    <i class="fas fa-play"></i> Play
+                </button>
+                <button class="btn-audio" onclick="restartAudio()">
+                    <i class="fas fa-redo"></i> Restart
+                </button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="time-display">
+                <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="switchTab('dictation')">
+                <i class="fas fa-pen"></i> 딕테이션
+            </button>
+            <button class="tab-btn" onclick="switchTab('grammar')">
+                <i class="fas fa-highlighter"></i> 문법 분석
+            </button>
+        </div>
+
+        <!-- Tab 1: Dictation -->
+        <div id="tab-dictation" class="tab-content active">
+            <h2 class="dictation-title">
+                <i class="fas fa-pen-fancy"></i> Dictation (받아쓰기)
+            </h2>
+            <div class="dictation-instruction">
+                <i class="fas fa-info-circle"></i> 
+                오디오를 듣고 빈칸에 알맞은 단어를 입력하세요. (대소문자 구분 없음)
+            </div>
+
+            <div class="dictation-paragraph">
+                Some teachers who students believe <input type="text" class="blank-input" id="blank1" data-answer="understand"> them say that very high <input type="text" class="blank-input" id="blank2" data-answer="standards"> can cause problems. Standards that are too high may make students feel <input type="text" class="blank-input" id="blank3" data-answer="stressed"> and worried. When schools <input type="text" class="blank-input" id="blank4" data-answer="require"> too much, students who need help often feel bad about themselves.
+            </div>
+
+            <div class="dictation-paragraph">
+                High standards may not work for all students. Students who teachers know try hard sometimes cannot meet difficult <input type="text" class="blank-input" id="blank5" data-answer="goals">. They may lose <input type="text" class="blank-input" id="blank6" data-answer="confidence"> and stop trying. Schools which experts think are good should <input type="text" class="blank-input" id="blank7" data-answer="support"> each student at their own level. Education should help students make <input type="text" class="blank-input" id="blank8" data-answer="progress">, not make them feel like failures.
+            </div>
+
+            <button class="check-btn" onclick="checkDictation()">
+                <i class="fas fa-check-circle"></i> 정답 확인
+            </button>
+
+            <button class="reset-btn" onclick="resetDictation()">
+                <i class="fas fa-redo"></i> 다시 하기
+            </button>
+
+            <div class="feedback-box" id="feedback"></div>
+        </div>
+
+        <!-- Tab 2: Grammar Focus -->
+        <div id="tab-grammar" class="tab-content">
+            <div class="grammar-section">
+                <h3><i class="fas fa-highlighter"></i> Grammar Focus: 관계사절 삽입구조</h3>
+                <div class="grammar-examples">
+                    <div class="example-item">
+                        <p>teachers <span class="highlight-grammar">who students believe</span> understand them</p>
+                    </div>
+                    <div class="example-item">
+                        <p>students <span class="highlight-grammar">who</span> need help</p>
+                    </div>
+                    <div class="example-item">
+                        <p>students <span class="highlight-grammar">who teachers know</span> try hard</p>
+                    </div>
+                    <div class="example-item">
+                        <p>schools <span class="highlight-grammar">which experts think</span> are good</p>
+                    </div>
+                </div>
+                <div class="grammar-note">
+                    <strong><i class="fas fa-lightbulb"></i> 패턴:</strong> 관계사 + (주어 + 생각/전달 동사) + 진짜 동사<br><br>
+                    문법 워크시트에서 배운 패턴이 실제 리스닝에서 어떻게 사용되는지 확인하세요!
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <button class="nav-btn secondary" onclick="location.href='reading-day1-final.html'">
+                <i class="fas fa-arrow-left"></i> 이전: Reading
+            </button>
+            <button class="nav-btn primary" onclick="location.href='logic-map-day1.html'">
+                다음: Logic Map <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/tts-helper.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/progress-manager.js"></script>
+    
+    <script>
+        // TTS를 사용한 오디오 재생 (진행률 표시 개선)
+        let utterance = null;
+        let isPlaying = false;
+        let progressInterval = null;
+
+        const listeningText = `Some teachers who students believe understand them say that very high standards can cause problems. Standards that are too high may make students feel stressed and worried. When schools require too much, students who need help often feel bad about themselves.
+
+High standards may not work for all students. Students who teachers know try hard sometimes cannot meet difficult goals. They may lose confidence and stop trying. Schools which experts think are good should support each student at their own level. Education should help students make progress, not make them feel like failures.`;
+
+        function togglePlay() {
+            if (isPlaying) {
+                window.speechSynthesis.cancel();
+                isPlaying = false;
+                document.getElementById('playBtn').innerHTML = '<i class="fas fa-play"></i> Play';
+                if (progressInterval) {
+                    clearInterval(progressInterval);
+                }
+            } else {
+                playAudio();
+            }
+        }
+
+        function playAudio() {
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
+
+            isPlaying = true;
+            document.getElementById('playBtn').innerHTML = '<i class="fas fa-pause"></i> Pause';
+
+            utterance = new SpeechSynthesisUtterance(listeningText);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+            
+            const voices = window.speechSynthesis.getVoices();
+            const femaleVoice = voices.find(voice => 
+                voice.lang === 'en-US' && (voice.name.includes('Female') || voice.name.includes('Google'))
+            );
+            if (femaleVoice) {
+                utterance.voice = femaleVoice;
+            }
+            
+            utterance.onend = function() {
+                isPlaying = false;
+                document.getElementById('playBtn').innerHTML = '<i class="fas fa-play"></i> Play';
+                document.getElementById('progressFill').style.width = '100%';
+                document.getElementById('currentTime').textContent = document.getElementById('totalTime').textContent;
+                if (progressInterval) {
+                    clearInterval(progressInterval);
+                }
+            };
+            
+            const wordCount = listeningText.split(/\s+/).length;
+            const estimatedDuration = wordCount * 0.55;
+            let currentTime = 0;
+            
+            document.getElementById('totalTime').textContent = formatTime(estimatedDuration);
+            document.getElementById('currentTime').textContent = '0:00';
+            document.getElementById('progressFill').style.width = '0%';
+            
+            progressInterval = setInterval(() => {
+                if (isPlaying && currentTime < estimatedDuration) {
+                    currentTime += 0.1;
+                    const percentage = Math.min((currentTime / estimatedDuration) * 100, 100);
+                    
+                    const progressBar = document.getElementById('progressFill');
+                    const currentTimeEl = document.getElementById('currentTime');
+                    
+                    if (progressBar) {
+                        progressBar.style.width = percentage + '%';
+                    }
+                    
+                    if (currentTimeEl) {
+                        currentTimeEl.textContent = formatTime(currentTime);
+                    }
+                } else if (!isPlaying || currentTime >= estimatedDuration) {
+                    clearInterval(progressInterval);
+                }
+            }, 100);
+            
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function restartAudio() {
+            window.speechSynthesis.cancel();
+            isPlaying = false;
+            
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
+            
+            document.getElementById('progressFill').style.width = '0%';
+            document.getElementById('currentTime').textContent = '0:00';
+            document.getElementById('playBtn').innerHTML = '<i class="fas fa-play"></i> Play';
+            
+            setTimeout(() => {
+                playAudio();
+            }, 100);
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+            event.target.closest('.tab-btn').classList.add('active');
+        }
+
+        // Dictation functions
+        function checkDictation() {
+            let correctCount = 0;
+            let totalCount = 8;
+
+            for (let i = 1; i <= totalCount; i++) {
+                const input = document.getElementById(`blank${i}`);
+                const answer = input.getAttribute('data-answer').toLowerCase();
+                const userAnswer = input.value.trim().toLowerCase();
+
+                input.classList.remove('correct', 'incorrect');
+
+                if (userAnswer === answer) {
+                    input.classList.add('correct');
+                    correctCount++;
+                } else if (userAnswer !== '') {
+                    input.classList.add('incorrect');
+                }
+            }
+
+            const score = Math.round((correctCount / totalCount) * 100);
+            const feedback = document.getElementById('feedback');
+            feedback.classList.add('show');
+
+            if (correctCount === totalCount) {
+                feedback.className = 'feedback-box show success';
+                feedback.innerHTML = '<i class="fas fa-check-circle"></i> 완벽합니다! 모든 답이 정확합니다! 🎉<br><br>자동으로 완료 처리됩니다...';
+                
+                // Save to Firebase automatically
+                setTimeout(() => saveListeningProgress(score), 1500);
+            } else if (score >= 90) {
+                feedback.className = 'feedback-box show success';
+                feedback.innerHTML = `<i class="fas fa-check-circle"></i> ${correctCount}/${totalCount} 정답입니다 (${score}점)! 90점 이상 달성! 🎉<br><br>자동으로 완료 처리됩니다...`;
+                
+                // Save to Firebase automatically
+                setTimeout(() => saveListeningProgress(score), 1500);
+            } else {
+                feedback.className = 'feedback-box show partial';
+                feedback.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${correctCount}/${totalCount} 정답입니다 (${score}점). 90점 이상이 필요합니다. 틀린 답은 빨간색으로 표시되었습니다. 다시 들어보세요!`;
+            }
+        }
+
+        function resetDictation() {
+            for (let i = 1; i <= 8; i++) {
+                const input = document.getElementById(`blank${i}`);
+                input.value = '';
+                input.classList.remove('correct', 'incorrect');
+            }
+
+            const feedback = document.getElementById('feedback');
+            feedback.classList.remove('show');
+        }
+
+        // Timer
+        let timeLeft = 480;
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const student = getCurrentStudent();
+            if (student) {
+                document.getElementById('studentName').textContent = student.name;
+            }
+            
+            updateTimer();
+        });
+
+        // ========================================
+        // Firebase Progress Save
+        // ========================================
+        
+        async function saveListeningProgress(score) {
+            try {
+                // Get student info from localStorage
+                const studentId = localStorage.getItem('studentId');
+                const studentName = localStorage.getItem('studentName');
+                
+                if (!studentId) {
+                    alert('로그인 정보가 없습니다. 다시 로그인해주세요.');
+                    window.location.href = 'index.html';
+                    return;
+                }
+                
+                // Check if ProgressManager is available
+                if (typeof ProgressManager === 'undefined') {
+                    console.warn('ProgressManager not available, completing without saving');
+                    alert(`✅ Listening 완료! (${score}점)\n\n다음 단계인 논리구조도로 이동합니다.`);
+                    window.location.href = 'logic-map-day1.html';
+                    return;
+                }
+                
+                // Save to Firebase
+                await ProgressManager.updateActivity(studentId, 1, 'listening', true, score);
+                
+                alert(`✅ Listening 완료! (${score}점)\n\n다음 단계인 논리구조도로 이동합니다.`);
+                window.location.href = 'logic-map-day1.html';
+                
+            } catch (error) {
+                console.error('완료 저장 중 오류:', error);
+                // Even if save fails, allow navigation
+                alert(`완료 처리되었습니다 (${score}점).\n\n논리구조도로 이동합니다.`);
+                window.location.href = 'logic-map-day1.html';
+            }
+        }
+    </script>
+</body>
+</html>

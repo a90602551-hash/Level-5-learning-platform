@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리디렉션 중...</title>
+    <script>
+        // 자동으로 새 대시보드로 리디렉션
+        window.location.href = 'student-dashboard.html';
+    </script>
+</head>
+<body>
+    <p>새 대시보드로 이동 중...</p>
+</body>
+</html>
+                    <div class="stat-content">
+                        <h3>AWL 테스트</h3>
+                        <div class="stat-value" id="awlScore">-</div>
+                        <div class="stat-label" id="awlStatus">미응시</div>
+                    </div>
+                </div>
+
+                <!-- Dictation Card -->
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>딕테이션</h3>
+                        <div class="stat-value" id="dictationScore">-</div>
+                        <div class="stat-label" id="dictationStatus">미완료</div>
+                    </div>
+                </div>
+
+                <!-- Logic Map Card -->
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>논리구조도</h3>
+                        <div class="stat-value" id="logicMapScore">-</div>
+                        <div class="stat-label" id="logicMapStatus">미완료</div>
+                    </div>
+                </div>
+
+                <!-- Overall Progress Card -->
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>전체 진도</h3>
+                        <div class="stat-value" id="overallProgress">0%</div>
+                        <div class="stat-label">완료율</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Status -->
+            <div class="status-section">
+                <h2 class="section-title">
+                    <i class="fas fa-tasks"></i> 학습 상태
+                </h2>
+
+                <div class="status-list">
+                    <div class="status-item" id="statusStep1Home">
+                        <div class="status-header">
+                            <i class="fas fa-circle status-dot pending"></i>
+                            <h4>Step 1: Home Task (가정학습)</h4>
+                        </div>
+                        <div class="status-tasks">
+                            <div class="task-item" id="taskAWLStudy">
+                                <i class="fas fa-circle-notch"></i>
+                                <span>AWL 단어 학습</span>
+                            </div>
+                            <div class="task-item" id="taskTopicBuilder">
+                                <i class="fas fa-circle-notch"></i>
+                                <span>토픽빌더 (영상 + 딕테이션 + 해설)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="status-item" id="statusStep2Booth">
+                        <div class="status-header">
+                            <i class="fas fa-circle status-dot pending"></i>
+                            <h4>Step 2: Booth (원내 학습 45분)</h4>
+                        </div>
+                        <div class="status-tasks">
+                            <div class="task-item" id="taskAWLTest">
+                                <i class="fas fa-circle-notch"></i>
+                                <span>AWL 테스트 (95점 이상)</span>
+                            </div>
+                            <div class="task-item" id="taskReading">
+                                <i class="fas fa-circle-notch"></i>
+                                <span>토플 리딩 지문 분석</span>
+                            </div>
+                            <div class="task-item" id="taskListening">
+                                <i class="fas fa-circle-notch"></i>
+                                <span>토플 리스닝 강의</span>
+                            </div>
+                            <div class="task-item" id="taskLogicMap">
+                                <i class="fas fa-circle-notch"></i>
+                                <span>논리구조도 작성</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2 class="section-title">
+                    <i class="fas fa-bolt"></i> 빠른 이동
+                </h2>
+                <div class="action-grid">
+                    <a href="awl-study.html" class="action-card">
+                        <i class="fas fa-book"></i>
+                        <span>AWL 학습</span>
+                    </a>
+                    <a href="awl-test.html" class="action-card">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span>AWL 테스트</span>
+                    </a>
+                    <a href="topic-builder.html" class="action-card">
+                        <i class="fas fa-video"></i>
+                        <span>토픽빌더</span>
+                    </a>
+                    <a href="toefl-reading.html" class="action-card">
+                        <i class="fas fa-book-open"></i>
+                        <span>리딩</span>
+                    </a>
+                    <a href="toefl-listening.html" class="action-card">
+                        <i class="fas fa-headphones"></i>
+                        <span>리스닝</span>
+                    </a>
+                    <a href="logic-map.html" class="action-card">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>논리구조도</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Level 5 Learning Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing Task - Day 1</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/content.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        /* Brand Color Override */
+        header {
+            background: linear-gradient(135deg, #F6E27F 0%, #F6E27F 100%) !important;
+            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.3) !important;
+        }
+        
+        header h1 {
+            color: #1F2A44 !important;
+        }
+        
+        .student-info, .student-info * {
+            color: #1F2A44 !important;
+        }
+        
+        .difficulty-badge {
+            background: rgba(31, 42, 68, 0.1) !important;
+            color: #1F2A44 !important;
+        }
+        
+        /* 버튼 강조 */
+        button[onclick*="grade"], button[onclick*="submit"], button[id*="Btn"], .btn {
+            font-size: 16px !important;
+            padding: 15px 30px !important;
+            font-weight: 600 !important;
+            border-radius: 8px !important;
+        }
+        
+        button[onclick*="submit"], button[id*="submitBtn"] {
+            background: linear-gradient(135deg, #F6E27F 0%, #E5D06B 100%) !important;
+            color: #1F2A44 !important;
+            border: 3px solid #1F2A44 !important;
+            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.4) !important;
+        }
+        
+        button[onclick*="grade"] {
+            background: #1F2A44 !important;
+            color: #F6E27F !important;
+            border: 2px solid #F6E27F !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-pen-fancy"></i> Writing Task - Day 1</h1>
+            <div class="student-info">
+                <span id="student-name">홍길동</span>
+                <span class="difficulty-badge">Step 2 | Writing</span>
+            </div>
+        </header>
+
+        <main class="content-area">
+            <section class="writing-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-edit"></i> Short Writing Task</h2>
+                    <div class="timer">
+                        <i class="fas fa-clock"></i>
+                        <span id="timer">10:00</span>
+                    </div>
+                </div>
+
+                <div class="instructions-box">
+                    <h3><i class="fas fa-info-circle"></i> Writing 과제</h3>
+                    <p><strong>주제:</strong> Do you agree with high academic standards in schools?</p>
+                    <p><strong>과제:</strong> 자신의 의견을 5문장으로 작성하세요.</p>
+                    <ol>
+                        <li>첫 번째 문장: 자신의 입장 (찬성 또는 반대)</li>
+                        <li>두 번째 문장: 이유 1</li>
+                        <li>세 번째 문장: 이유 2</li>
+                        <li>네 번째 문장: 예시 또는 설명</li>
+                        <li>다섯 번째 문장: 결론</li>
+                    </ol>
+                </div>
+
+                <!-- Useful Expressions -->
+                <div class="useful-expressions">
+                    <h3><i class="fas fa-bookmark"></i> 유용한 표현들</h3>
+                    <div class="expression-grid">
+                        <div class="expression-item">
+                            <strong>입장 표현:</strong>
+                            <ul>
+                                <li>I agree that...</li>
+                                <li>I believe that...</li>
+                                <li>I think that...</li>
+                                <li>In my opinion, ...</li>
+                            </ul>
+                        </div>
+                        <div class="expression-item">
+                            <strong>이유 표현:</strong>
+                            <ul>
+                                <li>First, ...</li>
+                                <li>The main reason is...</li>
+                                <li>Another reason is...</li>
+                                <li>Also, ...</li>
+                            </ul>
+                        </div>
+                        <div class="expression-item">
+                            <strong>예시 표현:</strong>
+                            <ul>
+                                <li>For example, ...</li>
+                                <li>In my experience, ...</li>
+                                <li>This is because...</li>
+                            </ul>
+                        </div>
+                        <div class="expression-item">
+                            <strong>결론 표현:</strong>
+                            <ul>
+                                <li>Therefore, ...</li>
+                                <li>In conclusion, ...</li>
+                                <li>That is why...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Writing Editor -->
+                <div class="writing-editor">
+                    <h3><i class="fas fa-keyboard"></i> 여기에 작성하세요</h3>
+                    
+                    <div class="sentence-box">
+                        <label><strong>Sentence 1:</strong> Your Position (입장)</label>
+                        <textarea id="sentence1" class="writing-textarea" rows="2" placeholder="I agree/disagree that..."></textarea>
+                        <div class="char-count"><span id="count1">0</span> characters</div>
+                    </div>
+
+                    <div class="sentence-box">
+                        <label><strong>Sentence 2:</strong> Reason 1 (이유 1)</label>
+                        <textarea id="sentence2" class="writing-textarea" rows="2" placeholder="First, ..."></textarea>
+                        <div class="char-count"><span id="count2">0</span> characters</div>
+                    </div>
+
+                    <div class="sentence-box">
+                        <label><strong>Sentence 3:</strong> Reason 2 (이유 2)</label>
+                        <textarea id="sentence3" class="writing-textarea" rows="2" placeholder="Also, ..."></textarea>
+                        <div class="char-count"><span id="count3">0</span> characters</div>
+                    </div>
+
+                    <div class="sentence-box">
+                        <label><strong>Sentence 4:</strong> Example or Explanation (예시/설명)</label>
+                        <textarea id="sentence4" class="writing-textarea" rows="2" placeholder="For example, ..."></textarea>
+                        <div class="char-count"><span id="count4">0</span> characters</div>
+                    </div>
+
+                    <div class="sentence-box">
+                        <label><strong>Sentence 5:</strong> Conclusion (결론)</label>
+                        <textarea id="sentence5" class="writing-textarea" rows="2" placeholder="Therefore, ..."></textarea>
+                        <div class="char-count"><span id="count5">0</span> characters</div>
+                    </div>
+
+                    <div class="total-stats">
+                        <strong>Total:</strong> <span id="totalWords">0</span> words | <span id="totalChars">0</span> characters
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="clearAll()">
+                        <i class="fas fa-eraser"></i> 모두 지우기
+                    </button>
+                    <button class="btn btn-warning" onclick="checkWriting()">
+                        <i class="fas fa-spell-check"></i> 고급 첨삭 (필수)
+                    </button>
+                    <button class="btn btn-success" id="submitBtn" onclick="submitWriting()" disabled>
+                        <i class="fas fa-lock"></i> 제출하기 (첨삭 후 90점 이상)
+                    </button>
+                </div>
+
+                <!-- Submit Guide -->
+                <div class="submit-guide" id="submitGuide">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>제출 조건:</strong> 반드시 고급 첨삭을 받고, 90점 이상을 받아야 제출할 수 있습니다.
+                </div>
+
+                <!-- Feedback Box -->
+                <div class="feedback-box" id="feedbackBox" style="display: none;">
+                    <h3><i class="fas fa-comment-dots"></i> 자동 첨삭 결과</h3>
+                    <div class="score-summary" id="scoreSummary"></div>
+                    <div id="basicFeedback"></div>
+                    <div id="vocabularyFeedback"></div>
+                    <div id="structureFeedback"></div>
+                    <div id="contentFeedback"></div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i> 논리구조도로 돌아가기
+                    </button>
+                    <button class="btn btn-primary" onclick="goToDashboard()">
+                        완료 - 대시보드로 <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <style>
+        .difficulty-badge {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 15px;
+        }
+
+        .instructions-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .instructions-box h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .instructions-box ol {
+            margin: 10px 0 0 0;
+            padding-left: 25px;
+        }
+
+        /* Useful Expressions */
+        .useful-expressions {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .useful-expressions h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .expression-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .expression-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .expression-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .expression-item ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .expression-item li {
+            padding: 5px 0;
+            color: #555;
+        }
+
+        .writing-editor {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .writing-editor h3 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .sentence-box {
+            margin-bottom: 25px;
+        }
+
+        .sentence-box label {
+            display: block;
+            margin-bottom: 10px;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .writing-textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+            transition: all 0.3s;
+        }
+
+        .writing-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .total-stats {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-disabled {
+            opacity: 0.5;
+            cursor: not-allowed !important;
+            background: #9ca3af !important;
+        }
+
+        .btn-disabled:hover {
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .submit-guide {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 15px;
+            line-height: 1.6;
+            transition: all 0.3s;
+        }
+
+        .submit-guide i {
+            font-size: 20px;
+            margin-right: 8px;
+        }
+
+        .feedback-box {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .feedback-box h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .score-summary {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .score-circle {
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .feedback-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .feedback-section h4 {
+            margin-top: 0;
+            color: #667eea;
+        }
+
+        .feedback-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feedback-item.success {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+
+        .feedback-item.warning {
+            border-left-color: #ffc107;
+            background: #fff3cd;
+        }
+
+        .feedback-item.error {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        @media (max-width: 768px) {
+            .template-tabs {
+                flex-direction: column;
+            }
+            
+            .expression-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    
+    <script src="js/firebase-config.js"></script>
+    <script src="js/progress-manager.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/awl-data-day1-elementary.js"></script>
+    <script src="js/grammar-checker-advanced.js"></script>
+    <script>
+        // Day 1 AWL 어휘 목록 (검사용)
+        const day1Words = [
+            'important', 'student', 'learn', 'help', 'need', 'try', 'work', 'know', 'think', 'make',
+            'goal', 'skill', 'future', 'prepare', 'problem',
+            'achieve', 'standard', 'challenge', 'support', 'improve', 'develop', 'experience',
+            'focus', 'understand', 'succeed', 'expect', 'require', 'benefit', 'progress', 'confident'
+        ];
+
+        // 연결어 목록
+        const connectingWords = [
+            'first', 'second', 'also', 'another', 'for example', 'therefore', 
+            'in conclusion', 'because', 'however', 'moreover'
+        ];
+
+        // 문자 수 및 단어 수 계산
+        function updateCounts() {
+            let totalWords = 0;
+            let totalChars = 0;
+
+            for (let i = 1; i <= 5; i++) {
+                const textarea = document.getElementById(`sentence${i}`);
+                const text = textarea.value.trim();
+                const charCount = text.length;
+                const wordCount = text ? text.split(/\s+/).length : 0;
+
+                document.getElementById(`count${i}`).textContent = charCount;
+                totalWords += wordCount;
+                totalChars += charCount;
+            }
+
+            document.getElementById('totalWords').textContent = totalWords;
+            document.getElementById('totalChars').textContent = totalChars;
+        }
+
+        // 이벤트 리스너
+        document.addEventListener('DOMContentLoaded', () => {
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`sentence${i}`).addEventListener('input', updateCounts);
+            }
+
+            // 학생 이름 로드
+            const studentName = localStorage.getItem('studentName') || '학생';
+            document.getElementById('student-name').textContent = studentName;
+        });
+
+        // 모두 지우기
+        function clearAll() {
+            if (confirm('정말 모든 내용을 지우시겠습니까?')) {
+                for (let i = 1; i <= 5; i++) {
+                    document.getElementById(`sentence${i}`).value = '';
+                }
+                updateCounts();
+                document.getElementById('feedbackBox').style.display = 'none';
+            }
+        }
+
+        // 전역 변수: 첨삭 상태 추적
+        let isChecked = false;
+        let lastScore = 0;
+        let lastDetailedScores = {};
+        let lastFeedback = [];
+
+        // 고급 첨삭
+        function checkWriting() {
+            isChecked = true;
+            const sentences = [];
+            let hasContent = false;
+
+            for (let i = 1; i <= 5; i++) {
+                const text = document.getElementById(`sentence${i}`).value.trim();
+                sentences.push(text);
+                if (text) hasContent = true;
+            }
+
+            if (!hasContent) {
+                alert('먼저 문장을 작성해주세요!');
+                return;
+            }
+
+            // 점수 계산
+            let totalScore = 0;
+
+            // 1. 기본 문법 체크 (8점)
+            const basicCheck = checkBasicGrammar(sentences);
+            totalScore += basicCheck.score;
+
+            // 2. 시제 체크 (12점)
+            const tenseCheck = checkTense(sentences);
+            totalScore += tenseCheck.score;
+
+            // 3. 수 일치 체크 (12점)
+            const agreementCheck = checkAgreement(sentences);
+            totalScore += agreementCheck.score;
+
+            // 4. 문장 형식 체크 (8점)
+            const patternCheck = checkSentencePattern(sentences);
+            totalScore += patternCheck.score;
+
+            // 5. 타겟 문법 체크 (15점)
+            const grammarCheck = checkTargetGrammar(sentences);
+            totalScore += grammarCheck.score;
+
+            // 6. 준동사 체크 (10점)
+            const verbalsCheck = checkVerbals(sentences);
+            totalScore += verbalsCheck.score;
+
+            // 7. 수동/능동 체크 (10점)
+            const voiceCheck = checkVoice(sentences);
+            totalScore += voiceCheck.score;
+
+            // 8. 어휘 사용 체크 (10점)
+            const vocabCheck = checkVocabulary(sentences);
+            totalScore += vocabCheck.score;
+
+            // 9. 연결사 사용 체크 (10점) - 새로 추가!
+            const connectorCheck = checkConnectors(sentences);
+            totalScore += connectorCheck.score;
+
+            // 10. 구조 체크 (5점)
+            const structureCheck = checkStructure(sentences);
+            totalScore += structureCheck.score;
+
+            // 점수 저장
+            lastScore = totalScore;
+            lastDetailedScores = {
+                basic: basicCheck.score,
+                tense: tenseCheck.score,
+                agreement: agreementCheck.score,
+                pattern: patternCheck.score,
+                grammar: grammarCheck.score,
+                verbals: verbalsCheck.score,
+                voice: voiceCheck.score,
+                vocabulary: vocabCheck.score,
+                connectors: connectorCheck.score,
+                structure: structureCheck.score
+            };
+            lastFeedback = [
+                { name: '기본 형식', ...basicCheck },
+                { name: '시제 일관성', ...tenseCheck },
+                { name: '주어-동사 수 일치', ...agreementCheck },
+                { name: '문장 형식', ...patternCheck },
+                { name: '타겟 문법', ...grammarCheck },
+                { name: '준동사', ...verbalsCheck },
+                { name: '수동/능동', ...voiceCheck },
+                { name: '어휘', ...vocabCheck },
+                { name: '연결사', ...connectorCheck },
+                { name: '구조', ...structureCheck }
+            ];
+
+            // 결과 표시
+            displayFeedback(totalScore, basicCheck, tenseCheck, agreementCheck, patternCheck, 
+                          grammarCheck, verbalsCheck, voiceCheck, vocabCheck, connectorCheck, structureCheck);
+
+            // 제출 버튼 상태 업데이트
+            updateSubmitButton(totalScore);
+        }
+
+        // 1. 기본 문법 체크 (8점)
+        function checkBasicGrammar(sentences) {
+            const feedback = [];
+            let score = 8;
+
+            sentences.forEach((text, index) => {
+                if (!text) {
+                    feedback.push({
+                        type: 'error',
+                        message: `❌ Sentence ${index + 1}: 문장이 작성되지 않았습니다.`
+                    });
+                    score -= 2;
+                    return;
+                }
+
+                // 마침표 체크
+                if (!text.match(/[.!?]$/)) {
+                    feedback.push({
+                        type: 'warning',
+                        message: `⚠️ Sentence ${index + 1}: 문장이 마침표로 끝나지 않았습니다.`
+                    });
+                    score -= 1;
+                }
+
+                // 대문자 체크
+                if (text.charAt(0) !== text.charAt(0).toUpperCase()) {
+                    feedback.push({
+                        type: 'warning',
+                        message: `⚠️ Sentence ${index + 1}: 문장이 대문자로 시작하지 않았습니다.`
+                    });
+                    score -= 1;
+                }
+
+                // 최소 길이 체크
+                if (text.length < 10) {
+                    feedback.push({
+                        type: 'warning',
+                        message: `⚠️ Sentence ${index + 1}: 문장이 너무 짧습니다. (최소 10자)`
+                    });
+                    score -= 1;
+                }
+            });
+
+            if (feedback.length === 0) {
+                feedback.push({
+                    type: 'success',
+                    message: '✅ 기본 형식이 올바릅니다.'
+                });
+            }
+
+            return { score: Math.max(0, score), feedback };
+        }
+
+        // 2. 어휘 사용 체크 (10점)
+        function checkVocabulary(sentences) {
+            const feedback = [];
+            let score = 10;
+            const fullText = sentences.join(' ').toLowerCase();
+            
+            // Day 1 AWL 어휘 사용 확인
+            const usedWords = day1Words.filter(word => 
+                fullText.includes(word.toLowerCase())
+            );
+
+            if (usedWords.length === 0) {
+                feedback.push({
+                    type: 'error',
+                    message: '❌ Day 1 어휘를 하나도 사용하지 않았습니다.'
+                });
+                score -= 10;
+            } else if (usedWords.length < 3) {
+                feedback.push({
+                    type: 'warning',
+                    message: `⚠️ Day 1 어휘를 ${usedWords.length}개만 사용했습니다. (권장: 5개 이상)`
+                });
+                feedback.push({
+                    type: 'info',
+                    message: `사용된 어휘: ${usedWords.join(', ')}`
+                });
+                score -= 5;
+            } else if (usedWords.length < 5) {
+                feedback.push({
+                    type: 'success',
+                    message: `✅ Day 1 어휘를 ${usedWords.length}개 사용했습니다.`
+                });
+                feedback.push({
+                    type: 'info',
+                    message: `사용된 어휘: ${usedWords.join(', ')}`
+                });
+                score -= 2;
+            } else {
+                feedback.push({
+                    type: 'success',
+                    message: `🌟 Day 1 어휘를 ${usedWords.length}개 사용했습니다! 훌륭합니다!`
+                });
+                feedback.push({
+                    type: 'info',
+                    message: `사용된 어휘: ${usedWords.join(', ')}`
+                });
+            }
+
+            return { score: Math.max(0, score), feedback };
+        }
+
+        // 9. 연결사 사용 체크 (10점)
+        function checkConnectors(sentences) {
+            const feedback = [];
+            let score = 10;
+
+            // 연결사 정의
+            const connectors = {
+                // 입장 표현 (Sentence 1)
+                opinion: ['I agree', 'I believe', 'I think', 'In my opinion', 'I disagree'],
+                
+                // 이유 표현 (Sentence 2-3)
+                reason: ['First', 'Second', 'The main reason', 'Another reason', 'Also', 'Furthermore', 'Moreover', 'In addition'],
+                
+                // 예시 표현 (Sentence 4)
+                example: ['For example', 'For instance', 'In my experience', 'This is because', 'To illustrate'],
+                
+                // 결론 표현 (Sentence 5)
+                conclusion: ['Therefore', 'In conclusion', 'Thus', 'That is why', 'As a result', 'For this reason']
+            };
+
+            // 각 문장별 연결사 체크
+            let errors = [];
+
+            // Sentence 1: 입장 표현 체크
+            if (sentences[0]) {
+                const hasOpinion = connectors.opinion.some(conn => 
+                    sentences[0].toLowerCase().includes(conn.toLowerCase())
+                );
+                if (!hasOpinion) {
+                    errors.push('Sentence 1에 입장 표현이 없습니다. (I agree/believe/think 등)');
+                    score -= 2;
+                }
+            }
+
+            // Sentence 2-3: 이유 표현 체크
+            let reasonCount = 0;
+            [1, 2].forEach(i => {
+                if (sentences[i]) {
+                    const hasReason = connectors.reason.some(conn => 
+                        sentences[i].toLowerCase().includes(conn.toLowerCase())
+                    );
+                    if (hasReason) reasonCount++;
+                }
+            });
+
+            if (reasonCount === 0) {
+                errors.push('Sentence 2-3에 이유 연결사가 없습니다. (First, Also, Another reason 등)');
+                score -= 3;
+            } else if (reasonCount === 1) {
+                feedback.push({
+                    type: 'warning',
+                    message: '⚠️ 이유 연결사를 한 개만 사용했습니다. 두 개 이상 사용하면 더 좋습니다.'
+                });
+                score -= 1;
+            }
+
+            // Sentence 4: 예시 표현 체크
+            if (sentences[3]) {
+                const hasExample = connectors.example.some(conn => 
+                    sentences[3].toLowerCase().includes(conn.toLowerCase())
+                );
+                if (!hasExample) {
+                    errors.push('Sentence 4에 예시 연결사가 없습니다. (For example, In my experience 등)');
+                    score -= 2;
+                }
+            }
+
+            // Sentence 5: 결론 표현 체크
+            if (sentences[4]) {
+                const hasConclusion = connectors.conclusion.some(conn => 
+                    sentences[4].toLowerCase().includes(conn.toLowerCase())
+                );
+                if (!hasConclusion) {
+                    errors.push('Sentence 5에 결론 연결사가 없습니다. (Therefore, In conclusion 등)');
+                    score -= 3;
+                }
+            }
+
+            // 피드백 생성
+            if (errors.length > 0) {
+                errors.forEach(error => {
+                    feedback.push({
+                        type: 'error',
+                        message: `❌ ${error}`
+                    });
+                });
+            }
+
+            if (score === 10) {
+                feedback.push({
+                    type: 'success',
+                    message: '✅ 모든 연결사가 논리에 맞게 사용되었습니다!'
+                });
+            } else if (score >= 7) {
+                feedback.push({
+                    type: 'success',
+                    message: '✅ 연결사가 대체로 적절하게 사용되었습니다.'
+                });
+            }
+
+            // 사용된 연결사 목록 표시
+            const fullText = sentences.join(' ');
+            const allConnectors = [...connectors.opinion, ...connectors.reason, ...connectors.example, ...connectors.conclusion];
+            const usedConnectors = allConnectors.filter(conn => 
+                fullText.toLowerCase().includes(conn.toLowerCase())
+            );
+
+            if (usedConnectors.length > 0) {
+                feedback.push({
+                    type: 'info',
+                    message: `📝 사용된 연결사: ${usedConnectors.join(', ')}`
+                });
+            }
+
+            return { score: Math.max(0, score), feedback };
+        }
+
+        // 10. 구조 체크 (5점)
+        function checkStructure(sentences) {
+            const feedback = [];
+            let score = 5;
+
+            // 5문장 완성 확인
+            const completedCount = sentences.filter(s => s.trim().length > 0).length;
+            if (completedCount < 5) {
+                feedback.push({
+                    type: 'error',
+                    message: `❌ 5문장을 모두 작성해야 합니다. (현재: ${completedCount}/5)`
+                });
+                score -= (5 - completedCount) * 1;
+            } else {
+                feedback.push({
+                    type: 'success',
+                    message: '✅ 5문장을 모두 작성했습니다.'
+                });
+            }
+
+            // 연결어 사용 확인
+            const fullText = sentences.join(' ').toLowerCase();
+            const usedConnectors = connectingWords.filter(word => 
+                fullText.includes(word.toLowerCase())
+            );
+
+            if (usedConnectors.length === 0) {
+                feedback.push({
+                    type: 'info',
+                    message: '💡 연결어를 사용하면 더 좋습니다. (First, Also, For example, Therefore 등)'
+                });
+            } else {
+                feedback.push({
+                    type: 'info',
+                    message: `💡 연결어 사용: ${usedConnectors.join(', ')}`
+                });
+            }
+
+            return { score: Math.max(0, score), feedback };
+        }
+
+        // 피드백 표시
+        function displayFeedback(totalScore, basicCheck, tenseCheck, agreementCheck, patternCheck, 
+                                grammarCheck, verbalsCheck, voiceCheck, vocabCheck, connectorCheck, structureCheck) {
+            const grade = totalScore >= 90 ? 'A' : totalScore >= 80 ? 'B' : totalScore >= 70 ? 'C' : totalScore >= 60 ? 'D' : 'F';
+            const gradeColor = totalScore >= 80 ? '#28a745' : totalScore >= 60 ? '#ffc107' : '#dc3545';
+
+            let html = `
+                <div class="score-summary">
+                    <div class="score-circle" style="background: ${gradeColor};">
+                        ${totalScore}점
+                    </div>
+                    <h4>등급: ${grade} | 총점: ${totalScore}/100</h4>
+                </div>
+            `;
+
+            // 각 항목별 피드백
+            const checks = [
+                { name: '1. 기본 형식', check: basicCheck, max: 8 },
+                { name: '2. 시제 일관성', check: tenseCheck, max: 12 },
+                { name: '3. 주어-동사 수 일치', check: agreementCheck, max: 12 },
+                { name: '4. 문장 형식', check: patternCheck, max: 8 },
+                { name: '5. 타겟 문법 (관계사절)', check: grammarCheck, max: 15 },
+                { name: '6. 준동사 사용', check: verbalsCheck, max: 10 },
+                { name: '7. 수동/능동', check: voiceCheck, max: 10 },
+                { name: '8. 어휘 사용', check: vocabCheck, max: 10 },
+                { name: '9. 연결사 사용', check: connectorCheck, max: 10 },
+                { name: '10. 구조', check: structureCheck, max: 5 }
+            ];
+
+            checks.forEach(item => {
+                const statusClass = item.check.score >= item.max * 0.8 ? 'success' : 
+                                  item.check.score >= item.max * 0.6 ? 'warning' : 'error';
+                
+                html += `
+                    <div class="feedback-section">
+                        <h4>${item.name} (${item.check.score}/${item.max}점)</h4>
+                        ${item.check.feedback.map(f => `
+                            <div class="feedback-item ${f.type || statusClass}">
+                                ${f.message || f}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+
+            // 총평
+            let comment = '';
+            if (totalScore >= 90) {
+                comment = '🎉 탁월합니다! 문법, 어휘, 구조 모두 완벽합니다!';
+            } else if (totalScore >= 80) {
+                comment = '👍 아주 잘했습니다! 조금만 더 신경 쓰면 완벽해질 수 있습니다!';
+            } else if (totalScore >= 70) {
+                comment = '😊 잘했습니다! 피드백을 참고해서 수정해보세요.';
+            } else if (totalScore >= 60) {
+                comment = '💪 괜찮습니다! 피드백을 반영하면 더 좋아질 거예요.';
+            } else {
+                comment = '📚 조금 더 연습이 필요합니다. 피드백을 자세히 읽어보세요!';
+            }
+
+            html += `
+                <div class="feedback-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                    <h4 style="color: white; margin-top: 0;">총평</h4>
+                    <p style="font-size: 1.2rem; margin: 0;">${comment}</p>
+                </div>
+            `;
+
+            document.getElementById('feedbackBox').innerHTML = html;
+            document.getElementById('feedbackBox').style.display = 'block';
+            document.getElementById('feedbackBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 제출 버튼 상태 업데이트
+        function updateSubmitButton(score) {
+            const submitBtn = document.getElementById('submitBtn');
+            const submitGuide = document.getElementById('submitGuide');
+
+            if (score >= 90) {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('btn-disabled');
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> 제출하기 (가능)';
+                submitGuide.innerHTML = '<i class="fas fa-check-circle" style="color: #10b981;"></i> <strong style="color: #10b981;">제출 가능!</strong> 90점 이상을 달성했습니다. 제출하기 버튼을 클릭하세요.';
+                submitGuide.style.background = 'linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)';
+                submitGuide.style.borderColor = '#10b981';
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.classList.add('btn-disabled');
+                submitBtn.innerHTML = '<i class="fas fa-lock"></i> 제출 불가 (90점 미만)';
+                submitGuide.innerHTML = `<i class="fas fa-times-circle" style="color: #ef4444;"></i> <strong style="color: #ef4444;">제출 불가:</strong> 현재 ${score}점입니다. 90점 이상이 필요합니다. 문장을 수정하고 다시 첨삭을 받으세요.`;
+                submitGuide.style.background = 'linear-gradient(135deg, #fee2e2 0%, #fecaca 100%)';
+                submitGuide.style.borderColor = '#ef4444';
+            }
+        }
+
+        // 제출하기
+        async function submitWriting() {
+            // 첨삭 여부 확인
+            if (!isChecked) {
+                alert('❌ 제출 불가\n\n먼저 "고급 첨삭" 버튼을 클릭하여 첨삭을 받아야 합니다.');
+                return;
+            }
+
+            // 점수 확인
+            if (lastScore < 90) {
+                alert(`❌ 제출 불가\n\n현재 점수: ${lastScore}점\n필요 점수: 90점 이상\n\n문장을 수정하고 다시 첨삭을 받으세요.`);
+                return;
+            }
+            const sentences = [];
+            let allFilled = true;
+
+            for (let i = 1; i <= 5; i++) {
+                const text = document.getElementById(`sentence${i}`).value.trim();
+                if (!text) {
+                    allFilled = false;
+                    break;
+                }
+                sentences.push(text);
+            }
+
+            if (!allFilled) {
+                alert('모든 문장을 작성해주세요!');
+                return;
+            }
+
+            // 확인 후 제출
+            if (!confirm('제출하시겠습니까? 제출 후에는 수정할 수 없습니다.')) {
+                return;
+            }
+
+            const studentId = localStorage.getItem('studentId');
+            
+            if (!studentId) {
+                alert('로그인 정보가 없습니다. 다시 로그인해주세요.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Firebase에 저장
+            try {
+                // Save progress using ProgressManager
+                if (typeof ProgressManager !== 'undefined') {
+                    await ProgressManager.updateActivity(studentId, 1, 'writing', true, lastScore);
+                } else {
+                    console.warn('ProgressManager not available');
+                }
+
+                alert(`✅ Writing 제출 완료!\n\n최종 점수: ${lastScore}점\n\nDay 1 학습을 완료했습니다! 🎉\n\n대시보드로 이동합니다.`);
+                window.location.href = 'student-dashboard.html';
+                
+            } catch (error) {
+                console.error('제출 오류:', error);
+                alert('완료 처리되었습니다.\n\n대시보드로 이동합니다.');
+                window.location.href = 'student-dashboard.html';
+            }
+        }
+
+        // 타이머
+        let timeLeft = 600; // 10분
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            }
+        }
+        updateTimer();
+
+        // 네비게이션
+        function goBack() {
+            window.location.href = 'logic-map-day1.html';
+        }
+
+        function goToDashboard() {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

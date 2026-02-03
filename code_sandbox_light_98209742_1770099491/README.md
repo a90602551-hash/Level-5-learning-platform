@@ -416,3 +416,5 @@ Copyright © 2026 Level 5 Learning Platform. All rights reserved.
 - ✅ AWL 단어 클릭 시 발음 재생 기능 추가
 - ✅ AWL 테스트에 스펠링 5문제 추가 (총 35문제)
 - ✅ Writing 첨삭 기준 강화 (9항목 촘촘한 체크)
+
+<!-- Deploy trigger: 2026-02-03 배포 테스트 -->

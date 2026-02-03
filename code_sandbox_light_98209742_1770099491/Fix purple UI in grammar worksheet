@@ -1,0 +1,997 @@
+ 1	<!DOCTYPE html>
+     2	<html lang="ko">
+     3	<head>
+     4	    <meta charset="UTF-8">
+     5	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6	    <title>Day 1 Grammar Worksheet - Level 5A</title>
+     7	    <link rel="stylesheet" href="css/style.css">
+     8	    <link rel="stylesheet" href="css/grammar-worksheet.css">
+     9	    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    10	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    11	    <style>
+    12	        /* Brand Color Override */
+    13	        .header {
+    14	            background: linear-gradient(135deg, #F6E27F 0%, #F6E27F 100%) !important;
+    15	            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.3) !important;
+    16	        }
+    17	        
+    18	        .header .logo {
+    19	            color: #1F2A44 !important;
+    20	            font-weight: 700 !important;
+    21	        }
+    22	        
+    23	        .header .nav-link {
+    24	            color: #1F2A44 !important;
+    25	        }
+    26	        
+    27	        .header .student-info {
+    28	            color: #1F2A44 !important;
+    29	            background: rgba(31, 42, 68, 0.1) !important;
+    30	        }
+    31	        
+    32	        .page-title {
+    33	            color: #1F2A44 !important;
+    34	        }
+    35	        
+    36	        /* 버튼 강조 */
+    37	        button[onclick*="complete"], .check-answer-btn, button[class*="btn"] {
+    38	            font-size: 16px !important;
+    39	            padding: 15px 30px !important;
+    40	            font-weight: 600 !important;
+    41	            border-radius: 8px !important;
+    42	        }
+    43	        
+    44	        button[onclick*="complete"] {
+    45	            background: linear-gradient(135deg, #F6E27F 0%, #E5D06B 100%) !important;
+    46	            color: #1F2A44 !important;
+    47	            border: 3px solid #1F2A44 !important;
+    48	            box-shadow: 0 4px 20px rgba(246, 226, 127, 0.4) !important;
+    49	        }
+    50	        
+    51	        /* Pattern Hunting Interactive Styles */
+    52	        .interactive-sentence {
+    53	            font-size: 18px;
+    54	            line-height: 2.5;
+    55	            padding: 20px;
+    56	            background: #f8f9fa;
+    57	            border-radius: 12px;
+    58	            margin: 15px 0;
+    59	            user-select: none;
+    60	        }
+    61	        
+    62	        .word {
+    63	            display: inline-block;
+    64	            padding: 4px 8px;
+    65	            margin: 2px;
+    66	            cursor: pointer;
+    67	            border-radius: 6px;
+    68	            transition: all 0.2s;
+    69	            position: relative;
+    70	        }
+    71	        
+    72	        .word:hover {
+    73	            background: #e0e7ff;
+    74	            transform: translateY(-2px);
+    75	        }
+    76	        
+    77	        .word.selected-parenthesis {
+    78	            background: #fef3c7;
+    79	            border: 2px solid #f59e0b;
+    80	            font-weight: 600;
+    81	        }
+    82	        
+    83	        .word.selected-verb {
+    84	            background: #dbeafe;
+    85	            border: 2px solid #3b82f6;
+    86	            font-weight: 600;
+    87	            position: relative;
+    88	        }
+    89	        
+    90	        .word.selected-verb::after {
+    91	            content: 'V';
+    92	            position: absolute;
+    93	            top: -8px;
+    94	            right: -8px;
+    95	            background: #3b82f6;
+    96	            color: white;
+    97	            font-size: 12px;
+    98	            padding: 2px 6px;
+    99	            border-radius: 4px;
+   100	            font-weight: bold;
+   101	        }
+   102	        
+   103	        .selection-buttons {
+   104	            display: flex;
+   105	            gap: 10px;
+   106	            margin: 15px 0;
+   107	            padding: 15px;
+   108	            background: white;
+   109	            border-radius: 12px;
+   110	            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+   111	        }
+   112	        
+   113	        .mode-btn {
+   114	            flex: 1;
+   115	            padding: 12px 20px;
+   116	            border: 2px solid #e5e7eb;
+   117	            border-radius: 8px;
+   118	            background: white;
+   119	            cursor: pointer;
+   120	            font-size: 14px;
+   121	            font-weight: 600;
+   122	            transition: all 0.2s;
+   123	            display: flex;
+   124	            align-items: center;
+   125	            justify-content: center;
+   126	            gap: 8px;
+   127	        }
+   128	        
+   129	        .mode-btn:hover {
+   130	            transform: translateY(-2px);
+   131	            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+   132	        }
+   133	        
+   134	        .mode-btn.active-parenthesis {
+   135	            background: #fef3c7;
+   136	            border-color: #f59e0b;
+   137	            color: #92400e;
+   138	        }
+   139	        
+   140	        .mode-btn.active-verb {
+   141	            background: #E8F4FD;
+   142	            border-color: #1F2A44;
+   143	            color: #1F2A44;
+   144	        }
+   145	        
+   146	        .reset-btn {
+   147	            padding: 8px 16px;
+   148	            background: #ef4444;
+   149	            color: white;
+   150	            border: none;
+   151	            border-radius: 8px;
+   152	            cursor: pointer;
+   153	            font-size: 14px;
+   154	            transition: all 0.2s;
+   155	        }
+   156	        
+   157	        .reset-btn:hover {
+   158	            background: #dc2626;
+   159	        }
+   160	        
+   161	        .pattern-result {
+   162	            margin-top: 15px;
+   163	            padding: 15px;
+   164	            background: white;
+   165	            border-radius: 12px;
+   166	            border: 2px solid #e5e7eb;
+   167	        }
+   168	        
+   169	        .result-label {
+   170	            font-weight: 600;
+   171	            color: #64748b;
+   172	            margin-bottom: 8px;
+   173	            display: block;
+   174	        }
+   175	        
+   176	        .result-text {
+   177	            font-size: 16px;
+   178	            line-height: 1.8;
+   179	            color: #1e293b;
+   180	        }
+   181	        
+   182	        .check-answer-btn {
+   183	            margin-top: 15px;
+   184	            padding: 12px 30px;
+   185	            background: linear-gradient(135deg, #F6E27F 0%, #E5D06B 100%);
+   186	            color: white;
+   187	            border: none;
+   188	            border-radius: 12px;
+   189	            font-size: 16px;
+   190	            font-weight: 600;
+   191	            cursor: pointer;
+   192	            transition: all 0.3s;
+   193	        }
+   194	        
+   195	        .check-answer-btn:hover {
+   196	            transform: translateY(-2px);
+   197	            box-shadow: 0 4px 12px rgba(246, 226, 127, 0.4);
+   198	        }
+   199	        
+   200	        .feedback {
+   201	            margin-top: 15px;
+   202	            padding: 15px;
+   203	            border-radius: 12px;
+   204	            font-weight: 600;
+   205	            display: none;
+   206	        }
+   207	        
+   208	        .feedback.correct {
+   209	            background: #d1fae5;
+   210	            color: #065f46;
+   211	            border: 2px solid #10b981;
+   212	            display: block;
+   213	        }
+   214	        
+   215	        .feedback.incorrect {
+   216	            background: #fee2e2;
+   217	            color: #991b1b;
+   218	            border: 2px solid #ef4444;
+   219	            display: block;
+   220	        }
+   221	        
+   222	        .instruction-box {
+   223	            background: linear-gradient(135deg, #F6E27F 0%, #E5D06B 100%);
+   224	            color: white;
+   225	            padding: 20px;
+   226	            border-radius: 12px;
+   227	            margin-bottom: 20px;
+   228	        }
+   229	        
+   230	        .instruction-box h3 {
+   231	            margin: 0 0 10px 0;
+   232	            font-size: 18px;
+   233	        }
+   234	        
+   235	        .instruction-box p {
+   236	            margin: 5px 0;
+   237	            opacity: 0.95;
+   238	        }
+   239	    </style>
+   240	</head>
+   241	<body>
+   242	    <header class="header">
+   243	        <div class="container">
+   244	            <div class="logo">
+   245	                <i class="fas fa-graduation-cap"></i>
+   246	                <span>Level 5 Learning</span>
+   247	            </div>
+   248	            <nav class="nav">
+   249	                <a href="index.html" class="nav-link">
+   250	                    <i class="fas fa-home"></i> 홈
+   251	                </a>
+   252	                <div class="student-info" id="studentInfo">
+   253	                    <i class="fas fa-user-circle"></i>
+   254	                    <span id="studentName">학생</span>
+   255	                </div>
+   256	            </nav>
+   257	        </div>
+   258	    </header>
+   259	
+   260	    <main class="main-content">
+   261	        <div class="container">
+   262	            <div class="page-header">
+   263	                <a href="index.html" class="back-btn">
+   264	                    <i class="fas fa-arrow-left"></i> 돌아가기
+   265	                </a>
+   266	                <h1 class="page-title">
+   267	                    <i class="fas fa-book"></i>
+   268	                    [Level 5A-1] Grammar Logic Workbook
+   269	                </h1>
+   270	                <p class="page-subtitle">Week 1-1. 관계사절 내 삽입구조 (Embedded Clauses)</p>
+   271	            </div>
+   272	
+   273	            <!-- Section: Pattern Hunting (Interactive) -->
+   274	            <div class="worksheet-section">
+   275	                <div class="section-header">
+   276	                    <div class="section-number">1</div>
+   277	                    <div class="section-title">
+   278	                        <h2>Pattern Hunting (단서 포착) - 인터랙티브 버전</h2>
+   279	                        <p class="section-description">
+   280	                            단어를 클릭하여 삽입절과 진짜 동사를 표시하세요!
+   281	                        </p>
+   282	                    </div>
+   283	                </div>
+   284	
+   285	                <!-- Instructions -->
+   286	                <div class="instruction-box">
+   287	                    <h3><i class="fas fa-info-circle"></i> 사용 방법</h3>
+   288	                    <p><strong>1단계:</strong> 아래 버튼에서 <span style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 4px;">괄호 모드</span> 또는 <span style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 4px;">V 모드</span>를 선택하세요.</p>
+   289	                    <p><strong>2단계:</strong> 문장의 단어를 클릭하여 표시하세요.</p>
+   290	                    <p><strong>3단계:</strong> 괄호는 삽입절(주어+동사)에, V는 진짜 동사에 표시합니다.</p>
+   291	                    <p><strong>4단계:</strong> 완료되면 "정답 확인" 버튼을 누르세요!</p>
+   292	                </div>
+   293	
+   294	                <!-- Sentence 1 -->
+   295	                <div class="pattern-item">
+   296	                    <div class="pattern-number">1</div>
+   297	                    <div class="pattern-content">
+   298	                        <h4 style="margin-bottom: 10px; color: #1e293b;">Sentence 1</h4>
+   299	                        
+   300	                        <!-- Selection Mode Buttons -->
+   301	                        <div class="selection-buttons">
+   302	                            <button class="mode-btn" id="mode1-parenthesis" onclick="setMode(1, 'parenthesis')">
+   303	                                <i class="fas fa-brackets"></i> 괄호 모드 ( )
+   304	                            </button>
+   305	                            <button class="mode-btn" id="mode1-verb" onclick="setMode(1, 'verb')">
+   306	                                <i class="fas fa-check"></i> V 모드
+   307	                            </button>
+   308	                            <button class="reset-btn" onclick="resetSentence(1)">
+   309	                                <i class="fas fa-redo"></i> 초기화
+   310	                            </button>
+   311	                        </div>
+   312	
+   313	                        <!-- Interactive Sentence -->
+   314	                        <div class="interactive-sentence" id="sentence1">
+   315	                            <span class="word" data-index="0" onclick="toggleWord(1, 0)">The</span>
+   316	                            <span class="word" data-index="1" onclick="toggleWord(1, 1)">suspect</span>
+   317	                            <span class="word" data-index="2" onclick="toggleWord(1, 2)">who</span>
+   318	                            <span class="word" data-index="3" onclick="toggleWord(1, 3)">the</span>
+   319	                            <span class="word" data-index="4" onclick="toggleWord(1, 4)">police</span>
+   320	                            <span class="word" data-index="5" onclick="toggleWord(1, 5)">thought</span>
+   321	                            <span class="word" data-index="6" onclick="toggleWord(1, 6)">was</span>
+   322	                            <span class="word" data-index="7" onclick="toggleWord(1, 7)">guilty</span>
+   323	                            <span class="word" data-index="8" onclick="toggleWord(1, 8)">has</span>
+   324	                            <span class="word" data-index="9" onclick="toggleWord(1, 9)">been</span>
+   325	                            <span class="word" data-index="10" onclick="toggleWord(1, 10)">released.</span>
+   326	                        </div>
+   327	
+   328	                        <!-- Result Display -->
+   329	                        <div class="pattern-result">
+   330	                            <span class="result-label">당신의 답:</span>
+   331	                            <div class="result-text" id="result1">클릭하여 선택을 시작하세요...</div>
+   332	                        </div>
+   333	
+   334	                        <button class="check-answer-btn" onclick="checkAnswer(1)">
+   335	                            <i class="fas fa-check-circle"></i> 정답 확인
+   336	                        </button>
+   337	                        
+   338	                        <div class="feedback" id="feedback1"></div>
+   339	                    </div>
+   340	                </div>
+   341	
+   342	                <!-- Sentence 2 -->
+   343	                <div class="pattern-item">
+   344	                    <div class="pattern-number">2</div>
+   345	                    <div class="pattern-content">
+   346	                        <h4 style="margin-bottom: 10px; color: #1e293b;">Sentence 2</h4>
+   347	                        
+   348	                        <div class="selection-buttons">
+   349	                            <button class="mode-btn" id="mode2-parenthesis" onclick="setMode(2, 'parenthesis')">
+   350	                                <i class="fas fa-brackets"></i> 괄호 모드 ( )
+   351	                            </button>
+   352	                            <button class="mode-btn" id="mode2-verb" onclick="setMode(2, 'verb')">
+   353	                                <i class="fas fa-check"></i> V 모드
+   354	                            </button>
+   355	                            <button class="reset-btn" onclick="resetSentence(2)">
+   356	                                <i class="fas fa-redo"></i> 초기화
+   357	                            </button>
+   358	                        </div>
+   359	
+   360	                        <div class="interactive-sentence" id="sentence2">
+   361	                            <span class="word" data-index="0" onclick="toggleWord(2, 0)">We</span>
+   362	                            <span class="word" data-index="1" onclick="toggleWord(2, 1)">interviewed</span>
+   363	                            <span class="word" data-index="2" onclick="toggleWord(2, 2)">a</span>
+   364	                            <span class="word" data-index="3" onclick="toggleWord(2, 3)">candidate</span>
+   365	                            <span class="word" data-index="4" onclick="toggleWord(2, 4)">who</span>
+   366	                            <span class="word" data-index="5" onclick="toggleWord(2, 5)">we</span>
+   367	                            <span class="word" data-index="6" onclick="toggleWord(2, 6)">believed</span>
+   368	                            <span class="word" data-index="7" onclick="toggleWord(2, 7)">had</span>
+   369	                            <span class="word" data-index="8" onclick="toggleWord(2, 8)">the</span>
+   370	                            <span class="word" data-index="9" onclick="toggleWord(2, 9)">most</span>
+   371	                            <span class="word" data-index="10" onclick="toggleWord(2, 10)">potential</span>
+   372	                            <span class="word" data-index="11" onclick="toggleWord(2, 11)">for</span>
+   373	                            <span class="word" data-index="12" onclick="toggleWord(2, 12)">the</span>
+   374	                            <span class="word" data-index="13" onclick="toggleWord(2, 13)">role.</span>
+   375	                        </div>
+   376	
+   377	                        <div class="pattern-result">
+   378	                            <span class="result-label">당신의 답:</span>
+   379	                            <div class="result-text" id="result2">클릭하여 선택을 시작하세요...</div>
+   380	                        </div>
+   381	
+   382	                        <button class="check-answer-btn" onclick="checkAnswer(2)">
+   383	                            <i class="fas fa-check-circle"></i> 정답 확인
+   384	                        </button>
+   385	                        
+   386	                        <div class="feedback" id="feedback2"></div>
+   387	                    </div>
+   388	                </div>
+   389	
+   390	                <!-- Sentence 3 -->
+   391	                <div class="pattern-item">
+   392	                    <div class="pattern-number">3</div>
+   393	                    <div class="pattern-content">
+   394	                        <h4 style="margin-bottom: 10px; color: #1e293b;">Sentence 3</h4>
+   395	                        
+   396	                        <div class="selection-buttons">
+   397	                            <button class="mode-btn" id="mode3-parenthesis" onclick="setMode(3, 'parenthesis')">
+   398	                                <i class="fas fa-brackets"></i> 괄호 모드 ( )
+   399	                            </button>
+   400	                            <button class="mode-btn" id="mode3-verb" onclick="setMode(3, 'verb')">
+   401	                                <i class="fas fa-check"></i> V 모드
+   402	                            </button>
+   403	                            <button class="reset-btn" onclick="resetSentence(3)">
+   404	                                <i class="fas fa-redo"></i> 초기화
+   405	                            </button>
+   406	                        </div>
+   407	
+   408	                        <div class="interactive-sentence" id="sentence3">
+   409	                            <span class="word" data-index="0" onclick="toggleWord(3, 0)">This</span>
+   410	                            <span class="word" data-index="1" onclick="toggleWord(3, 1)">is</span>
+   411	                            <span class="word" data-index="2" onclick="toggleWord(3, 2)">the</span>
+   412	                            <span class="word" data-index="3" onclick="toggleWord(3, 3)">masterpiece</span>
+   413	                            <span class="word" data-index="4" onclick="toggleWord(3, 4)">which</span>
+   414	                            <span class="word" data-index="5" onclick="toggleWord(3, 5)">the</span>
+   415	                            <span class="word" data-index="6" onclick="toggleWord(3, 6)">critics</span>
+   416	                            <span class="word" data-index="7" onclick="toggleWord(3, 7)">say</span>
+   417	                            <span class="word" data-index="8" onclick="toggleWord(3, 8)">changed</span>
+   418	                            <span class="word" data-index="9" onclick="toggleWord(3, 9)">the</span>
+   419	                            <span class="word" data-index="10" onclick="toggleWord(3, 10)">history</span>
+   420	                            <span class="word" data-index="11" onclick="toggleWord(3, 11)">of</span>
+   421	                            <span class="word" data-index="12" onclick="toggleWord(3, 12)">modern</span>
+   422	                            <span class="word" data-index="13" onclick="toggleWord(3, 13)">art.</span>
+   423	                        </div>
+   424	
+   425	                        <div class="pattern-result">
+   426	                            <span class="result-label">당신의 답:</span>
+   427	                            <div class="result-text" id="result3">클릭하여 선택을 시작하세요...</div>
+   428	                        </div>
+   429	
+   430	                        <button class="check-answer-btn" onclick="checkAnswer(3)">
+   431	                            <i class="fas fa-check-circle"></i> 정답 확인
+   432	                        </button>
+   433	                        
+   434	                        <div class="feedback" id="feedback3"></div>
+   435	                    </div>
+   436	                </div>
+   437	
+   438	                <!-- Next Button to Error Detection -->
+   439	                <div style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #F6E27F 0%, #E5D06B 100%); border-radius: 12px;">
+   440	                    <h3 style="color: white; margin-bottom: 15px;">
+   441	                        <i class="fas fa-check-circle"></i> Pattern Hunting 완료!
+   442	                    </h3>
+   443	                    <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px;">
+   444	                        모든 문제를 확인하셨나요? 다음 단계로 이동하세요.
+   445	                    </p>
+   446	                    <button onclick="goToErrorDetection()" style="background: white; color: #1F2A44; border: 3px solid #F6E27F; padding: 15px 40px; border-radius: 12px; font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+   447	                        <i class="fas fa-arrow-right"></i> 다음 단계: Error Detection
+   448	                    </button>
+   449	                </div>
+   450	
+   451	            </div>
+   452	
+   453	            <!-- Section 2: Logical Error Detection -->
+   454	            <div class="worksheet-section" id="errorDetectionSection" style="margin-top: 40px; display: none;">
+   455	                <div class="section-header">
+   456	                    <div class="section-number">2</div>
+   457	                    <div class="section-title">
+   458	                        <h2>Logical Error Detection (오류 수정 및 설명)</h2>
+   459	                        <p class="section-description">
+   460	                            다음 문장에서 어법상 틀린 부분을 찾아 고치고, 그 <strong>[사고과정(Logic)]</strong>을 논리적으로 서술하세요.<br>
+   461	                            <span style="color: #1F2A44; font-weight: 600;">(명시적 문법 인강에서 선생님이 보여준 사고과정을 참고하세요!)</span>
+   462	                        </p>
+   463	                    </div>
+   464	                </div>
+   465	
+   466	                <!-- Error 1: Sentence A -->
+   467	                <div class="pattern-item">
+   468	                    <div class="pattern-number">A</div>
+   469	                    <div class="pattern-content">
+   470	                        <div class="interactive-sentence" style="background: #f8f9fa; border: 2px solid #e5e7eb; font-size: 18px; padding: 20px; margin-bottom: 20px;">
+   471	                            "She is the teacher who I heard was won the national award."
+   472	                        </div>
+   473	
+   474	                        <div style="margin-bottom: 20px;">
+   475	                            <label style="font-weight: 600; color: #1e293b; display: block; margin-bottom: 8px;">
+   476	                                <i class="fas fa-edit"></i> Correction:
+   477	                            </label>
+   478	                            <input type="text" id="correction1" 
+   479	                                   placeholder="수정된 문장을 입력하세요" 
+   480	                                   style="width: 100%; padding: 12px; font-size: 16px; border: 2px solid #e5e7eb; border-radius: 8px;">
+   481	                        </div>
+   482	
+   483	                        <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 2px solid #e5e7eb;">
+   484	                            <h4 style="margin: 0 0 15px 0; color: #1e293b;">
+   485	                                <i class="fas fa-brain"></i> Logic (사고과정):
+   486	                            </h4>
+   487	                            
+   488	                            <div style="margin-bottom: 15px;">
+   489	                                <label style="font-weight: 600; color: #475569; display: block; margin-bottom: 5px;">
+   490	                                    (단서 포착)
+   491	                                </label>
+   492	                                <textarea id="logic1-clue" rows="2" 
+   493	                                          placeholder="어떤 단서를 포착했나요?"
+   494	                                          style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #cbd5e1; border-radius: 6px; resize: vertical;"></textarea>
+   495	                            </div>
+   496	
+   497	                            <div style="margin-bottom: 15px;">
+   498	                                <label style="font-weight: 600; color: #475569; display: block; margin-bottom: 5px;">
+   499	                                    (구조 분석)
+   500	                                </label>
+   501	                                <textarea id="logic1-analysis" rows="2" 
+   502	                                          placeholder="문장 구조를 어떻게 분석했나요?"
+   503	                                          style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #cbd5e1; border-radius: 6px; resize: vertical;"></textarea>
+   504	                            </div>
+   505	
+   506	                            <div style="margin-bottom: 0;">
+   507	                                <label style="font-weight: 600; color: #475569; display: block; margin-bottom: 5px;">
+   508	                                    (결론 적용)
+   509	                                </label>
+   510	                                <textarea id="logic1-conclusion" rows="2" 
+   511	                                          placeholder="어떤 결론을 적용했나요?"
+   512	                                          style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #cbd5e1; border-radius: 6px; resize: vertical;"></textarea>
+   513	                            </div>
+   514	                        </div>
+   515	
+   516	                        <button class="check-answer-btn" onclick="checkLogicalError(1)" style="margin-top: 20px;">
+   517	                            <i class="fas fa-check-circle"></i> 제출 및 확인
+   518	                        </button>
+   519	                        
+   520	                        <div class="feedback" id="feedback-error1"></div>
+   521	                    </div>
+   522	                </div>
+   523	
+   524	                <!-- Error 2: Sentence B -->
+   525	                <div class="pattern-item">
+   526	                    <div class="pattern-number">B</div>
+   527	                    <div class="pattern-content">
+   528	                        <div class="interactive-sentence" style="background: #f8f9fa; border: 2px solid #e5e7eb; font-size: 18px; padding: 20px; margin-bottom: 20px;">
+   529	                            "The artifact which the researcher claimed it was authentic proved to be a fake."
+   530	                        </div>
+   531	
+   532	                        <div style="margin-bottom: 20px;">
+   533	                            <label style="font-weight: 600; color: #1e293b; display: block; margin-bottom: 8px;">
+   534	                                <i class="fas fa-edit"></i> Correction:
+   535	                            </label>
+   536	                            <input type="text" id="correction2" 
+   537	                                   placeholder="수정된 문장을 입력하세요" 
+   538	                                   style="width: 100%; padding: 12px; font-size: 16px; border: 2px solid #e5e7eb; border-radius: 8px;">
+   539	                        </div>
+   540	
+   541	                        <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 2px solid #e5e7eb;">
+   542	                            <h4 style="margin: 0 0 15px 0; color: #1e293b;">
+   543	                                <i class="fas fa-brain"></i> Logic (사고과정):
+   544	                            </h4>
+   545	                            
+   546	                            <div style="margin-bottom: 15px;">
+   547	                                <label style="font-weight: 600; color: #475569; display: block; margin-bottom: 5px;">
+   548	                                    (단서 포착)
+   549	                                </label>
+   550	                                <textarea id="logic2-clue" rows="2" 
+   551	                                          placeholder="어떤 단서를 포착했나요?"
+   552	                                          style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #cbd5e1; border-radius: 6px; resize: vertical;"></textarea>
+   553	                            </div>
+   554	
+   555	                            <div style="margin-bottom: 15px;">
+   556	                                <label style="font-weight: 600; color: #475569; display: block; margin-bottom: 5px;">
+   557	                                    (구조 분석)
+   558	                                </label>
+   559	                                <textarea id="logic2-analysis" rows="2" 
+   560	                                          placeholder="문장 구조를 어떻게 분석했나요?"
+   561	                                          style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #cbd5e1; border-radius: 6px; resize: vertical;"></textarea>
+   562	                            </div>
+   563	
+   564	                            <div style="margin-bottom: 0;">
+   565	                                <label style="font-weight: 600; color: #475569; display: block; margin-bottom: 5px;">
+   566	                                    (결론 적용)
+   567	                                </label>
+   568	                                <textarea id="logic2-conclusion" rows="2" 
+   569	                                          placeholder="어떤 결론을 적용했나요?"
+   570	                                          style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #cbd5e1; border-radius: 6px; resize: vertical;"></textarea>
+   571	                            </div>
+   572	                        </div>
+   573	
+   574	                        <button class="check-answer-btn" onclick="checkLogicalError(2)" style="margin-top: 20px;">
+   575	                            <i class="fas fa-check-circle"></i> 제출 및 확인
+   576	                        </button>
+   577	                        
+   578	                        <div class="feedback" id="feedback-error2"></div>
+   579	                    </div>
+   580	                </div>
+   581	
+   582	                <!-- Error 3: Sentence C -->
+   583	                <div class="pattern-item">
+   584	                    <div class="pattern-number">C</div>
+   585	                    <div class="pattern-content">
+   586	                        <div class="interactive-sentence" style="background: #f8f9fa; border: 2px solid #e5e7eb; font-size: 18px; padding: 20px; margin-bottom: 20px;">
+   587	                            "This is the student who the principal believes are the most talented in our school."
+   588	                        </div>
+   589	
+   590	                        <div style="margin-bottom: 20px;">
+   591	                            <label style="font-weight: 600; color: #1e293b; display: block; margin-bottom: 8px;">
+   592	                                <i class="fas fa-edit"></i> Correction:
+   593	                            </label>
+   594	                            <input type="text" id="correction3" 
+   595	                                   placeholder="수정된 문장을 입력하세요" 
+   596	                                   style="width: 100%; padding: 12px; font-size: 16px; border: 2px solid #e5e7eb; border-radius: 8px;">
+   597	                        </div>
+   598	
+   599	                        <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 2px solid #e5e7eb;">
+   600	                            <h4 style="margin: 0 0 15px 0; color: #1e293b;">
+   601	                                <i class="fas fa-brain"></i> Logic (사고과정):
+   602	                            </h4>
+   603	                            
+   604	                            <div style="margin-bottom: 15px;">
+   605	                                <label style="font-weight: 600; color: #475569; display: block; margin-bottom: 5px;">
+   606	                                    (단서 포착)
+   607	                                </label>
+   608	                                <textarea id="logic3-clue" rows="2" 
+   609	                                          placeholder="어떤 단서를 포착했나요?"
+   610	                                          style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #cbd5e1; border-radius: 6px; resize: vertical;"></textarea>
+   611	                            </div>
+   612	
+   613	                            <div style="margin-bottom: 15px;">
+   614	                                <label style="font-weight: 600; color: #475569; display: block; margin-bottom: 5px;">
+   615	                                    (구조 분석)
+   616	                                </label>
+   617	                                <textarea id="logic3-analysis" rows="2" 
+   618	                                          placeholder="문장 구조를 어떻게 분석했나요?"
+   619	                                          style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #cbd5e1; border-radius: 6px; resize: vertical;"></textarea>
+   620	                            </div>
+   621	
+   622	                            <div style="margin-bottom: 0;">
+   623	                                <label style="font-weight: 600; color: #475569; display: block; margin-bottom: 5px;">
+   624	                                    (결론 적용)
+   625	                                </label>
+   626	                                <textarea id="logic3-conclusion" rows="2" 
+   627	                                          placeholder="어떤 결론을 적용했나요?"
+   628	                                          style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #cbd5e1; border-radius: 6px; resize: vertical;"></textarea>
+   629	                            </div>
+   630	                        </div>
+   631	
+   632	                        <button class="check-answer-btn" onclick="checkLogicalError(3)" style="margin-top: 20px;">
+   633	                            <i class="fas fa-check-circle"></i> 제출 및 확인
+   634	                        </button>
+   635	                        
+   636	                        <div class="feedback" id="feedback-error3"></div>
+   637	                    </div>
+   638	                </div>
+   639	
+   640	                <!-- Complete Button -->
+   641	                <div style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 12px;">
+   642	                    <h3 style="color: white; margin-bottom: 15px;">
+   643	                        <i class="fas fa-trophy"></i> 문법 워크시트 완료! 🎉
+   644	                    </h3>
+   645	                    <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px;">
+   646	                        모든 문제를 다 풀었습니다! 수고하셨어요!
+   647	                    </p>
+   648	                    <button onclick="completeGrammarWorksheet()" style="background: white; color: #10b981; border: none; padding: 15px 40px; border-radius: 12px; font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+   649	                        <i class="fas fa-arrow-right"></i> 다음: Reading 학습
+   650	                    </button>
+   651	                </div>
+   652	
+   653	            </div>
+   654	
+   655	        </div>
+   656	    </main>
+   657	
+   658	    <script src="js/main.js"></script>
+   659	    
+   660	    <!-- Firebase SDK -->
+   661	    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+   662	    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+   663	    <script src="js/firebase-config.js"></script>
+   664	    <script src="js/progress-manager.js"></script>
+   665	    
+   666	    <script>
+   667	        // ========================================
+   668	        // Interactive Pattern Hunting Logic
+   669	        // ========================================
+   670	
+   671	        // State management
+   672	        const sentenceStates = {
+   673	            1: { mode: 'parenthesis', parenthesis: [3, 4, 5], verb: [6] },
+   674	            2: { mode: 'parenthesis', parenthesis: [5, 6], verb: [7] },
+   675	            3: { mode: 'parenthesis', parenthesis: [5, 6, 7], verb: [8] }
+   676	        };
+   677	
+   678	        const correctAnswers = {
+   679	            1: { parenthesis: [3, 4, 5], verb: [6] }, // "the police thought" / "was"
+   680	            2: { parenthesis: [5, 6], verb: [7] },     // "we believed" / "had"
+   681	            3: { parenthesis: [5, 6, 7], verb: [8] }   // "the critics say" / "changed"
+   682	        };
+   683	
+   684	        const sentences = {
+   685	            1: ["The", "suspect", "who", "the", "police", "thought", "was", "guilty", "has", "been", "released."],
+   686	            2: ["We", "interviewed", "a", "candidate", "who", "we", "believed", "had", "the", "most", "potential", "for", "the", "role."],
+   687	            3: ["This", "is", "the", "masterpiece", "which", "the", "critics", "say", "changed", "the", "history", "of", "modern", "art."]
+   688	        };
+   689	
+   690	        // Student's selections
+   691	        const studentSelections = {
+   692	            1: { parenthesis: [], verb: [] },
+   693	            2: { parenthesis: [], verb: [] },
+   694	            3: { parenthesis: [], verb: [] }
+   695	        };
+   696	
+   697	        // Set selection mode
+   698	        function setMode(sentenceNum, mode) {
+   699	            sentenceStates[sentenceNum].mode = mode;
+   700	            
+   701	            // Update button styles
+   702	            document.getElementById(`mode${sentenceNum}-parenthesis`).classList.remove('active-parenthesis');
+   703	            document.getElementById(`mode${sentenceNum}-verb`).classList.remove('active-verb');
+   704	            
+   705	            if (mode === 'parenthesis') {
+   706	                document.getElementById(`mode${sentenceNum}-parenthesis`).classList.add('active-parenthesis');
+   707	            } else {
+   708	                document.getElementById(`mode${sentenceNum}-verb`).classList.add('active-verb');
+   709	            }
+   710	        }
+   711	
+   712	        // Toggle word selection
+   713	        function toggleWord(sentenceNum, wordIndex) {
+   714	            const mode = sentenceStates[sentenceNum].mode;
+   715	            const word = document.querySelector(`#sentence${sentenceNum} .word[data-index="${wordIndex}"]`);
+   716	            
+   717	            if (mode === 'parenthesis') {
+   718	                // Toggle parenthesis selection
+   719	                const index = studentSelections[sentenceNum].parenthesis.indexOf(wordIndex);
+   720	                if (index > -1) {
+   721	                    // Remove selection
+   722	                    studentSelections[sentenceNum].parenthesis.splice(index, 1);
+   723	                    word.classList.remove('selected-parenthesis');
+   724	                } else {
+   725	                    // Add selection
+   726	                    studentSelections[sentenceNum].parenthesis.push(wordIndex);
+   727	                    word.classList.add('selected-parenthesis');
+   728	                }
+   729	            } else {
+   730	                // Toggle verb selection
+   731	                const index = studentSelections[sentenceNum].verb.indexOf(wordIndex);
+   732	                if (index > -1) {
+   733	                    // Remove selection
+   734	                    studentSelections[sentenceNum].verb.splice(index, 1);
+   735	                    word.classList.remove('selected-verb');
+   736	                } else {
+   737	                    // Add selection
+   738	                    studentSelections[sentenceNum].verb.push(wordIndex);
+   739	                    word.classList.add('selected-verb');
+   740	                }
+   741	            }
+   742	            
+   743	            updateResultDisplay(sentenceNum);
+   744	        }
+   745	
+   746	        // Update result display
+   747	        function updateResultDisplay(sentenceNum) {
+   748	            const selected = studentSelections[sentenceNum];
+   749	            const words = sentences[sentenceNum];
+   750	            
+   751	            let resultText = '';
+   752	            for (let i = 0; i < words.length; i++) {
+   753	                let word = words[i];
+   754	                
+   755	                // Check if word is in parenthesis
+   756	                if (selected.parenthesis.includes(i)) {
+   757	                    if (resultText.length > 0 && !resultText.endsWith('(')) {
+   758	                        resultText += ' ';
+   759	                    }
+   760	                    if (!resultText.endsWith('(')) {
+   761	                        resultText += '(';
+   762	                    }
+   763	                    resultText += word + ' ';
+   764	                } else {
+   765	                    // Close parenthesis if needed
+   766	                    if (resultText.endsWith(' ') && resultText.includes('(') && !resultText.includes(')')) {
+   767	                        resultText = resultText.trim() + ') ';
+   768	                    }
+   769	                    
+   770	                    if (resultText.length > 0 && !resultText.endsWith(' ') && !resultText.endsWith('(')) {
+   771	                        resultText += ' ';
+   772	                    }
+   773	                    resultText += word;
+   774	                    
+   775	                    // Add V marker if selected as verb
+   776	                    if (selected.verb.includes(i)) {
+   777	                        resultText += '(V)';
+   778	                    }
+   779	                }
+   780	            }
+   781	            
+   782	            // Close final parenthesis if needed
+   783	            if (resultText.includes('(') && !resultText.includes(')')) {
+   784	                resultText = resultText.trim() + ')';
+   785	            }
+   786	            
+   787	            document.getElementById(`result${sentenceNum}`).textContent = resultText || '클릭하여 선택을 시작하세요...';
+   788	        }
+   789	
+   790	        // Reset sentence
+   791	        function resetSentence(sentenceNum) {
+   792	            // Clear selections
+   793	            studentSelections[sentenceNum].parenthesis = [];
+   794	            studentSelections[sentenceNum].verb = [];
+   795	            
+   796	            // Remove all highlighting
+   797	            const words = document.querySelectorAll(`#sentence${sentenceNum} .word`);
+   798	            words.forEach(word => {
+   799	                word.classList.remove('selected-parenthesis', 'selected-verb');
+   800	            });
+   801	            
+   802	            // Reset display
+   803	            updateResultDisplay(sentenceNum);
+   804	            
+   805	            // Hide feedback
+   806	            document.getElementById(`feedback${sentenceNum}`).style.display = 'none';
+   807	        }
+   808	
+   809	        // Check answer
+   810	        function checkAnswer(sentenceNum) {
+   811	            const student = studentSelections[sentenceNum];
+   812	            const correct = correctAnswers[sentenceNum];
+   813	            
+   814	            // Sort arrays for comparison
+   815	            const studentParenthesis = [...student.parenthesis].sort((a, b) => a - b);
+   816	            const correctParenthesis = [...correct.parenthesis].sort((a, b) => a - b);
+   817	            const studentVerb = [...student.verb].sort((a, b) => a - b);
+   818	            const correctVerb = [...correct.verb].sort((a, b) => a - b);
+   819	            
+   820	            // Check if correct
+   821	            const isParenthesisCorrect = JSON.stringify(studentParenthesis) === JSON.stringify(correctParenthesis);
+   822	            const isVerbCorrect = JSON.stringify(studentVerb) === JSON.stringify(correctVerb);
+   823	            
+   824	            const feedback = document.getElementById(`feedback${sentenceNum}`);
+   825	            
+   826	            if (isParenthesisCorrect && isVerbCorrect) {
+   827	                feedback.className = 'feedback correct';
+   828	                feedback.innerHTML = '<i class="fas fa-check-circle"></i> 정답입니다! 훌륭해요! 🎉';
+   829	            } else {
+   830	                feedback.className = 'feedback incorrect';
+   831	                let message = '<i class="fas fa-times-circle"></i> 다시 한 번 확인해보세요.<br>';
+   832	                
+   833	                if (!isParenthesisCorrect) {
+   834	                    const correctWords = correctParenthesis.map(i => sentences[sentenceNum][i]);
+   835	                    message += `힌트: 괄호는 <strong>${correctWords.join(' ')}</strong>에 표시해야 합니다.<br>`;
+   836	                }
+   837	                
+   838	                if (!isVerbCorrect) {
+   839	                    const correctWords = correctVerb.map(i => sentences[sentenceNum][i]);
+   840	                    message += `힌트: V는 <strong>${correctWords.join(', ')}</strong>에 표시해야 합니다.`;
+   841	                }
+   842	                
+   843	                feedback.innerHTML = message;
+   844	            }
+   845	        }
+   846	
+   847	        // Initialize
+   848	        document.addEventListener('DOMContentLoaded', function() {
+   849	            const student = getCurrentStudent();
+   850	            if (student) {
+   851	                document.getElementById('studentName').textContent = student.name;
+   852	            }
+   853	            
+   854	            // Set default mode for all sentences
+   855	            setMode(1, 'parenthesis');
+   856	            setMode(2, 'parenthesis');
+   857	            setMode(3, 'parenthesis');
+   858	        });
+   859	
+   860	        // ========================================
+   861	        // Navigate to Error Detection
+   862	        // ========================================
+   863	        function goToErrorDetection() {
+   864	            // Hide Pattern Hunting section
+   865	            document.querySelectorAll('.worksheet-section')[0].style.display = 'none';
+   866	            
+   867	            // Show Error Detection section
+   868	            document.getElementById('errorDetectionSection').style.display = 'block';
+   869	            
+   870	            // Scroll to top
+   871	            window.scrollTo({ top: 0, behavior: 'smooth' });
+   872	        }
+   873	
+   874	        // ========================================
+   875	        // Error Detection Logic
+   876	        // ========================================
+   877	
+   878	        const errorCorrectAnswers = {
+   879	            1: {
+   880	                correction: "She is the teacher who I heard won the national award.",
+   881	                logic: {
+   882	                    clue: "관계대명사 'who' 뒤에 '주어+동사(I heard)' 삽입 구조가 있고, 진짜 동사는 'won'이어야 함",
+   883	                    analysis: "'was won'은 수동태인데, 'win'은 타동사이므로 능동태 'won'을 써야 함. 삽입절 'I heard'를 괄호로 처리하면 'who won'이 맞음",
+   884	                    conclusion: "'was won'을 'won'으로 수정"
+   885	                }
+   886	            },
+   887	            2: {
+   888	                correction: "The artifact which the researcher claimed was authentic proved to be a fake.",
+   889	                logic: {
+   890	                    clue: "관계대명사 'which'가 이미 주어 역할을 함. 'the researcher claimed'는 삽입절",
+   891	                    analysis: "'which'가 주어인데 'it was'에서 'it'가 또 주어로 나타나 중복됨. 삽입절을 괄호로 처리하면 'which was authentic'가 되어야 함",
+   892	                    conclusion: "'it'를 제거하여 'which the researcher claimed was authentic'로 수정"
+   893	                }
+   894	            },
+   895	            3: {
+   896	                correction: "This is the student who the principal believes is the most talented in our school.",
+   897	                logic: {
+   898	                    clue: "관계대명사 'who'의 선행사는 'the student' (단수)",
+   899	                    analysis: "'the principal believes'는 삽입절이고, 진짜 동사는 'are'인데 선행사가 단수이므로 'is'를 써야 함",
+   900	                    conclusion: "'are'를 'is'로 수정"
+   901	                }
+   902	            }
+   903	        };
+   904	
+   905	        function checkLogicalError(num) {
+   906	            const correction = document.getElementById(`correction${num}`).value.trim();
+   907	            const clue = document.getElementById(`logic${num}-clue`).value.trim();
+   908	            const analysis = document.getElementById(`logic${num}-analysis`).value.trim();
+   909	            const conclusion = document.getElementById(`logic${num}-conclusion`).value.trim();
+   910	            
+   911	            const feedback = document.getElementById(`feedback-error${num}`);
+   912	            
+   913	            // Check if all fields are filled
+   914	            if (!correction || !clue || !analysis || !conclusion) {
+   915	                feedback.className = 'feedback incorrect';
+   916	                feedback.innerHTML = '<i class="fas fa-exclamation-circle"></i> 모든 항목을 작성해주세요!';
+   917	                feedback.style.display = 'block';
+   918	                return;
+   919	            }
+   920	            
+   921	            // Check correction
+   922	            const correctCorrection = errorCorrectAnswers[num].correction;
+   923	            const isCorrect = correction.toLowerCase().replace(/[.,!?]/g, '').trim() === 
+   924	                             correctCorrection.toLowerCase().replace(/[.,!?]/g, '').trim();
+   925	            
+   926	            // Provide feedback
+   927	            feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+   928	            feedback.style.display = 'block';
+   929	            
+   930	            let feedbackHTML = '';
+   931	            
+   932	            if (isCorrect) {
+   933	                feedbackHTML = '<i class="fas fa-check-circle"></i> <strong>Correction 정답입니다!</strong> 🎉<br><br>';
+   934	            } else {
+   935	                feedbackHTML = '<i class="fas fa-times-circle"></i> <strong>Correction이 정확하지 않습니다.</strong><br>';
+   936	                feedbackHTML += `<strong>모범답안:</strong> ${correctCorrection}<br><br>`;
+   937	            }
+   938	            
+   939	            // Show model logic
+   940	            feedbackHTML += '<div style="background: white; padding: 15px; border-radius: 8px; margin-top: 15px;">';
+   941	            feedbackHTML += '<h4 style="margin: 0 0 10px 0; color: #1e293b;"><i class="fas fa-lightbulb"></i> 모범 사고과정:</h4>';
+   942	            feedbackHTML += `<p style="margin: 8px 0;"><strong>(단서 포착)</strong><br>${errorCorrectAnswers[num].logic.clue}</p>`;
+   943	            feedbackHTML += `<p style="margin: 8px 0;"><strong>(구조 분석)</strong><br>${errorCorrectAnswers[num].logic.analysis}</p>`;
+   944	            feedbackHTML += `<p style="margin: 8px 0;"><strong>(결론 적용)</strong><br>${errorCorrectAnswers[num].logic.conclusion}</p>`;
+   945	            feedbackHTML += '</div>';
+   946	            
+   947	            // Compare student logic with model
+   948	            feedbackHTML += '<div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin-top: 15px; border: 2px solid #3b82f6;">';
+   949	            feedbackHTML += '<h4 style="margin: 0 0 10px 0; color: #1e40af;"><i class="fas fa-user"></i> 당신의 사고과정:</h4>';
+   950	            feedbackHTML += `<p style="margin: 8px 0;"><strong>(단서 포착)</strong><br>${clue}</p>`;
+   951	            feedbackHTML += `<p style="margin: 8px 0;"><strong>(구조 분석)</strong><br>${analysis}</p>`;
+   952	            feedbackHTML += `<p style="margin: 8px 0;"><strong>(결론 적용)</strong><br>${conclusion}</p>`;
+   953	            feedbackHTML += '</div>';
+   954	            
+   955	            feedback.innerHTML = feedbackHTML;
+   956	        }
+   957	
+   958	        // ========================================
+   959	        // Firebase Progress Save
+   960	        // ========================================
+   961	        
+   962	        async function completeGrammarWorksheet() {
+   963	            try {
+   964	                // Get student info from localStorage
+   965	                const studentId = localStorage.getItem('studentId');
+   966	                const studentName = localStorage.getItem('studentName');
+   967	                
+   968	                if (!studentId) {
+   969	                    alert('로그인 정보가 없습니다. 다시 로그인해주세요.');
+   970	                    window.location.href = 'index.html';
+   971	                    return;
+   972	                }
+   973	                
+   974	                // Check if ProgressManager is available
+   975	                if (typeof ProgressManager === 'undefined') {
+   976	                    console.warn('ProgressManager not available, completing without saving');
+   977	                    window.location.href = 'reading-day1-final.html';
+   978	                    return;
+   979	                }
+   980	                
+   981	                // Save to Firebase
+   982	                await ProgressManager.updateActivity(studentId, 1, 'grammar', true);
+   983	                
+   984	                alert('✅ 문법 워크시트 완료!\n\n다음 단계인 Reading으로 이동합니다.');
+   985	                window.location.href = 'reading-day1-final.html';
+   986	                
+   987	            } catch (error) {
+   988	                console.error('완료 저장 중 오류:', error);
+   989	                // Even if save fails, allow navigation
+   990	                alert('완료 처리되었습니다.\n\nReading으로 이동합니다.');
+   991	                window.location.href = 'reading-day1-final.html';
+   992	            }
+   993	        }
+   994	    </script>
+   995	</body>
+   996	</html>
+   997	
